@@ -155,12 +155,17 @@ public:
 };
 ````
 
+Individual hash algorithms are defined by typedefs, e.g.
+````C++
+    typedef hasher<detail::sha3_provider> sha3;
+````
+
 ## Supported algorithms
 
 ### Hash functions
 
-Hasher instance|Description|Supported output sizes|Optional parameters
----------------|-----------|----------------------|-------------------
+Typedef|Description|Supported output sizes|Optional parameters
+-------|-----------|----------------------|-------------------
 blake|Original BLAKE algorithm|224, 256, 384, 512|salt
 blake2b|BLAKE2b|8-512|salt, personalization
 blake2s|BLAKE2s|8-256|salt, personalization
@@ -185,8 +190,8 @@ whirlpool|Whirlpool|512
 
 ### Extendable output functions
 
-Hasher instance|Description|Optional parameters
----------------|-----------|-------------------
+Typedef|Description|Optional parameters
+-------|-----------|-------------------
 blake2xb_xof|BLAKE2xb in XOF mode|salt, personalization
 blake2xs_xof|BLAKE2xs in XOF mode|salt, personalization
 k12|KangarooTwelve|customization
@@ -221,19 +226,19 @@ Q: Why `hasher` does not support hashing non-byte types?
 A: Cryptographic hash functions are always defined for a sequence of bytes. We support only those data types that can be unambiguosly converted to bytes (sequences of `char`, `signed char`, or `unsigned char`). Other data types should be converted to a sequence of bytes in non-ambiguous way before they can be hashed (eg wide strings could be encoded using UTF-8 or another encoding), which is beyond the scope of the library.
 
 
-Q: Since the output size has to be provided to the constructor, why there are separate hasher instances for `sha256` and `sha512` instead of one hasher with output size parameter: `sha2(256)` / `sha2(512)`?
+Q: Since the output size has to be provided to the constructor, why there are separate typedefs for `sha256` and `sha512` instead of one hasher with output size parameter: `sha2(256)` / `sha2(512)`?
 
-A: SHA-2 family of hash functions is special because SHA-512 can produce output of any size up to 512 bits (SHA-512/t), e.g. `sha512(256)` will calculate SHA-512/256. The resulting hash is different from SHA-256, but has the same length. Thus SHA-512 is an independent hash function supporting variable output sizes. On the other hand, the 32-bit version of SHA-2 is only defined for 224-bit and 256-bit outputs, and they are widely known as SHA-224 and SHA-256. We decided to use different hasher instances for SHA-224 and SHA-256 because requiring users to use `sha256(224)` for getting SHA-224 digests would be confusing. Internally all SHA-2 functions are implemented using one template class.
+A: SHA-2 family of hash functions is special because SHA-512 can produce output of any size up to 512 bits (SHA-512/t), e.g. `sha512(256)` will calculate SHA-512/256. The resulting hash is different from SHA-256, but has the same length. Thus SHA-512 is an independent hash function supporting variable output sizes. On the other hand, the 32-bit version of SHA-2 is only defined for 224-bit and 256-bit outputs, and they are widely known as SHA-224 and SHA-256. We decided to use different typedefs for SHA-224 and SHA-256 because requiring users to use `sha256(224)` for getting SHA-224 digests would be confusing. Internally all SHA-2 functions are implemented using one template class.
 
 
-Q: Why there are separate hasher instances for `skein256`, `skein512` and `skein1024` instead of one hasher with output size parameter: `skein(256)` / `skein(512)` / `skein(1024)`?
+Q: Why there are separate typedefs for `skein256`, `skein512` and `skein1024` instead of one hasher with output size parameter: `skein(256)` / `skein(512)` / `skein(1024)`?
 
 A: Skein256, Skein512 and Skein1024 are different algorithms. Each of them can produce digests of any size. The outputs are unrelated, e.g. `skein256(256)` != `skein512(256)` != `skein1024(256)`. Internally all Skein variants are implemented using one template class.
 
 
-Q: Why there are so many instances for BLAKE2 hash function?
+Q: Why there are so many typedefs for BLAKE2 hash function?
 
-A: BLAKE2 has many variants that produce incompatible digests for the same output sizes. We support different variants via different hasher instances. For the 512-bit version, `blake2b` is the oldest algorithm which can produce digests of any size up to 512 bits. `blake2xb` can be used to produce larger digests but requires the output size to be known in advance; it can't be merged with `blake2b` because their output are different for the same digest sizes. `blake2xb_xof` can be used in XOF mode when the output size is not known in advance. Then there is a 256-bit version `blake2s` which supports all this variants as well. Internally all BLAKE2 variants are implemented using one template class.
+A: BLAKE2 has many variants that produce incompatible digests for the same output sizes. We support different variants via different typedef. For the 512-bit version, `blake2b` is the oldest algorithm which can produce digests of any size up to 512 bits. `blake2xb` can be used to produce larger digests but requires the output size to be known in advance; it can't be merged with `blake2b` because their output are different for the same digest sizes. `blake2xb_xof` can be used in XOF mode when the output size is not known in advance. Then there is a 256-bit version `blake2s` which supports all this variants as well. Internally all BLAKE2 variants are implemented using one template class.
 
 ## Known limitations
 
