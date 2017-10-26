@@ -1,17 +1,6 @@
-#include <iostream>
-#include <algorithm>
-#include <iomanip>
-#include <functional>
-#include <sstream>
-#include <vector>
-#include <cstdint>
-#include <cstdio>
-#include <cstring>
-#include <iterator>
-#include <fstream>
-#include <assert.h>
 
 #include "../digestpp.hpp"
+#include <iostream>
 
 bool compare(const std::string& name, const std::string& actual, const std::string& expected)
 {

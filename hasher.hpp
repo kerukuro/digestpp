@@ -5,6 +5,15 @@ This code is written by kerukuro and released into public domain.
 #ifndef DIGESTPP_HASHER_HPP
 #define DIGESTPP_HASHER_HPP
 
+#include <string>
+#include <array>
+#include <algorithm>
+#include <vector>
+#include <iterator>
+#include <sstream>
+#include <cstring>
+#include <iomanip>
+
 #include "detail/traits.hpp"
 #include "detail/stream_width_fixer.hpp"
 

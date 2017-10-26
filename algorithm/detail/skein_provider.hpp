@@ -314,7 +314,7 @@ public:
 
 	inline void final(unsigned char* hash)
 	{
-		return squeeze(hash, hs);
+		return squeeze(hash, hs / 8);
 	}
 
 	inline size_t hash_size() const 
