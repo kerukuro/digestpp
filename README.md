@@ -8,55 +8,55 @@ Tested with g++ 6.4.0, clang 4.0.1 and Visual C++ 2017.
 ## Examples
 Calculate BLAKE2b digest from a double quoted string and output it in hex format:
 ````C++
-cout << hasher<blake2b>().absorb("The quick brown fox jumps over the lazy dog").hexdigest();
+cout << blake2b().absorb("The quick brown fox jumps over the lazy dog").hexdigest();
 ````
 Calculate BLAKE2b-256 digest from an std::string and output it in hex format:
 ````C++
 string str = "The quick brown fox jumps over the lazy dog";
-cout << hasher<blake2b>(256).absorb(str).hexdigest();
+cout << blake2b(256).absorb(str).hexdigest();
 ````
 Calculate SHA-512 digest of a vector<unsigned char> and output it in hex format:
 ````C++
 vector<unsigned char> v;
 // ...fill the vector
-cout << hasher<sha512>().absorb(v.begin(), v.end()).hexdigest();
+cout << sha512().absorb(v.begin(), v.end()).hexdigest();
 ````
 Calculate SHA-512/256 digest of a C array and output it in hex format:
 ````C++
 unsigned char c[32];
 // ...fill the array
-cout << hasher<sha512>(256).absorb(c, sizeof(c)).hexdigest();
+cout << sha512(256).absorb(c, sizeof(c)).hexdigest();
 ````
 Calculate SHA-256 digest of a file and output it in hex format:
 ````C++
 ifstream file("filename", ios_base::in|ios_base::binary);
-cout << hasher<sha256>().absorb(file).hexdigest();
+cout << sha256().absorb(file).hexdigest();
 ````
 Generate SHA3-224 digest using multiple calls to absorb():
 ````C++
-cout << hasher<sha3>(224).absorb("The quick brown fox ").absorb("jumps over the lazy dog").hexdigest();
+cout << sha3(224).absorb("The quick brown fox ").absorb("jumps over the lazy dog").hexdigest();
 ````
 Output binary digest to a vector<unsigned char>:
 ````C++
 vector<unsigned char> v;
-hasher<sha3>(256).absorb("The quick brown fox jumps over the lazy dog").digest(back_inserter(v));
+sha3(256).absorb("The quick brown fox jumps over the lazy dog").digest(back_inserter(v));
 ````
 Output binary digest to a raw C array:
 ````C++
 unsigned char buf[32];
-hasher<sha3>(256).absorb("The quick brown fox jumps over the lazy dog").digest(buf, sizeof(buf));
+sha3(256).absorb("The quick brown fox jumps over the lazy dog").digest(buf, sizeof(buf));
 ````
 Output binary digest to a stream:
 ````C++
 string str = "The quick brown fox jumps over the lazy dog";
 string output;
 ostringstream os(output);
-hasher<sha3>(256).absorb(str).digest(ostream_iterator<char>(ostr, ""));
+sha3(256).absorb(str).digest(ostream_iterator<char>(os, ""));
 ````
 Generate long output using SHAKE-256 extendable output function using multiple calls to squeeze():
 ````C++
 vector<unsigned char> v;
-hasher<shake256> xof;
+shake256 xof;
 xof.absorb("The quick brown fox jumps over the lazy dog");
 xof.squeeze(1000, back_inserter(v));
 xof.squeeze(1000, back_inserter(v));
@@ -65,7 +65,7 @@ cout << "Squeezed " << v.size() << " bytes." << endl;
 ````
 Generate 64-byte digest using customizable cSHAKE-256 algorithm and print it in hex format:
 ````C++
-hasher<cshake256> xof;
+cshake256 xof;
 xof.set_customization("Customization");
 cout << xof.absorb("The quick brown fox jumps over the lazy dog").hexsqueeze(64);
 ````
