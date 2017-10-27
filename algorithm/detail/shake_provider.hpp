@@ -23,18 +23,18 @@ class cshake_mixin
 public:
 	cshake_mixin<T>(T& provider) : shake(provider) {}
 
-	inline hasher<T, cshake_mixin<T>>& set_function_name(const std::string& function_name)
+	inline hasher<T, detail::cshake_mixin>& set_function_name(const std::string& function_name)
 	{
 		shake.set_function_name(function_name);
 		shake.init();
-		return static_cast<hasher<T, cshake_mixin<T>>&>(*this);
+		return static_cast<hasher<T, detail::cshake_mixin>&>(*this);
 	}
 
-	inline hasher<T, cshake_mixin<T>>& set_customization(const std::string& customization)
+	inline hasher<T, detail::cshake_mixin>& set_customization(const std::string& customization)
 	{
 		shake.set_customization(customization);
 		shake.init();
-		return static_cast<hasher<T, cshake_mixin<T>>&>(*this);
+		return static_cast<hasher<T, detail::cshake_mixin>&>(*this);
 	}
 
 private:

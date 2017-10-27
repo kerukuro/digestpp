@@ -10,7 +10,7 @@ This code is written by kerukuro and released into public domain.
 namespace digestpp
 {
 
-typedef hasher<detail::blake_provider, detail::blake_mixin<detail::blake_provider>> blake;
+typedef hasher<detail::blake_provider, detail::blake_mixin> blake;
 
 } // namespace digestpp
 

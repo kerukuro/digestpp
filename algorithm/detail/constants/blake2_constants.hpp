@@ -57,7 +57,7 @@ const uint32_t blake2_constants<T>::S[12][16] = {
 	{ 14, 10, 4, 8, 9, 15, 13, 6, 1, 12, 0, 2, 11, 7, 5, 3 }
 };
 
-enum class blake2_provider_type
+enum class blake2_type
 {
 	hash,
 	x_hash,

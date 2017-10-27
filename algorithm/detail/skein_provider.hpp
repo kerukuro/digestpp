@@ -23,25 +23,25 @@ class skein_mixin
 public:
 	skein_mixin<T>(T& provider) : skein(provider) {}
 
-	inline hasher<T, skein_mixin<T>>& set_personalization(const std::string& personalization)
+	inline hasher<T, detail::skein_mixin>& set_personalization(const std::string& personalization)
 	{
 		skein.set_personalization(personalization);
 		skein.init();
-		return static_cast<hasher<T, skein_mixin<T>>&>(*this);
+		return static_cast<hasher<T, detail::skein_mixin>&>(*this);
 	}
 
-	inline hasher<T, skein_mixin<T>>& set_key(const std::string& key)
+	inline hasher<T, detail::skein_mixin>& set_key(const std::string& key)
 	{
 		skein.set_key(key);
 		skein.init();
-		return static_cast<hasher<T, skein_mixin<T>>&>(*this);
+		return static_cast<hasher<T, detail::skein_mixin>&>(*this);
 	}
 
-	inline hasher<T, skein_mixin<T>>& set_nonce(const std::string& nonce)
+	inline hasher<T, detail::skein_mixin>& set_nonce(const std::string& nonce)
 	{
 		skein.set_nonce(nonce);
 		skein.init();
-		return static_cast<hasher<T, skein_mixin<T>>&>(*this);
+		return static_cast<hasher<T, detail::skein_mixin>&>(*this);
 	}
 
 private:

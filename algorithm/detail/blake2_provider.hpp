@@ -24,21 +24,21 @@ public:
 	blake2_mixin<T>(T& provider) : blake(provider) {}
 
 	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
-	inline hasher<T, blake2_mixin<T>>& set_parameters(const std::basic_string<C>& salt, 
+	inline hasher<T, detail::blake2_mixin>& set_parameters(const std::basic_string<C>& salt, 
 			const std::basic_string<C>& personalization)
 	{
 		return set_parameters(salt.c_str(), salt.size(), personalization.c_str(), personalization.size());
 	}
 
 	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
-	inline hasher<T, blake2_mixin<T>>& set_parameters(const C* salt, size_t salt_len,
+	inline hasher<T, detail::blake2_mixin>& set_parameters(const C* salt, size_t salt_len,
 			const C* personalization, size_t personalization_len)
 	{
 		blake.clear();
 		blake.set_parameters(reinterpret_cast<const unsigned char*>(salt), salt_len, 
 				reinterpret_cast<const unsigned char*>(personalization), personalization_len);
 		blake.init();
-		return static_cast<hasher<T, blake2_mixin<T>>&>(*this);
+		return static_cast<hasher<T, detail::blake2_mixin>&>(*this);
 	}
 
 private:
@@ -134,18 +134,20 @@ namespace blake2_functions
 
 }
 
-template<size_t N, typename T, blake2_provider_type type>
+template<typename T, blake2_type type>
 class blake2_provider
 {
 public:
-	static const bool is_xof = type == blake2_provider_type::xof;
+	static const bool is_xof = type == blake2_type::xof;
 
 	blake2_provider(size_t hashsize = N)
 		: hs(hashsize), squeezing(false)
 	{
-		if (type == blake2_provider_type::hash)
+		static_assert(sizeof(T) == 8 || sizeof(T) == 4, "Invalid T size");
+
+		if (type == blake2_type::hash)
 			detail::validate_hash_size(hashsize, N);
-		else if (type == blake2_provider_type::x_hash)
+		else if (type == blake2_type::x_hash)
 			detail::validate_hash_size(hashsize, N * sizeof(T) * 4 - 16);
 
 		zero_memory(s);
@@ -165,12 +167,12 @@ public:
 
 		blake2_functions::initH(H);
 
-		if (type == blake2_provider_type::hash)
+		if (type == blake2_type::hash)
 			H[0] ^= hash_size()/8;
 		else
 		{
 			H[0] ^= N / 8;
-			T rhs = type == blake2_provider_type::x_hash ? static_cast<T>(hs/8) : (static_cast<T>(-1) >> (sizeof(T) * 4));
+			T rhs = type == blake2_type::x_hash ? static_cast<T>(hs/8) : (static_cast<T>(-1) >> (sizeof(T) * 4));
 			if (N == 512)
 				H[1] ^= (rhs << (N / 16));
 			else
@@ -223,7 +225,7 @@ public:
 		}
 		while (processed < hs)
 		{
-			blake2_functions::initX(H, hs, processed, xoffset++, type == blake2_provider_type::xof ? static_cast<T>(-1) : static_cast<T>(hs));
+			blake2_functions::initX(H, hs, processed, xoffset++, type == blake2_type::xof ? static_cast<T>(-1) : static_cast<T>(hs));
 			H[4] ^= s[0];
 			H[5] ^= s[1];
 			H[6] ^= p[0];
@@ -240,7 +242,7 @@ public:
 	inline void final(unsigned char* hash)
 	{
 		total += pos * 8;
-		if (type == blake2_provider_type::hash)
+		if (type == blake2_type::hash)
 		{
 			memset(&m[pos], 0, N / 4 - pos);
 			transform(m.data(), 1, true);
@@ -319,6 +321,7 @@ private:
 
 	}
 
+	constexpr static size_t N = sizeof(T) == 8 ? 512 : 256;
 	std::array<T, 8> H;
 	std::array<T, 2> s;
 	std::array<T, 2> p;

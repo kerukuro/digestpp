@@ -12,8 +12,8 @@ namespace digestpp
 
 typedef hasher<detail::shake_provider<128, 24>> shake128;
 typedef hasher<detail::shake_provider<256, 24>> shake256;
-typedef hasher<detail::shake_provider<128, 24>, detail::cshake_mixin<detail::shake_provider<128, 24>>> cshake128;
-typedef hasher<detail::shake_provider<256, 24>, detail::cshake_mixin<detail::shake_provider<256, 24>>> cshake256;
+typedef hasher<detail::shake_provider<128, 24>, detail::cshake_mixin> cshake128;
+typedef hasher<detail::shake_provider<256, 24>, detail::cshake_mixin> cshake256;
 
 } // namespace digestpp
 

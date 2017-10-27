@@ -22,12 +22,12 @@ class k12m14_mixin
 {
 public:
 	k12m14_mixin<T>(T& provider) : k12m14(provider) {}
-	inline hasher<T, k12m14_mixin<T>>& set_customization(const std::string& customization)
+	inline hasher<T, detail::k12m14_mixin>& set_customization(const std::string& customization)
 	{
 		k12m14.clear();
 		k12m14.set_customization(customization);
 		k12m14.init();
-		return static_cast<hasher<T, k12m14_mixin<T>>&>(*this);
+		return static_cast<hasher<T, detail::k12m14_mixin>&>(*this);
 	}
 private:
 	T& k12m14;

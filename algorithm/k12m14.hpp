@@ -10,8 +10,8 @@ This code is written by kerukuro and released into public domain.
 namespace digestpp
 {
 
-typedef hasher<detail::k12m14_provider<128>, detail::k12m14_mixin<detail::k12m14_provider<128>>> k12;
-typedef hasher<detail::k12m14_provider<256>, detail::k12m14_mixin<detail::k12m14_provider<256>>> m14;
+typedef hasher<detail::k12m14_provider<128>, detail::k12m14_mixin> k12;
+typedef hasher<detail::k12m14_provider<256>, detail::k12m14_mixin> m14;
 
 } // namespace digestpp
 

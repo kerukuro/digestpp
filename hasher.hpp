@@ -20,8 +20,8 @@ This code is written by kerukuro and released into public domain.
 namespace digestpp
 {
 
-template<class HashProvider, class Mixin = detail::null_mixin<HashProvider>>
-class hasher : public Mixin
+template<class HashProvider, template <class> class Mixin = detail::null_mixin>
+class hasher : public Mixin<HashProvider>
 {
 	public:
 
@@ -29,7 +29,7 @@ class hasher : public Mixin
 	// Used for hash functions with fixed output size, hash functions with sensible default output size
 	// and exendable output functions (XOFs).
 	template<typename H=HashProvider, typename std::enable_if<std::is_default_constructible<H>::value>::type* = nullptr>
-	hasher() : Mixin(provider)
+	hasher() : Mixin<HashProvider>(provider)
 	{ 
 		provider.init();
 	}
@@ -38,7 +38,7 @@ class hasher : public Mixin
 	// Used with hash functions which can produce variable output size.
 	// If the requested output size is not supported by the algorithm, std::runtime_error will be thrown.
 	template<typename H=HashProvider, typename std::enable_if<!detail::is_xof<H>::value>::type* = nullptr>
-	hasher(size_t hashsize) : provider(hashsize), Mixin(provider)
+	hasher(size_t hashsize) : provider(hashsize), Mixin<HashProvider>(provider)
 	{
 		provider.init();
 	}
