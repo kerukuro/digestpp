@@ -130,16 +130,16 @@ void basic_self_test()
 		"503c341341572725709b874e95f13a438677aa6f9648467fd341e0f3e5421840");
 
 	errors += !compare("BLAKE2XS-XOF/512", digestpp::blake2xs_xof().absorb(ts).hexsqueeze(64), 
-		"4e13634574b153019520d7e22a84bebc2b344e853df9420d6819dbcb26a6610e"
-		"bca3e71aba24f60b0444dbbd6f1bb526a43b87c5e6ac057870d43f8ae1c4890d");
+		"0650cde4df888a06eada0f0fecb3c17594304b4a03fdd678182f27db1238b174"
+		"7e33c34ae539fe2179a7594442b5cc9a7a0f398bb15ac3095a397de6a60061d6");
 
 	errors += !compare("BLAKE2XB/512", digestpp::blake2xb().absorb(ts).hexdigest(), 
 		"6136549d6849d7386e42a1b7c034a1ddd6527e055a8425db4f3ae3c044aa306d"
 		"59c0bc428787d1539c5d13c703bfef01004e22277a84f5b0b093bed8268536b7");
 
 	errors += !compare("BLAKE2XB-XOF/512", digestpp::blake2xb_xof().absorb(ts).hexsqueeze(64), 
-		"a4cae634be0d4011ed04d3b8ca60a3616147a201603505c0dd5ade86a50e8964"
-		"3f4e03d0aeb3781408b12700fb407080bf907d88bdef47dda63ceefa8b9cc5c6");
+		"364e84ca4c103df292306c93ebba6f6633d5e9cc8a95e040498e9a012d5ca534"
+		"c5532e20be9705e9266ad829952104c694954be42a6f50d847f8a782910ffe4b");
 
 	std::cout << "Self-test completed with " << errors << " errors." << std::endl;
 }

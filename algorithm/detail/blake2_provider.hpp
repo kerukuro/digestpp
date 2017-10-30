@@ -210,9 +210,12 @@ public:
 		size_t processed = 0;
 		if (!squeezing)
 		{
+			if (type == blake2_type::xof)
+				total += pos * 8;
 			squeezing = true;
 			xoffset = 0;
-			memset(&m[pos], 0, N / 4 - pos);
+			if (N / 4 != pos)
+				memset(&m[pos], 0, N / 4 - pos);
 			transform(m.data(), 1, true);
 			memcpy(&m[0], H.data(), N / 8);
 		}
@@ -233,7 +236,7 @@ public:
 			total = N;
 			memset(&m[N / 8], 0, m.size() - N / 8);
 			transform(m.data(), 1, true);
-			pos = std::min(hs, N / 8);
+			pos = std::min(hs - processed, N / 8);
 			memcpy(hash + processed, H.data(), pos);
 			processed += pos;
 		}
@@ -244,7 +247,8 @@ public:
 		total += pos * 8;
 		if (type == blake2_type::hash)
 		{
-			memset(&m[pos], 0, N / 4 - pos);
+			if (N / 4 != pos)
+				memset(&m[pos], 0, N / 4 - pos);
 			transform(m.data(), 1, true);
 			memcpy(hash, H.data(), hash_size() / 8);
 		}
@@ -270,7 +274,6 @@ private:
 			T M[16];
 			for (int i = 0; i < 16; i++)
 				M[i] = reinterpret_cast<const T*>(data)[blk * 16 + i];
-
 			uint64_t totalbytes = total / 8 + (padding ? 0 : (blk + 1) * N) / 4;
 			T t0 = static_cast<T>(totalbytes);
 			T t1 = N == 512 ? 0 : static_cast<T>(totalbytes >> 32);

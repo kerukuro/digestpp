@@ -173,15 +173,16 @@ public:
 	{
 		total += pos * 8;
 		m[pos++] = 0x80;
-		if (pos > N / 4 - 8) {
-			memset(&m[0] + pos, 0, N / 4 - pos);
-			transform(&m[0], 1);
+		if (pos > N / 4 - sizeof(T) * 2) {
+			if (pos != N / 4)
+				memset(&m[pos], 0, N / 4 - pos);
+			transform(m.data(), 1);
 			pos = 0;
 		}
-		memset(&m[0] + pos, 0, N / 4 - pos);
+		memset(&m[pos], 0, N / 4 - pos);
 		uint64_t mlen = byteswap(total);
-		memcpy(&m[0] + (N / 4 - 8), &mlen, 64 / 8);
-		transform(&m[0], 1);
+		memcpy(&m[N / 4 - 8], &mlen, 64 / 8);
+		transform(m.data(), 1);
 		for (int i = 0; i < 8; i++)
 			H[i] = byteswap(H[i]);
 		memcpy(hash, &H[0], hs/8);

@@ -136,7 +136,8 @@ public:
 		size_t limit = block_bytes();
 		if (pos > limit - 12)
 		{
-			memset(&m[pos], 0, limit - pos);
+			if (limit != pos)
+				memset(&m[pos], 0, limit - pos);
 			transform(m.data(), 1);
 			pos = 0;
 		}

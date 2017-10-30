@@ -151,7 +151,8 @@ public:
 	{
 		size_t r = rate / 8;
 		m[pos++] = 0x06;
-		memset(&m[0] + pos, 0, r - pos);
+		if (r != pos)
+			memset(&m[pos], 0, r - pos);
 		m[r - 1] |= 0x80;
 		sha3_functions::transform<24>(m.data(), 1, A.data(), rate);
 		memcpy(hash, A.data(), hash_size() / 8);

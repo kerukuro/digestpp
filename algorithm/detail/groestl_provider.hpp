@@ -137,7 +137,8 @@ public:
 		size_t limit = block_bytes();
 		if (pos > limit - 8)
 		{
-			memset(&m[pos], 0, limit - pos);
+			if (limit != pos)
+				memset(&m[pos], 0, limit - pos);
 			transform(m.data(), 1);
 			total += (block_bytes() - pos) * 8;
 			pos = 0;

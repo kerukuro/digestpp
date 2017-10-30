@@ -132,7 +132,8 @@ public:
 	inline void final(unsigned char* hash)
 	{
 		m[pos++] = 0x01;
-		memset(&m[pos], 0, 64 - pos);
+		if (pos != 64)
+			memset(&m[pos], 0, 64 - pos);
 		transform(&m[0], 1, false);
 		total += (pos - 1) * 8;
 

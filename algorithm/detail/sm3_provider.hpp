@@ -85,14 +85,15 @@ public:
 		m[pos++] = 0x80;
 		if (pos > 56)
 		{
-			memset(&m[pos], 0, 64 - pos);
+			if (pos != 64)
+				memset(&m[pos], 0, 64 - pos);
 			transform(m.data(), 1);
 			pos = 0;
 		}
 		memset(&m[pos], 0, 56 - pos);
 		uint64_t mlen = byteswap(total);
-		memcpy(&m[0] + (64 - 8), &mlen, 64 / 8);
-		transform(&m[0], 1);
+		memcpy(&m[64 - 8], &mlen, 64 / 8);
+		transform(m.data(), 1);
 		for (int i = 0; i < 8; i++)
 			H[i] = byteswap(H[i]);
 		memcpy(hash, H.data(), 32);

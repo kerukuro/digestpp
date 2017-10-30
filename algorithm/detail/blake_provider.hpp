@@ -262,7 +262,8 @@ public:
 		m[pos] = pos == messageend && !truncated ? 0x81 : 0x80;
 		if (pos++ > messageend)
 		{
-			memset(&m[pos], 0, block_bytes() - pos);
+			if (block_bytes() != pos)
+				memset(&m[pos], 0, block_bytes() - pos);
 			transform(m.data(), 1, false, true);
 			pos = 0;
 			padding = true;

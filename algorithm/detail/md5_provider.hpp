@@ -81,7 +81,8 @@ public:
 		m[pos++] = 0x80;
 		if (pos > 56)
 		{
-			memset(&m[0] + pos, 0, 64 - pos);
+			if (pos != 64)
+				memset(&m[pos], 0, 64 - pos);
 			transform(&m[0], 1);
 			pos = 0;
 		}

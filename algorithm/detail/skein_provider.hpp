@@ -300,7 +300,7 @@ public:
 		}
 		while (processed < hs)
 		{
-			pos = std::min(hs, N / 8);
+			pos = std::min(hs - processed, N / 8);
 			tweak[0] = 0;
 			tweak[1] = 255ULL << 56;
 			memcpy(&m[0], &total, 8);

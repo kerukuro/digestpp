@@ -153,7 +153,8 @@ public:
 		if (!squeezing)
 		{
 			m[pos++] = suffix ? suffix : N.empty() && S.empty() ? 0x1F : 0x04;
-			memset(&m[0] + pos, 0, r - pos);
+			if (r != pos)
+				memset(&m[pos], 0, r - pos);
 			m[r - 1] |= 0x80;
 			sha3_functions::transform<R>(m.data(), 1, A.data(), rate);
 			squeezing = true;
