@@ -159,9 +159,9 @@ Individual hash algorithms are defined by typedefs, e.g.
 ````C++
     typedef hasher<detail::sha3_provider> sha3;
 
-	typedef hasher<detail::blake_provider, detail::blake_mixin> blake;
+    typedef hasher<detail::blake_provider, detail::blake_mixin> blake;
 
-	// ...
+    // ...
 ````
 
 ## Supported algorithms
