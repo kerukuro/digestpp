@@ -74,19 +74,19 @@ namespace sha2_functions
 
 // SHA-224, SHA-256, SHA-384, SHA-512/t algorithm
 // SHA-512/t supports any output size up to 512 bits; in this case O must be 0 and output size provided to the constructor
-template<size_t N, typename T, size_t O = 0>
+template<typename T, size_t O = 0>
 class sha2_provider
 {
 public:
 	static const bool is_xof = false;
 
-	template<size_t n=N, size_t o=O, typename std::enable_if<o && (n == 256 || o == 384)>::type* = nullptr>
+	template<typename t=T, size_t o=O, typename std::enable_if<o && (sizeof(t) == 4 || o == 384)>::type* = nullptr>
 	sha2_provider()
 		: hs(O)
 	{
 	}
 
-	template<size_t n=N, size_t o=O, typename std::enable_if<n == 512 && !o>::type* = nullptr>
+	template<typename t=T, size_t o=O, typename std::enable_if<sizeof(t) == 8 && !o>::type* = nullptr>
 	sha2_provider(size_t hashsize = N)
 		: hs(hashsize)
 	{
@@ -248,6 +248,7 @@ private:
 
 	}
 
+	constexpr static size_t N = sizeof(T) == 8 ? 512 : 256;
 	std::array<T, 8> H;
 	std::array<unsigned char, N / 4> m;
 	size_t pos;
@@ -256,31 +257,31 @@ private:
 };
 
 template<>
-inline uint32_t sha2_provider<256, uint32_t, 256>::getK(int t) const
+inline uint32_t sha2_provider<uint32_t, 256>::getK(int t) const
 {
 	return sha256_constants<void>::K[t];
 }
 
 template<>
-inline uint32_t sha2_provider<256, uint32_t, 224>::getK(int t) const
+inline uint32_t sha2_provider<uint32_t, 224>::getK(int t) const
 {
 	return sha256_constants<void>::K[t];
 }
 
 template<>
-inline uint64_t sha2_provider<512, uint64_t, 384>::getK(int t) const
+inline uint64_t sha2_provider<uint64_t, 384>::getK(int t) const
 {
 	return sha512_constants<void>::K[t];
 }
 
 template<>
-inline uint64_t sha2_provider<512, uint64_t, 0>::getK(int t) const
+inline uint64_t sha2_provider<uint64_t, 0>::getK(int t) const
 {
 	return sha512_constants<void>::K[t];
 }
 
 template<>
-inline void sha2_provider<256, uint32_t, 224>::init()
+inline void sha2_provider<uint32_t, 224>::init()
 {
 	pos = 0;
 	total = 0;
@@ -295,7 +296,7 @@ inline void sha2_provider<256, uint32_t, 224>::init()
 }
 
 template<>
-inline void sha2_provider<256, uint32_t, 256>::init()
+inline void sha2_provider<uint32_t, 256>::init()
 {
 	pos = 0;
 	total = 0;

@@ -10,10 +10,10 @@ This code is written by kerukuro and released into public domain.
 namespace digestpp
 {
 
-typedef hasher<detail::sha2_provider<512, uint64_t>> sha512;
-typedef hasher<detail::sha2_provider<512, uint64_t, 384>> sha384;
-typedef hasher<detail::sha2_provider<256, uint32_t, 256>> sha256;
-typedef hasher<detail::sha2_provider<256, uint32_t, 224>> sha224;
+typedef hasher<detail::sha2_provider<uint64_t>> sha512;
+typedef hasher<detail::sha2_provider<uint64_t, 384>> sha384;
+typedef hasher<detail::sha2_provider<uint32_t, 256>> sha256;
+typedef hasher<detail::sha2_provider<uint32_t, 224>> sha224;
 
 
 } // namespace digestpp

@@ -76,7 +76,7 @@ Hasher is a main class template implementing the public API for hashing.
 
 It has two template parameters:
 - HashProvider is a class implementing the algorithm via traditional init/update/final interface. We provide our own implementations of hash functions listed in the next section, but using the traditional interface allows anyone to trivially implement the providers as wrappers over popular libraries, such as OpenSSL, Crypto++, Botan.
-- Mixin is a class which can be used to inject additional functions to the public API of the hasher, for example for setting the customization string for cSHAKE, the salt for BLAKE, etc.
+- Mixin is a class template which can be used to inject additional functions to the public API of the hasher, for example for setting the customization string for cSHAKE, the salt for BLAKE, etc.
 
 ````C++
 template<class HashProvider, template <class> class Mixin = detail::null_mixin>
@@ -158,6 +158,10 @@ public:
 Individual hash algorithms are defined by typedefs, e.g.
 ````C++
     typedef hasher<detail::sha3_provider> sha3;
+
+	typedef hasher<detail::blake_provider, detail::blake_mixin> blake;
+
+	// ...
 ````
 
 ## Supported algorithms
