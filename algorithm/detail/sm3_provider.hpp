@@ -7,8 +7,6 @@ This code is written by kerukuro and released into public domain.
 
 #include "../../detail/functions.hpp"
 #include "../../detail/absorb_data.hpp"
-#include "../../detail/validate_hash_size.hpp"
-#include "constants/sm3_constants.hpp"
 #include <array>
 
 namespace digestpp
