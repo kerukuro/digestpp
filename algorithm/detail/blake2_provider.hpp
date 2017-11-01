@@ -24,19 +24,43 @@ public:
 	blake2_mixin<T>(T& provider) : blake(provider) {}
 
 	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
-	inline hasher<T, detail::blake2_mixin>& set_parameters(const std::basic_string<C>& salt, 
-			const std::basic_string<C>& personalization)
+	inline hasher<T, detail::blake2_mixin>& set_salt(const std::basic_string<C>& salt)
 	{
-		return set_parameters(salt.c_str(), salt.size(), personalization.c_str(), personalization.size());
+		return set_salt(salt.c_str(), salt.size());
 	}
 
 	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
-	inline hasher<T, detail::blake2_mixin>& set_parameters(const C* salt, size_t salt_len,
-			const C* personalization, size_t personalization_len)
+	inline hasher<T, detail::blake2_mixin>& set_salt(const C* salt, size_t salt_len)
 	{
-		blake.clear();
-		blake.set_parameters(reinterpret_cast<const unsigned char*>(salt), salt_len, 
-				reinterpret_cast<const unsigned char*>(personalization), personalization_len);
+		blake.set_salt(reinterpret_cast<const unsigned char*>(salt), salt_len);
+		blake.init();
+		return static_cast<hasher<T, detail::blake2_mixin>&>(*this);
+	}
+
+	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
+	inline hasher<T, detail::blake2_mixin>& set_personalization(const std::basic_string<C>& personalization)
+	{
+		return set_personalization(personalization.c_str(), personalization.size());
+	}
+
+	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
+	inline hasher<T, detail::blake2_mixin>& set_personalization(const C* personalization, size_t personalization_len)
+	{
+		blake.set_personalization(reinterpret_cast<const unsigned char*>(personalization), personalization_len);
+		blake.init();
+		return static_cast<hasher<T, detail::blake2_mixin>&>(*this);
+	}
+
+	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
+	inline hasher<T, detail::blake2_mixin>& set_key(const std::basic_string<C>& key)
+	{
+		return set_key(key.c_str(), key.size());
+	}
+
+	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
+	inline hasher<T, detail::blake2_mixin>& set_key(const C* key, size_t key_len)
+	{
+		blake.set_key(std::string(reinterpret_cast<const char*>(key), key_len));
 		blake.init();
 		return static_cast<hasher<T, detail::blake2_mixin>&>(*this);
 	}
@@ -178,11 +202,12 @@ public:
 			else
 				H[3] ^= rhs;
 		}
-
+		H[0] ^= (k.size() << 8);
 		H[4] ^= s[0];
 		H[5] ^= s[1];
 		H[6] ^= p[0];
 		H[7] ^= p[1];
+		absorb_key();
 	}
 
 	inline void update(const unsigned char* data, size_t len)
@@ -191,17 +216,27 @@ public:
 			[this](const unsigned char* data, size_t len) { transform(data, len, false); });
 	}
 
-
-	inline void set_parameters(const unsigned char* salt, size_t salt_len,
-			const unsigned char* personalization, size_t personalization_len)
+	inline void set_key(const std::string& key)
 	{
-		if (salt_len && ((N == 512 && salt_len != 16) || (N == 256 && salt_len != 8)))
-			throw std::runtime_error("invalid salt length");
+		if (key.length() > N / 8)
+			throw std::runtime_error("invalid key length");
 
-		if (personalization_len && ((N == 512 && personalization_len != 16) || (N == 256 && personalization_len != 8)))
+		k = key;
+	}
+
+	inline void set_salt(const unsigned char* salt, size_t salt_len)
+	{
+		if (salt_len && salt_len != N / 32)
 			throw std::runtime_error("invalid salt length");
 
 		memcpy(&s[0], salt, salt_len);
+	}
+
+	inline void set_personalization(const unsigned char* personalization, size_t personalization_len)
+	{
+		if (personalization_len && personalization_len != N / 32)
+			throw std::runtime_error("invalid personalization length");
+
 		memcpy(&p[0], personalization, personalization_len);
 	}
 
@@ -262,11 +297,25 @@ public:
 		zero_memory(m);
 		zero_memory(s);
 		zero_memory(p);
+		zero_memory(k);
+		k.clear();
 	}
 
 	inline size_t hash_size() const { return hs; }
 
 private:
+	inline void absorb_key()
+	{
+		if (k.empty())
+			return;
+
+		unsigned char key[N / 4];
+		memcpy(key, k.data(), k.length());
+		if (k.length() != N / 4)
+			memset(key + k.length(), 0, N / 4 - k.length());
+		update(key, sizeof(key));
+	}
+
 	inline void transform(const unsigned char* data, size_t num_blks, bool padding)
 	{
 		for (size_t blk = 0; blk < num_blks; blk++)
@@ -328,6 +377,7 @@ private:
 	std::array<T, 8> H;
 	std::array<T, 2> s;
 	std::array<T, 2> p;
+	std::string k;
 	std::array<unsigned char, N / 4> m;
 	size_t pos;
 	uint64_t total;

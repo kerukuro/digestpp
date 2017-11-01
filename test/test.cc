@@ -141,6 +141,13 @@ void basic_self_test()
 		"364e84ca4c103df292306c93ebba6f6633d5e9cc8a95e040498e9a012d5ca534"
 		"c5532e20be9705e9266ad829952104c694954be42a6f50d847f8a782910ffe4b");
 
+	errors += !compare("BLAKE2B-key", digestpp::blake2b(136)
+			.set_key("\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f\x10", 17)
+			.set_salt("\x35\x62\x36\x62\x34\x31\x65\x64\x39\x62\x33\x34\x33\x66\x65\x30", 16)
+			.set_personalization("\x35\x31\x32\x36\x66\x62\x32\x61\x33\x37\x34\x30\x30\x64\x32\x61", 16)
+			.absorb("\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f", 16).hexdigest(), 
+		"e262ba3e2ab76efdf83513108e3b987d1b");
+
 	std::cout << "Self-test completed with " << errors << " errors." << std::endl;
 }
 
