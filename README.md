@@ -171,10 +171,10 @@ Individual hash algorithms are defined by typedefs, e.g.
 Typedef|Description|Supported output sizes|Optional parameters
 -------|-----------|----------------------|-------------------
 blake|Original BLAKE algorithm|224, 256, 384, 512|salt
-blake2b|BLAKE2b|8-512|salt, personalization
-blake2s|BLAKE2s|8-256|salt, personalization
-blake2xb|BLAKE2xb|arbitrary|salt, personalization
-blake2xs|BLAKE2xs|arbitrary|salt, personalization
+blake2b|BLAKE2b|8-512|salt, personalization, key
+blake2s|BLAKE2s|8-256|salt, personalization, key
+blake2xb|BLAKE2xb|arbitrary|salt, personalization, key
+blake2xs|BLAKE2xs|arbitrary|salt, personalization, key
 groestl|Grøstl|8-512
 jh|JH|8-512
 kupyna|Kupyna|256, 512
@@ -196,8 +196,8 @@ whirlpool|Whirlpool|512
 
 Typedef|Description|Optional parameters
 -------|-----------|-------------------
-blake2xb_xof|BLAKE2xb in XOF mode|salt, personalization
-blake2xs_xof|BLAKE2xs in XOF mode|salt, personalization
+blake2xb_xof|BLAKE2xb in XOF mode|salt, personalization, key
+blake2xs_xof|BLAKE2xs in XOF mode|salt, personalization, key
 k12|KangarooTwelve|customization
 m14|MarsupilamiFourteen|customization
 shake128|SHAKE-128
