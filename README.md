@@ -206,8 +206,8 @@ shake128|SHAKE-128
 shake256|SHAKE-256
 cshake128|cSHAKE-128|function name, customization
 cshake256|cSHAKE-256|function name, customization
-kmac128_xof|KMAC-128 in XOF mode|arbitrary|key, customization
-kmac256_xof|KMAC-256 in XOF mode|arbitrary|key, customization
+kmac128_xof|KMAC-128 in XOF mode|key, customization
+kmac256_xof|KMAC-256 in XOF mode|key, customization
 skein256_xof|Skein256 in XOF mode|personalization, key, nonce
 skein512_xof|Skein512 in XOF mode|personalization, key, nonce
 skein1024_xof|Skein1024 in XOF mode|personalization, key, nonce
