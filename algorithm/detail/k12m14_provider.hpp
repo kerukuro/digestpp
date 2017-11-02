@@ -20,17 +20,13 @@ template<typename T>
 class k12m14_mixin
 {
 public:
-	k12m14_mixin<T>(T& provider) : k12m14(provider) {}
 	inline hasher<T, detail::k12m14_mixin>& set_customization(const std::string& customization)
 	{
-		k12m14.clear();
-		k12m14.set_customization(customization);
-		k12m14.init();
-		return static_cast<hasher<T, detail::k12m14_mixin>&>(*this);
+		auto& k12m14 = static_cast<hasher<T, detail::k12m14_mixin>&>(*this);
+		k12m14.provider.set_customization(customization);
+		k12m14.provider.init();
+		return k12m14;
 	}
-private:
-	T& k12m14;
-
 };
 
 template<size_t B>

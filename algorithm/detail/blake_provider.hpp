@@ -21,8 +21,6 @@ template<typename T>
 class blake_mixin
 {
 public:
-	blake_mixin<T>(T& provider) : blake(provider) {}
-
 	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
 	inline hasher<T, detail::blake_mixin>& set_salt(const std::basic_string<C>& salt)
 	{
@@ -32,14 +30,11 @@ public:
 	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
 	inline hasher<T, detail::blake_mixin>& set_salt(const C* salt, size_t salt_len)
 	{
-		blake.clear();
-		blake.set_salt(reinterpret_cast<const unsigned char*>(salt), salt_len);
-		blake.init();
-		return static_cast<hasher<T, detail::blake_mixin>&>(*this);
+		auto& blake = static_cast<hasher<T, detail::blake_mixin>&>(*this);
+		blake.provider.set_salt(reinterpret_cast<const unsigned char*>(salt), salt_len);
+		blake.provider.init();
+		return blake;
 	}
-
-private:
-	T& blake;
 };
 
 namespace blake_functions

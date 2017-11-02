@@ -27,7 +27,6 @@ struct is_byte
 template<typename T>
 struct null_mixin
 {
-	null_mixin<T>(T&) {}
 };
 
 } // namespace detail

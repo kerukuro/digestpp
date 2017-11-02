@@ -20,25 +20,21 @@ template<typename T>
 class cshake_mixin
 {
 public:
-	cshake_mixin<T>(T& provider) : shake(provider) {}
-
 	inline hasher<T, detail::cshake_mixin>& set_function_name(const std::string& function_name)
 	{
-		shake.set_function_name(function_name);
-		shake.init();
-		return static_cast<hasher<T, detail::cshake_mixin>&>(*this);
+		auto& shake = static_cast<hasher<T, detail::cshake_mixin>&>(*this);
+		shake.provider.set_function_name(function_name);
+		shake.provider.init();
+		return shake;
 	}
 
 	inline hasher<T, detail::cshake_mixin>& set_customization(const std::string& customization)
 	{
-		shake.set_customization(customization);
-		shake.init();
-		return static_cast<hasher<T, detail::cshake_mixin>&>(*this);
+		auto& shake = static_cast<hasher<T, detail::cshake_mixin>&>(*this);
+		shake.provider.set_customization(customization);
+		shake.provider.init();
+		return shake;
 	}
-
-private:
-	T& shake;
-
 };
 
 namespace shake_functions

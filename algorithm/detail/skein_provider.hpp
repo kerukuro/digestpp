@@ -21,32 +21,29 @@ template<typename T>
 class skein_mixin
 {
 public:
-	skein_mixin<T>(T& provider) : skein(provider) {}
-
 	inline hasher<T, detail::skein_mixin>& set_personalization(const std::string& personalization)
 	{
-		skein.set_personalization(personalization);
-		skein.init();
-		return static_cast<hasher<T, detail::skein_mixin>&>(*this);
+		auto& skein = static_cast<hasher<T, detail::skein_mixin>&>(*this);
+		skein.provider.set_personalization(personalization);
+		skein.provider.init();
+		return skein;
 	}
 
 	inline hasher<T, detail::skein_mixin>& set_key(const std::string& key)
 	{
-		skein.set_key(key);
-		skein.init();
-		return static_cast<hasher<T, detail::skein_mixin>&>(*this);
+		auto& skein = static_cast<hasher<T, detail::skein_mixin>&>(*this);
+		skein.provider.set_key(key);
+		skein.provider.init();
+		return skein;
 	}
 
 	inline hasher<T, detail::skein_mixin>& set_nonce(const std::string& nonce)
 	{
-		skein.set_nonce(nonce);
-		skein.init();
-		return static_cast<hasher<T, detail::skein_mixin>&>(*this);
+		auto& skein = static_cast<hasher<T, detail::skein_mixin>&>(*this);
+		skein.provider.set_nonce(nonce);
+		skein.provider.init();
+		return skein;
 	}
-
-private:
-	T& skein;
-
 };
 
 

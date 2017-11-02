@@ -29,7 +29,7 @@ class hasher : public Mixin<HashProvider>
 	// Used for hash functions with fixed output size, hash functions with sensible default output size
 	// and exendable output functions (XOFs).
 	template<typename H=HashProvider, typename std::enable_if<std::is_default_constructible<H>::value>::type* = nullptr>
-	hasher() : Mixin<HashProvider>(provider)
+	hasher()
 	{ 
 		provider.init();
 	}
@@ -38,7 +38,7 @@ class hasher : public Mixin<HashProvider>
 	// Used with hash functions which can produce variable output size.
 	// If the requested output size is not supported by the algorithm, std::runtime_error will be thrown.
 	template<typename H=HashProvider, typename std::enable_if<!detail::is_xof<H>::value>::type* = nullptr>
-	hasher(size_t hashsize) : provider(hashsize), Mixin<HashProvider>(provider)
+	hasher(size_t hashsize) : provider(hashsize)
 	{
 		provider.init();
 	}
@@ -173,6 +173,7 @@ class hasher : public Mixin<HashProvider>
 	}
 
 private:
+	friend Mixin<HashProvider>;
 	HashProvider provider;
 };
 
