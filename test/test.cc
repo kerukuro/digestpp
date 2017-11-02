@@ -148,6 +148,35 @@ void basic_self_test()
 			.absorb("\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0a\x0b\x0c\x0d\x0e\x0f", 16).hexdigest(), 
 		"e262ba3e2ab76efdf83513108e3b987d1b");
 
+	errors += !compare("KMAC128", digestpp::kmac128(256)
+		.set_key("\x40\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F"
+			     "\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x5B\x5C\x5D\x5E\x5F", 32)
+		.absorb("\x00\x01\x02\x03", 4).hexdigest(), 
+		"e5780b0d3ea6f7d3a429c5706aa43a00fadbd7d49628839e3187243f456ee14e");
+
+	errors += !compare("KMAC256", digestpp::kmac256(512)
+		.set_customization("My Tagged Application")
+		.set_key("\x40\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F"
+			     "\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x5B\x5C\x5D\x5E\x5F", 32)
+		.absorb("\x00\x01\x02\x03", 4).hexdigest(), 
+		"20c570c31346f703c9ac36c61c03cb64c3970d0cfc787e9b79599d273a68d2f7"
+		"f69d4cc3de9d104a351689f27cf6f5951f0103f33f4f24871024d9c27773a8dd");
+
+	errors += !compare("KMAC128-xof", digestpp::kmac128_xof()
+		.set_key("\x40\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F"
+			     "\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x5B\x5C\x5D\x5E\x5F", 32)
+		.absorb("\x00\x01\x02\x03", 4).hexsqueeze(32), 
+		"cd83740bbd92ccc8cf032b1481a0f4460e7ca9dd12b08a0c4031178bacd6ec35");
+
+	errors += !compare("KMAC256-xof", digestpp::kmac256_xof()
+		.set_customization("My Tagged Application")
+		.set_key("\x40\x41\x42\x43\x44\x45\x46\x47\x48\x49\x4A\x4B\x4C\x4D\x4E\x4F"
+			     "\x50\x51\x52\x53\x54\x55\x56\x57\x58\x59\x5A\x5B\x5C\x5D\x5E\x5F", 32)
+		.absorb("\x00\x01\x02\x03", 4).hexsqueeze(64), 
+		"1755133f1534752aad0748f2c706fb5c784512cab835cd15676b16c0c6647fa9"
+		"6faa7af634a0bf8ff6df39374fa00fad9a39e322a7c92065a64eb1fb0801eb2b");
+
+
 	std::cout << "Self-test completed with " << errors << " errors." << std::endl;
 }
 
