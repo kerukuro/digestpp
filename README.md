@@ -177,8 +177,8 @@ blake2xb|BLAKE2xb|arbitrary|salt, personalization, key
 blake2xs|BLAKE2xs|arbitrary|salt, personalization, key
 groestl|Grøstl|8-512
 jh|JH|8-512
-kmac128|KMAC-128|arbitrary|key, customization
-kmac256|KMAC-256|arbitrary|key, customization
+kmac128|KMAC128|arbitrary|key, customization
+kmac256|KMAC256|arbitrary|key, customization
 kupyna|Kupyna|256, 512
 md5|MD5|128
 sha1|SHA-1|160
@@ -206,8 +206,8 @@ shake128|SHAKE-128
 shake256|SHAKE-256
 cshake128|cSHAKE-128|function name, customization
 cshake256|cSHAKE-256|function name, customization
-kmac128_xof|KMAC-128 in XOF mode|key, customization
-kmac256_xof|KMAC-256 in XOF mode|key, customization
+kmac128_xof|KMAC128 in XOF mode|key, customization
+kmac256_xof|KMAC256 in XOF mode|key, customization
 skein256_xof|Skein256 in XOF mode|personalization, key, nonce
 skein512_xof|Skein512 in XOF mode|personalization, key, nonce
 skein1024_xof|Skein1024 in XOF mode|personalization, key, nonce

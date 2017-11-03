@@ -67,7 +67,16 @@ class kmac_provider
 public:
 	static const bool is_xof = XOF;
 
-	kmac_provider(size_t hashsize = 0) : hs(hashsize)
+	template<bool xof=XOF, typename std::enable_if<!xof>::type* = nullptr>
+	kmac_provider(size_t hashsize) : hs(hashsize)
+	{
+		static_assert(B == 128 || B == 256, "KMAC only supports 128 and 256 bits");
+		validate_hash_size(hashsize, SIZE_MAX);
+		set_key("");
+	}
+
+	template<bool xof=XOF, typename std::enable_if<xof>::type* = nullptr>
+	kmac_provider() : hs(0)
 	{
 		static_assert(B == 128 || B == 256, "KMAC only supports 128 and 256 bits");
 		set_key("");
