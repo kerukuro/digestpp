@@ -24,11 +24,6 @@ struct is_byte
 			std::is_same<T, unsigned char>::value;
 };
 
-template<typename T>
-struct null_mixin
-{
-};
-
 } // namespace detail
 } // namespace digestpp
 

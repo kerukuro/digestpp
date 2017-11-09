@@ -17,26 +17,6 @@ namespace digestpp
 namespace detail
 {
 
-template<typename T>
-class blake_mixin
-{
-public:
-	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
-	inline hasher<T, detail::blake_mixin>& set_salt(const std::basic_string<C>& salt)
-	{
-		return set_salt(salt.c_str(), salt.size());
-	}
-
-	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
-	inline hasher<T, detail::blake_mixin>& set_salt(const C* salt, size_t salt_len)
-	{
-		auto& blake = static_cast<hasher<T, detail::blake_mixin>&>(*this);
-		blake.provider.set_salt(reinterpret_cast<const unsigned char*>(salt), salt_len);
-		blake.provider.init();
-		return blake;
-	}
-};
-
 namespace blake_functions
 {
 	static inline void G(int r, int i, uint32_t& a, uint32_t& b, uint32_t& c, uint32_t& d, uint32_t* M)

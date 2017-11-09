@@ -98,16 +98,16 @@ public:
     
      // Absorbs bytes from a C-style pointer to character buffer
     template<typename T, typename std::enable_if<detail::is_byte<T>::value>::type* = nullptr>
-    inline hasher& absorb(const T* t, size_t len);
+    inline hasher& absorb(const T* data, size_t len);
     
     // Absorbs bytes from std::basic_string
     template<typename T,
         typename std::enable_if<detail::is_byte<T>::value 
             && !std::is_same<T, std::string::value_type>::value>::type* = nullptr>
-    inline hasher& absorb(const std::basic_string<T>& istr);
+    inline hasher& absorb(const std::basic_string<T>& str);
 
     // Absorbs bytes from std::string
-    inline hasher& absorb(const std::string& istr);
+    inline hasher& absorb(const std::string& str);
 
     // Absorbs bytes from std::istream
     template<typename T, typename std::enable_if<detail::is_byte<T>::value>::type* = nullptr>;
@@ -175,24 +175,24 @@ blake2b|BLAKE2b|8-512|salt, personalization, key
 blake2s|BLAKE2s|8-256|salt, personalization, key
 blake2xb|BLAKE2xb|arbitrary|salt, personalization, key
 blake2xs|BLAKE2xs|arbitrary|salt, personalization, key
-groestl|Grøstl|8-512
-jh|JH|8-512
+groestl|Grøstl|8-512|-
+jh|JH|8-512|-
 kmac128|KMAC128|arbitrary|key, customization
 kmac256|KMAC256|arbitrary|key, customization
-kupyna|Kupyna|256, 512
-md5|MD5|128
-sha1|SHA-1|160
-sha224|SHA-224|224
-sha256|SHA-256|256
-sha384|SHA-384|384
-sha512|SHA-512|8-512
-sha3|SHA-3|224, 256, 384, 512
+kupyna|Kupyna|256, 512|-
+md5|MD5|128|-
+sha1|SHA-1|160|-
+sha224|SHA-224|224|-
+sha256|SHA-256|256|-
+sha384|SHA-384|384|-
+sha512|SHA-512|8-512|-
+sha3|SHA-3|224, 256, 384, 512|-
 skein256|Skein256|arbitrary|personalization, key, nonce
 skein512|Skein512|arbitrary|personalization, key, nonce
 skein1024|Skein1024|arbitrary|personalization, key, nonce
-sm3|SM3|256
-streebog|Streebog|256, 512
-whirlpool|Whirlpool|512
+sm3|SM3|256|-
+streebog|Streebog|256, 512|-
+whirlpool|Whirlpool|512|-
 
 ### Extendable output functions
 
@@ -202,8 +202,8 @@ blake2xb_xof|BLAKE2xb in XOF mode|salt, personalization, key
 blake2xs_xof|BLAKE2xs in XOF mode|salt, personalization, key
 k12|KangarooTwelve|customization
 m14|MarsupilamiFourteen|customization
-shake128|SHAKE-128
-shake256|SHAKE-256
+shake128|SHAKE-128|-
+shake256|SHAKE-256|-
 cshake128|cSHAKE-128|function name, customization
 cshake256|cSHAKE-256|function name, customization
 kmac128_xof|KMAC128 in XOF mode|key, customization

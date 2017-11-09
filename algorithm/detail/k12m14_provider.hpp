@@ -16,19 +16,6 @@ namespace digestpp
 namespace detail
 {
 
-template<typename T>
-class k12m14_mixin
-{
-public:
-	inline hasher<T, detail::k12m14_mixin>& set_customization(const std::string& customization)
-	{
-		auto& k12m14 = static_cast<hasher<T, detail::k12m14_mixin>&>(*this);
-		k12m14.provider.set_customization(customization);
-		k12m14.provider.init();
-		return k12m14;
-	}
-};
-
 template<size_t B>
 class k12m14_provider
 {

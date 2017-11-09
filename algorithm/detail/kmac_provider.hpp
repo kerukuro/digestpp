@@ -13,33 +13,6 @@ namespace digestpp
 namespace detail
 {
 
-template<typename T>
-class kmac_mixin
-{
-public:
-	inline hasher<T, detail::kmac_mixin>& set_key(const std::string& key)
-	{
-		auto& kmac = static_cast<hasher<T, detail::kmac_mixin>&>(*this);
-		kmac.provider.set_key(key);
-		kmac.provider.init();
-		return kmac;
-	}
-
-	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
-	inline hasher<T, detail::kmac_mixin>& set_key(const C* key, size_t key_len)
-	{
-		return set_key(std::string(reinterpret_cast<const char*>(key), key_len));
-	}
-
-	inline hasher<T, detail::kmac_mixin>& set_customization(const std::string& customization)
-	{
-		auto& kmac = static_cast<hasher<T, detail::kmac_mixin>&>(*this);
-		kmac.provider.set_customization(customization);
-		kmac.provider.init();
-		return kmac;
-	}
-};
-
 namespace kmac_functions
 {
 	template<size_t B>

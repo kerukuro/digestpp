@@ -17,56 +17,6 @@ namespace digestpp
 namespace detail
 {
 
-template<typename T>
-class blake2_mixin
-{
-public:
-	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
-	inline hasher<T, detail::blake2_mixin>& set_salt(const std::basic_string<C>& salt)
-	{
-		return set_salt(salt.c_str(), salt.size());
-	}
-
-	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
-	inline hasher<T, detail::blake2_mixin>& set_salt(const C* salt, size_t salt_len)
-	{
-		auto& blake = static_cast<hasher<T, detail::blake2_mixin>&>(*this);
-		blake.provider.set_salt(reinterpret_cast<const unsigned char*>(salt), salt_len);
-		blake.provider.init();
-		return blake;
-	}
-
-	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
-	inline hasher<T, detail::blake2_mixin>& set_personalization(const std::basic_string<C>& personalization)
-	{
-		return set_personalization(personalization.c_str(), personalization.size());
-	}
-
-	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
-	inline hasher<T, detail::blake2_mixin>& set_personalization(const C* personalization, size_t personalization_len)
-	{
-		auto& blake = static_cast<hasher<T, detail::blake2_mixin>&>(*this);
-		blake.provider.set_personalization(reinterpret_cast<const unsigned char*>(personalization), personalization_len);
-		blake.provider.init();
-		return blake;
-	}
-
-	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
-	inline hasher<T, detail::blake2_mixin>& set_key(const std::basic_string<C>& key)
-	{
-		return set_key(key.c_str(), key.size());
-	}
-
-	template<typename C, typename std::enable_if<detail::is_byte<C>::value>::type* = nullptr>
-	inline hasher<T, detail::blake2_mixin>& set_key(const C* key, size_t key_len)
-	{
-		auto& blake = static_cast<hasher<T, detail::blake2_mixin>&>(*this);
-		blake.provider.set_key(std::string(reinterpret_cast<const char*>(key), key_len));
-		blake.provider.init();
-		return blake;
-	}
-};
-
 namespace blake2_functions
 {
 	static inline void G(int r, int i, uint64_t& a, uint64_t& b, uint64_t& c, uint64_t& d, uint64_t* M)

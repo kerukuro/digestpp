@@ -16,27 +16,6 @@ namespace digestpp
 namespace detail
 {
 
-template<typename T>
-class cshake_mixin
-{
-public:
-	inline hasher<T, detail::cshake_mixin>& set_function_name(const std::string& function_name)
-	{
-		auto& shake = static_cast<hasher<T, detail::cshake_mixin>&>(*this);
-		shake.provider.set_function_name(function_name);
-		shake.provider.init();
-		return shake;
-	}
-
-	inline hasher<T, detail::cshake_mixin>& set_customization(const std::string& customization)
-	{
-		auto& shake = static_cast<hasher<T, detail::cshake_mixin>&>(*this);
-		shake.provider.set_customization(customization);
-		shake.provider.init();
-		return shake;
-	}
-};
-
 namespace shake_functions
 {
 	static inline size_t left_encode(size_t num, unsigned char* buf)
