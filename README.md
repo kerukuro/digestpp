@@ -255,4 +255,9 @@ A: BLAKE2 has many variants that produce incompatible digests for the same outpu
 * Big endian systems are not supported.
 * No attempts were made to make implementation of every algorithm constant time.
 
+## Reference documentation
+
+Reference documentation is here: https://kerukuro.github.io/digestpp/
+
+
 
