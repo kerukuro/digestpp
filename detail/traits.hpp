@@ -28,4 +28,3 @@ struct is_byte
 } // namespace digestpp
 
 #endif // DIGESTPP_DETAIL_TRAITS_HPP
-

@@ -21,26 +21,26 @@ namespace blake_functions
 {
 	static inline void G(int r, int i, uint32_t& a, uint32_t& b, uint32_t& c, uint32_t& d, uint32_t* M)
 	{
-		a = a + b + (M[blake_constants<void>::S[r % 10][2 * i]] 
+		a = a + b + (M[blake_constants<void>::S[r % 10][2 * i]]
 				^ blake_constants<void>::c[blake_constants<void>::S[r % 10][2 * i + 1]]);
 		d = rotate_right(d ^ a, 16);
 		c = c + d;
 		b = rotate_right(b ^ c, 12);
-		a = a + b + (M[blake_constants<void>::S[r % 10][2 * i + 1]] 
+		a = a + b + (M[blake_constants<void>::S[r % 10][2 * i + 1]]
 				^ blake_constants<void>::c[blake_constants<void>::S[r % 10][2 * i]]);
 		d = rotate_right(d ^ a, 8);
 		c = c + d;
 		b = rotate_right(b ^ c, 7);
 	}
 
-	static inline void G(int r, int i, uint64_t& a, uint64_t& b, uint64_t& c, uint64_t& d, uint64_t* M) 
+	static inline void G(int r, int i, uint64_t& a, uint64_t& b, uint64_t& c, uint64_t& d, uint64_t* M)
 	{
 		a = a + b + (M[blake_constants<void>::S[r % 10][2 * i]]
 				^ blake_constants<void>::c512[blake_constants<void>::S[r % 10][2 * i + 1]]);
 		d = rotate_right(d ^ a, 32);
 		c = c + d;
 		b = rotate_right(b ^ c, 25);
-		a = a + b + (M[blake_constants<void>::S[r % 10][2 * i + 1]] 
+		a = a + b + (M[blake_constants<void>::S[r % 10][2 * i + 1]]
 				^ blake_constants<void>::c512[blake_constants<void>::S[r % 10][2 * i]]);
 		d = rotate_right(d ^ a, 16);
 		c = c + d;
@@ -48,7 +48,7 @@ namespace blake_functions
 	}
 
 	template<typename T>
-	static inline void round(int r, T* M, T* v) 
+	static inline void round(int r, T* M, T* v)
 	{
 		G(r, 0, v[0], v[4], v[8], v[12], M);
 		G(r, 1, v[1], v[5], v[9], v[13], M);
@@ -139,7 +139,7 @@ namespace blake_functions
 		if (saltlen)
 			for (int i = 0; i < 4; i++)
 				H[8 + i] = byteswap(reinterpret_cast<const T*>(salt)[i]);
-		else 
+		else
 			H[8] = H[9] = H[10] = H[11] = 0;
 	}
 }
@@ -213,7 +213,7 @@ public:
 
 	inline void update(const unsigned char* data, size_t len)
 	{
-		detail::absorb_bytes(data, len, block_bytes(), block_bytes(), m.data(), pos, total, 
+		detail::absorb_bytes(data, len, block_bytes(), block_bytes(), m.data(), pos, total,
 			[this](const unsigned char* data, size_t len) { transform(data, len, false, false); });
 	}
 
@@ -299,4 +299,3 @@ private:
 } // namespace digestpp
 
 #endif
-

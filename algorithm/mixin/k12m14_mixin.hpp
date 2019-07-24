@@ -53,5 +53,3 @@ public:
 } // namespace digestpp
 
 #endif // DIGESTPP_MIXINS_K12M14_HPP
-
-

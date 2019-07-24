@@ -69,4 +69,3 @@ const uint64_t jh_constants<T>::C[168] = {
 } // namespace digestpp
 
 #endif
-

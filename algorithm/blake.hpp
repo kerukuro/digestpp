@@ -45,4 +45,3 @@ typedef hasher<detail::blake_provider, mixin::blake_mixin> blake;
 } // namespace digestpp
 
 #endif // DIGESTPP_ALGORITHM_BLAKE_HPP
-

@@ -23,4 +23,3 @@ struct null_mixin
 } // namespace digestpp
 
 #endif // DIGESTPP_MIXINS_NULL_HPP
-

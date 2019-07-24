@@ -111,5 +111,3 @@ int main()
 	example10();
 	example11();
 }
-
-

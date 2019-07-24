@@ -69,4 +69,3 @@ enum class blake2_type
 } // namespace digestpp
 
 #endif
-

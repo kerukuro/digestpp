@@ -143,7 +143,7 @@ public:
 
 	inline void update(const unsigned char* data, size_t len)
 	{
-		detail::absorb_bytes(data, len, rate / 8, rate / 8, m.data(), pos, total, 
+		detail::absorb_bytes(data, len, rate / 8, rate / 8, m.data(), pos, total,
 			[this](const unsigned char* data, size_t len) { sha3_functions::transform<24>(data, len, A.data(), rate); });
 	}
 
@@ -158,9 +158,9 @@ public:
 		memcpy(hash, A.data(), hash_size() / 8);
 	}
 
-	inline size_t hash_size() const 
-	{ 
-		return hs; 
+	inline size_t hash_size() const
+	{
+		return hs;
 	}
 
 	inline void clear()
@@ -183,5 +183,3 @@ private:
 } // namespace digestpp
 
 #endif // DIGESTPP_PROVIDERS_SHA3_HPP
-
-

@@ -20,25 +20,25 @@ namespace md5_functions
 {
 	static inline void roundf(int round, uint32_t& a, uint32_t& b, uint32_t& c, uint32_t& d, const uint32_t* M)
 	{
-		a = b + rotate_left(a + (d ^ (b & (c ^ d))) + md5_constants<void>::K[round] + M[round], 
+		a = b + rotate_left(a + (d ^ (b & (c ^ d))) + md5_constants<void>::K[round] + M[round],
 				md5_constants<void>::S[round]);
 	}
 
 	static inline void roundg(int round, uint32_t& a, uint32_t& b, uint32_t& c, uint32_t& d, const uint32_t* M)
 	{
-		a = b + rotate_left(a + (c ^ (d & (b ^ c))) + md5_constants<void>::K[round] + M[(5 * round + 1) % 16], 
+		a = b + rotate_left(a + (c ^ (d & (b ^ c))) + md5_constants<void>::K[round] + M[(5 * round + 1) % 16],
 				md5_constants<void>::S[round]);
 	}
 
 	static inline void roundh(int round, uint32_t& a, uint32_t& b, uint32_t& c, uint32_t& d, const uint32_t* M)
 	{
-		a = b + rotate_left(a + (b ^ c ^ d) + md5_constants<void>::K[round] + M[(3 * round + 5) % 16], 
+		a = b + rotate_left(a + (b ^ c ^ d) + md5_constants<void>::K[round] + M[(3 * round + 5) % 16],
 				md5_constants<void>::S[round]);
 	}
 
 	static inline void roundi(int round, uint32_t& a, uint32_t& b, uint32_t& c, uint32_t& d, const uint32_t* M)
 	{
-		a = b + rotate_left(a + (c ^ (b | ~d)) + md5_constants<void>::K[round] + M[(7 * round) % 16], 
+		a = b + rotate_left(a + (c ^ (b | ~d)) + md5_constants<void>::K[round] + M[(7 * round) % 16],
 				md5_constants<void>::S[round]);
 	}
 
@@ -70,7 +70,7 @@ public:
 
 	inline void update(const unsigned char* data, size_t len)
 	{
-		detail::absorb_bytes(data, len, 64, 64, m.data(), pos, total, 
+		detail::absorb_bytes(data, len, 64, 64, m.data(), pos, total,
 			[this](const unsigned char* data, size_t len) { transform(data, len); });
 	}
 
@@ -196,4 +196,3 @@ private:
 } // namespace digestpp
 
 #endif
-

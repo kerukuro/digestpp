@@ -19,9 +19,9 @@ inline uint16_t byteswap(uint16_t val)
 // Byte-swap a 32-bit unsigned integer.
 inline uint32_t byteswap(uint32_t val)
 {
-    return (((val & 0xff000000) >> 24) | 
-			((val & 0x00ff0000) >> 8) | 
-			((val & 0x0000ff00) << 8) | 
+    return (((val & 0xff000000) >> 24) |
+			((val & 0x00ff0000) >> 8) |
+			((val & 0x0000ff00) << 8) |
 			((val & 0x000000ff) << 24));
 }
 
@@ -89,4 +89,3 @@ inline void zero_memory(std::string& s)
 } // namespace digestpp
 
 #endif
-

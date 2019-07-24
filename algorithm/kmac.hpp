@@ -139,5 +139,3 @@ typedef hasher<detail::kmac_provider<256, true>, mixin::kmac_mixin> kmac256_xof;
 } // namespace digestpp
 
 #endif // DIGESTPP_ALGORITHM_KMAC_HPP
-
-

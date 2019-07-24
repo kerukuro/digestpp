@@ -584,4 +584,3 @@ const uint64_t streebog_constants<V>::RC[12][8] = {
 } // namespace digestpp
 
 #endif
-
