@@ -39,4 +39,3 @@ typedef hasher<detail::streebog_provider> streebog;
 } // namespace digestpp
 
 #endif // DIGESTPP_ALGORITHM_STREEBOG_HPP
-

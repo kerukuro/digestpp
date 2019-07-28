@@ -24,7 +24,7 @@ namespace digestpp
 /**
  * \brief Main class template implementing the public API for hashing
  *
- * Individual hash functions are defined by typedefs. 
+ * Individual hash functions are defined by typedefs.
  * See \ref digestpp namespace description for description of supported hash functions with usage examples.
  *
  * \param HashProvider A class implementing the algorithm via traditional init/update/final interface.
@@ -46,11 +46,11 @@ class hasher : public Mixin<HashProvider>
 	 */
 	template<typename H=HashProvider, typename std::enable_if<std::is_default_constructible<H>::value>::type* = nullptr>
 	hasher()
-	{ 
+	{
 		provider.init();
 	}
-	
-	/** 
+
+	/**
 	 * \brief Constructor with hash size parameter
 	 *
 	 * Supported output sizes for each algorithm are listed in the description of corresponding typedef.
@@ -67,7 +67,7 @@ class hasher : public Mixin<HashProvider>
 		provider.init();
 	}
 
-	/** 
+	/**
 	 * \brief Absorbs bytes from a C-style pointer to character buffer
 	 * \param[in] data Pointer to data to absorb
 	 * \param[in] len Size of data to absorb (in bytes)
@@ -92,7 +92,7 @@ class hasher : public Mixin<HashProvider>
 	 * \param[in] str String to absorb
 	 * \return Reference to *this
 	 */
-	template<typename T, 
+	template<typename T,
 		typename std::enable_if<detail::is_byte<T>::value && !std::is_same<T, std::string::value_type>::value>::type* = nullptr>
 	inline hasher& absorb(const std::basic_string<T>& str)
 	{
@@ -172,7 +172,7 @@ class hasher : public Mixin<HashProvider>
 		return *this;
 	}
 
-	/** 
+	/**
 	 * \brief Squeeze bytes into user-provided preallocated buffer.
 	 *
 	 * After each invocation of this function the internal state of the hasher changes
@@ -184,14 +184,14 @@ class hasher : public Mixin<HashProvider>
 	 * \param[out] buf Buffer to squeeze data to; must be of byte type (char, unsigned char or signed char)
 	 * \param[in] len Size of data to squeeze (in bytes)
 	 */
-	template<typename T, typename H=HashProvider, 
+	template<typename T, typename H=HashProvider,
 		typename std::enable_if<detail::is_byte<T>::value && detail::is_xof<H>::value>::type* = nullptr>
 	inline void squeeze(T* buf, size_t len)
 	{
 		provider.squeeze(reinterpret_cast<unsigned char*>(buf), len);
 	}
-	
-	/** 
+
+	/**
 	 * \brief Squeeze bytes into an output iterator.
 	 *
 	 * After each invocation of this function the internal state of the hasher changes
@@ -221,7 +221,7 @@ class hasher : public Mixin<HashProvider>
 		std::copy(hash.begin(), hash.end(), it);
 	}
 
-	/** 
+	/**
 	 * \brief Squeeze bytes and return them as a hex string.
 	 *
 	 * After each invocation of this function the internal state of the hasher changes
@@ -248,7 +248,7 @@ class hasher : public Mixin<HashProvider>
 		return res.str();
 	}
 
-	/** 
+	/**
 	 * \brief Output binary digest into user-provided preallocated buffer.
 	 *
 	 * This function does not change the state of the hasher and can be called multiple times, producing the same result.
@@ -266,7 +266,7 @@ class hasher : public Mixin<HashProvider>
 	 * digestpp::sha3(256).absorb("The quick brown fox jumps over the lazy dog").digest(buf, sizeof(buf));
 	 * @endcode
 	 */
-	template<typename T, typename H=HashProvider, 
+	template<typename T, typename H=HashProvider,
 		typename std::enable_if<detail::is_byte<T>::value && !detail::is_xof<H>::value>::type* = nullptr>
 	inline void digest(T* buf, size_t len) const
 	{
@@ -277,7 +277,7 @@ class hasher : public Mixin<HashProvider>
 		copy.final(buf);
 	}
 
-	/** 
+	/**
 	 * \brief Write binary digest into an output iterator.
 	 *
 	 * This function does not change the state of the hasher and can be called multiple times, producing the same result.
@@ -301,7 +301,7 @@ class hasher : public Mixin<HashProvider>
 		std::copy(hash.begin(), hash.end(), it);
 	}
 
-	/** 
+	/**
 	 * \brief Return hex digest of absorbed data.
 	 *
 	 * This function does not change the state of the hasher and can be called multiple times, producing the same result.
@@ -324,12 +324,12 @@ class hasher : public Mixin<HashProvider>
 		return res.str();
 	}
 
-	/** 
+	/**
 	 * \brief Reset the hasher state to start new digest computation.
 	 *
 	 * \param[in] resetParameters if true, also clear optional parameters (personalization, salt, etc)
 	 */
-	inline void reset(bool resetParameters = false) 
+	inline void reset(bool resetParameters = false)
 	{
 		if (resetParameters)
 			provider.clear();
@@ -345,4 +345,3 @@ private:
 } // namespace digestpp
 
 #endif // DIGESTPP_HASHER_HPP
-

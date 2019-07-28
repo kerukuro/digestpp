@@ -28,4 +28,3 @@ std::ostream& operator<<(std::ostream& ostr, const stream_width_fixer<T, N>& val
 } // namespace digestpp
 
 #endif // DIGESTPP_DETAIL_WIDTH_FIXER_HPP
-

@@ -79,5 +79,3 @@ public:
 } // namespace digestpp
 
 #endif // DIGESTPP_MIXIN_SHAKE_HPP
-
-

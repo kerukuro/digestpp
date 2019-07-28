@@ -79,5 +79,3 @@ public:
 } // namespace digestpp
 
 #endif // DIGESTPP_MIXINS_KMAC_HPP
-
-

@@ -53,4 +53,3 @@ const uint32_t blake_constants<T>::S[10][16] = {
 } // namespace digestpp
 
 #endif
-

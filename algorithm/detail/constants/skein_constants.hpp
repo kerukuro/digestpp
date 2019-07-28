@@ -23,7 +23,7 @@ struct skein_constants
 };
 
 template<typename T>
-const unsigned skein_constants<T>::C4[8][2] = { 
+const unsigned skein_constants<T>::C4[8][2] = {
 	{ 14, 16 }, { 52, 57 }, { 23, 40 }, { 5, 37 }, { 25, 33 }, { 46, 12 }, { 58, 22 }, { 32, 32 }
 };
 
@@ -50,9 +50,9 @@ const unsigned skein_constants<T>::I4[8][4]= {
 
 template<typename T>
 const unsigned skein_constants<T>::I8[8][8]= {
-	{ 0, 1, 2, 3, 4, 5, 6, 7 }, { 2, 1, 4, 7, 6, 5, 0, 3 }, 
+	{ 0, 1, 2, 3, 4, 5, 6, 7 }, { 2, 1, 4, 7, 6, 5, 0, 3 },
 	{ 4, 1, 6, 3, 0, 5, 2, 7 }, { 6, 1, 0, 7, 2, 5, 4, 3 },
-	{ 0, 1, 2, 3, 4, 5, 6, 7 }, { 2, 1, 4, 7, 6, 5, 0, 3 }, 
+	{ 0, 1, 2, 3, 4, 5, 6, 7 }, { 2, 1, 4, 7, 6, 5, 0, 3 },
 	{ 4, 1, 6, 3, 0, 5, 2, 7 }, { 6, 1, 0, 7, 2, 5, 4, 3 }
 };
 
@@ -73,8 +73,3 @@ const unsigned skein_constants<T>::I16[8][16] = {
 } // namespace digestpp
 
 #endif
-
-
-
-
-

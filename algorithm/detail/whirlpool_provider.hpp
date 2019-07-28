@@ -22,8 +22,8 @@ namespace whirlpool_functions
 	static inline uint64_t G(const uint64_t* ll)
 	{
 			return whirlpool_constants<void>::T[0][static_cast<unsigned char>(ll[a % 8])]
-				^ whirlpool_constants<void>::T[1][static_cast<unsigned char>(ll[(a - 1) % 8] >> 8)] 
-				^ whirlpool_constants<void>::T[2][static_cast<unsigned char>(ll[(a - 2) % 8] >> 16)] 
+				^ whirlpool_constants<void>::T[1][static_cast<unsigned char>(ll[(a - 1) % 8] >> 8)]
+				^ whirlpool_constants<void>::T[2][static_cast<unsigned char>(ll[(a - 2) % 8] >> 16)]
 				^ whirlpool_constants<void>::T[3][static_cast<unsigned char>(ll[(a - 3) % 8] >> 24)]
 				^ whirlpool_constants<void>::T[4][static_cast<unsigned char>(ll[(a - 4) % 8] >> 32)]
 				^ whirlpool_constants<void>::T[5][static_cast<unsigned char>(ll[(a - 5) % 8] >> 40)]
@@ -55,7 +55,7 @@ public:
 
 	inline void update(const unsigned char* data, size_t len)
 	{
-		detail::absorb_bytes(data, len, 64, 64, m.data(), pos, total, 
+		detail::absorb_bytes(data, len, 64, 64, m.data(), pos, total,
 			[this](const unsigned char* data, size_t len) { transform(data, len); });
 	}
 
@@ -124,7 +124,7 @@ private:
 			}
 
 			for (int i = 0; i < 8; ++i)
-				h[i] ^= state[i] ^ reinterpret_cast<const uint64_t*>(mp)[i]; 
+				h[i] ^= state[i] ^ reinterpret_cast<const uint64_t*>(mp)[i];
 			mp += 64;
 		}
 	}
@@ -141,4 +141,3 @@ private:
 } // namespace digestpp
 
 #endif
-

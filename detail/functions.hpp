@@ -19,9 +19,9 @@ inline uint16_t byteswap(uint16_t val)
 // Byte-swap a 32-bit unsigned integer.
 inline uint32_t byteswap(uint32_t val)
 {
-    return (((val & 0xff000000) >> 24) | 
-			((val & 0x00ff0000) >> 8) | 
-			((val & 0x0000ff00) << 8) | 
+    return (((val & 0xff000000) >> 24) |
+			((val & 0x00ff0000) >> 8) |
+			((val & 0x0000ff00) << 8) |
 			((val & 0x000000ff) << 24));
 }
 
@@ -37,6 +37,23 @@ inline uint64_t byteswap(uint64_t val)
 			((val & 0x000000000000ff00ull) << 40) |
 			((val & 0x00000000000000ffull) << 56));
 }
+
+#ifdef __APPLE__
+inline size_t byteswap(size_t val)
+{
+	switch(sizeof(size_t))
+	{
+		case sizeof(uint16_t):
+			return (size_t)byteswap((uint16_t)val);
+
+		case sizeof(uint32_t):
+			return (size_t)byteswap((uint32_t)val);
+
+		case sizeof(uint64_t):
+			return (size_t)byteswap((uint64_t)val);
+	}
+}
+#endif
 
 // Rotate 32-bit unsigned integer to the right.
 inline uint32_t rotate_right(uint32_t x, unsigned n)
@@ -89,4 +106,3 @@ inline void zero_memory(std::string& s)
 } // namespace digestpp
 
 #endif
-

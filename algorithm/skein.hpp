@@ -189,8 +189,3 @@ typedef hasher<detail::skein_provider<256, true>, mixin::skein_mixin> skein256_x
 } // namespace digestpp
 
 #endif
-
-
-
-
-

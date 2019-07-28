@@ -27,4 +27,3 @@ const uint32_t sha1_constants<T>::K[4] = {
 } // namespace digestpp
 
 #endif
-

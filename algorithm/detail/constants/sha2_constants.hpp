@@ -64,4 +64,3 @@ const uint32_t sha256_constants<T>::K[64] = {
 } // namespace digestpp
 
 #endif
-

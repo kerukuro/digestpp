@@ -39,4 +39,3 @@ inline void validate_hash_size(size_t hs, size_t max)
 } // namespace digestpp
 
 #endif // DIGESTPP_DETAIL_VALIDATE_HASH_SIZE_HPP
-

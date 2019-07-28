@@ -40,4 +40,3 @@ typedef hasher<detail::md5_provider> md5;
 } // namespace digestpp
 
 #endif
-

@@ -44,4 +44,3 @@ inline void absorb_bytes(const unsigned char* data, size_t len, size_t bs, size_
 } // namespace digestpp
 
 #endif // DIGESTPP_DETAIL_ABSORB_DATA_HPP
-

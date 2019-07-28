@@ -111,5 +111,3 @@ typedef hasher<detail::shake_provider<256, 24>, mixin::cshake_mixin> cshake256;
 } // namespace digestpp
 
 #endif // DIGESTPP_ALGORITHM_SHAKE_HPP
-
-

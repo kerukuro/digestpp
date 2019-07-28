@@ -40,5 +40,3 @@ typedef hasher<detail::sha3_provider> sha3;
 } // namespace digestpp
 
 #endif // DIGESTPP_ALGORITHM_SHA3_HPP
-
-

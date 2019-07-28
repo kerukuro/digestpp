@@ -20,7 +20,7 @@ namespace digestpp
  *
  * @defaultsize none
  *
- * @throw std::runtime_error if the requested digest size is not divisible by 8 (full bytes), 
+ * @throw std::runtime_error if the requested digest size is not divisible by 8 (full bytes),
  * or is not within the supported range
  *
  * @par Example:\n
@@ -41,4 +41,3 @@ typedef hasher<detail::jh_provider> jh;
 } // namespace digestpp
 
 #endif // DIGESTPP_ALGORITHM_JG_HPP
-
