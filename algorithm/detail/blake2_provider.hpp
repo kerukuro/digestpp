@@ -134,6 +134,7 @@ public:
 	{
 		pos = 0;
 		total = 0;
+		xoffset = 0;
 		squeezing = false;
 
 		blake2_functions::initH(H);

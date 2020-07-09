@@ -81,6 +81,7 @@ public:
 	{
 		zero_memory(A);
 		pos = 0;
+		total = 0;
 		squeezing = false;
 		suffix = 0;
 
