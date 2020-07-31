@@ -41,6 +41,7 @@ public:
 	{
 		main.init();
 		pos = 0;
+		total = 0;
 		chunk = 0;
 		squeezing = false;
 	}

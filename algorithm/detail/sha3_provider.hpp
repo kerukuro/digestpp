@@ -139,6 +139,7 @@ public:
 	{
 		zero_memory(A);
 		pos = 0;
+		total = 0;
 	}
 
 	inline void update(const unsigned char* data, size_t len)
