@@ -86,6 +86,8 @@ public:
 
 	inline void transform(const unsigned char* data, uint64_t num_blks, size_t reallen)
 	{
+		(void)reallen;
+
 		for (uint64_t blk = 0; blk < num_blks; blk++)
 		{
 			if (!chunk)
