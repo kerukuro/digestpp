@@ -38,4 +38,3 @@ typedef hasher<detail::sm3_provider> sm3;
 } // namespace digestpp
 
 #endif
-

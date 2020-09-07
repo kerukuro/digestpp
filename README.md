@@ -95,14 +95,14 @@ public:
     // If the requested output size is not supported by the algorithm, std::runtime_error will be thrown.
     template<typename H=HashProvider, typename std::enable_if<!detail::is_xof<H>::value>::type* = nullptr>
     hasher(size_t hashsize);
-    
+
      // Absorbs bytes from a C-style pointer to character buffer
     template<typename T, typename std::enable_if<detail::is_byte<T>::value>::type* = nullptr>
     inline hasher& absorb(const T* data, size_t len);
-    
+
     // Absorbs bytes from std::basic_string
     template<typename T,
-        typename std::enable_if<detail::is_byte<T>::value 
+        typename std::enable_if<detail::is_byte<T>::value
             && !std::is_same<T, std::string::value_type>::value>::type* = nullptr>
     inline hasher& absorb(const std::basic_string<T>& str);
 
@@ -112,43 +112,43 @@ public:
     // Absorbs bytes from std::istream
     template<typename T, typename std::enable_if<detail::is_byte<T>::value>::type* = nullptr>;
     inline hasher& absorb(std::basic_istream<T>& istr);
-    
+
     // Absorbs bytes from an iterator sequence
     template<typename IT>
     inline hasher& absorb(IT begin, IT end);
-    
+
     // In case HashProvider is an extendable output function, squeeze <len> bytes from absorbed data
     // into user-provided preallocated buffer.
     template<typename T, typename H=HashProvider,
         typename std::enable_if<detail::is_byte<T>::value && detail::is_xof<H>::value>::type* = nullptr>
     inline void squeeze(T* buf, size_t len);
-    
+
     // In case HashProvider is an extendable output function, squeeze <len> bytes from absorbed data
     // and write them into the output iterator.
-    template<typename OI, typename H=HashProvider, 
+    template<typename OI, typename H=HashProvider,
         typename std::enable_if<detail::is_xof<H>::value>::type* = nullptr>
     inline void squeeze(size_t len, OI it);
-   
+
     // In case HashProvider is an extendable output function, squeeze <len> bytes from absorbed data
     // and return them as a hex string.
     template<typename H=HashProvider, typename std::enable_if<detail::is_xof<H>::value>::type* = nullptr>
     inline std::string hexsqueeze(size_t len);
-    
+
     // In case HashProvider is a hash function, output binary digest to user-provided preallocated buffer.
     template<typename T, typename H=HashProvider,
         typename std::enable_if<detail::is_byte<T>::value && !detail::is_xof<H>::value>::type* = nullptr>
     inline void digest(T* buf, size_t len) const;
-    
-    // In case HashProvider is a hash function, generates binary digest from absorbed data 
+
+    // In case HashProvider is a hash function, generates binary digest from absorbed data
     // and write it via output iterator.
-    template<typename OI, typename H=HashProvider, 
+    template<typename OI, typename H=HashProvider,
         typename std::enable_if<!detail::is_xof<H>::value>::type* = nullptr>
     inline void digest(OI it) const;
-    
+
     // In case HashProvider is a hash function, returns hex digest of absorbed data.
     template<typename H=HashProvider, typename std::enable_if<!detail::is_xof<H>::value>::type* = nullptr>
     inline std::string hexdigest() const;
-    
+
     // Resets the state to start new digest computation.
     // If resetParameters is true, all customization parameters such as salt will also be cleared.
     inline void reset(bool resetParameters = false);

@@ -22,13 +22,13 @@ namespace streebog_functions
 	template<int I>
 	static inline uint64_t lps(unsigned char* ch)
 	{
-		return streebog_constants<void>::T[0][(ch[I])] 
-			^ streebog_constants<void>::T[1][(ch[8 + I])] 
-			^ streebog_constants<void>::T[2][(ch[16 + I])] 
+		return streebog_constants<void>::T[0][(ch[I])]
+			^ streebog_constants<void>::T[1][(ch[8 + I])]
+			^ streebog_constants<void>::T[2][(ch[16 + I])]
 			^ streebog_constants<void>::T[3][(ch[24 + I])]
 			^ streebog_constants<void>::T[4][(ch[32 + I])]
-			^ streebog_constants<void>::T[5][(ch[40 + I])] 
-			^ streebog_constants<void>::T[6][(ch[48 + I])] 
+			^ streebog_constants<void>::T[5][(ch[40 + I])]
+			^ streebog_constants<void>::T[6][(ch[48 + I])]
 			^ streebog_constants<void>::T[7][(ch[56 + I])];
 	}
 
@@ -125,7 +125,7 @@ public:
 
 	inline void update(const unsigned char* data, size_t len)
 	{
-		detail::absorb_bytes(data, len, 64, 64, m.data(), pos, total, 
+		detail::absorb_bytes(data, len, 64, 64, m.data(), pos, total,
 			[this](const unsigned char* data, size_t len) { transform(data, len, false); });
 	}
 
@@ -180,4 +180,3 @@ private:
 } // namespace digestpp
 
 #endif
-

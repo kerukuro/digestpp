@@ -36,7 +36,7 @@ namespace jh_functions
 		bitswap(H[15], mask, shift);
 	}
 
-	static inline void Sbitsli(uint64_t& x0a, uint64_t& x0b, uint64_t& x1a, uint64_t& x1b, uint64_t& x2a, uint64_t& x2b, 
+	static inline void Sbitsli(uint64_t& x0a, uint64_t& x0b, uint64_t& x1a, uint64_t& x1b, uint64_t& x2a, uint64_t& x2b,
 			uint64_t& x3a, uint64_t& x3b, uint64_t ca, uint64_t cb)
 	{
 		x3a = ~x3a;
@@ -85,9 +85,9 @@ namespace jh_functions
 
 	static inline void round(std::array<uint64_t, 16>& H, int r, uint64_t mask, int shift)
 	{
-		jh_functions::Sbitsli(H[0], H[1], H[4], H[5], H[8], H[9], H[12], H[13], 
+		jh_functions::Sbitsli(H[0], H[1], H[4], H[5], H[8], H[9], H[12], H[13],
 				jh_constants<void>::C[r * 4 + 0], jh_constants<void>::C[r * 4 + 1]);
-		jh_functions::Sbitsli(H[2], H[3], H[6], H[7], H[10], H[11], H[14], H[15], 
+		jh_functions::Sbitsli(H[2], H[3], H[6], H[7], H[10], H[11], H[14], H[15],
 				jh_constants<void>::C[r * 4 + 2], jh_constants<void>::C[r * 4 + 3]);
 		jh_functions::Lbitsli(H);
 		if (shift)
@@ -126,7 +126,7 @@ public:
 
 	inline void update(const unsigned char* data, size_t len)
 	{
-		detail::absorb_bytes(data, len, 64, 64, m.data(), pos, total, 
+		detail::absorb_bytes(data, len, 64, 64, m.data(), pos, total,
 			[this](const unsigned char* data, size_t len) { transform(data, len); });
 	}
 
@@ -212,4 +212,3 @@ private:
 } // namespace digestpp
 
 #endif
-

@@ -41,4 +41,3 @@ typedef hasher<detail::kupyna_provider> kupyna;
 } // namespace digestpp
 
 #endif // DIGESTPP_ALGORITHM_KUPYNA_HPP
-

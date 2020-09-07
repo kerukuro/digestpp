@@ -38,4 +38,3 @@ typedef hasher<detail::whirlpool_provider> whirlpool;
 } // namespace digestpp
 
 #endif // DIGESTPP_ALGORITHM_WHIRLPOOL_HPP
-

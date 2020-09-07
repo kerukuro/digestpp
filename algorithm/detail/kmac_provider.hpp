@@ -89,7 +89,7 @@ public:
 		{
 			unsigned char buf[32];
 			size_t len = shake_functions::right_encode(!XOF ? hs * 8 : 0, buf, false);
-			update(buf, len); 
+			update(buf, len);
 			squeezing = true;
 		}
 		shake.squeeze(hash, hs);
@@ -124,5 +124,3 @@ private:
 } // namespace digestpp
 
 #endif // DIGESTPP_PROVIDERS_KMAC_HPP
-
-

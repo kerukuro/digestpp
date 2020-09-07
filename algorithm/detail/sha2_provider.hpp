@@ -165,7 +165,7 @@ public:
 
 	inline void update(const unsigned char* data, size_t len)
 	{
-		detail::absorb_bytes(data, len, N / 4, N / 4, m.data(), pos, total, 
+		detail::absorb_bytes(data, len, N / 4, N / 4, m.data(), pos, total,
 			[this](const unsigned char* data, size_t len) { transform(data, len); });
 	}
 
@@ -316,4 +316,3 @@ inline void sha2_provider<uint32_t, 256>::init()
 } // namespace digestpp
 
 #endif
-

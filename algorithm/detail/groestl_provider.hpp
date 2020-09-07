@@ -26,11 +26,11 @@ namespace groestl_functions
 		   x[idx] ^= (static_cast<uint64_t>(idx) << 4) ^ i;
 
 	   for (int c = R - 1; c >= 0; c--)
-		   y[c] = groestl_constants<void>::T[0][static_cast<unsigned char>(x[(c + 0) % R])] 
-			   ^ groestl_constants<void>::T[1][static_cast<unsigned char>(x[(c + 1) % R] >> 8)] 
-			   ^ groestl_constants<void>::T[2][static_cast<unsigned char>(x[(c + 2) % R] >> 16)] 
+		   y[c] = groestl_constants<void>::T[0][static_cast<unsigned char>(x[(c + 0) % R])]
+			   ^ groestl_constants<void>::T[1][static_cast<unsigned char>(x[(c + 1) % R] >> 8)]
+			   ^ groestl_constants<void>::T[2][static_cast<unsigned char>(x[(c + 2) % R] >> 16)]
 			   ^ groestl_constants<void>::T[3][static_cast<unsigned char>(x[(c + 3) % R] >> 24)]
-			   ^ groestl_constants<void>::T[4][static_cast<unsigned char>(x[(c + 4) % R] >> 32)] 
+			   ^ groestl_constants<void>::T[4][static_cast<unsigned char>(x[(c + 4) % R] >> 32)]
 			   ^ groestl_constants<void>::T[5][static_cast<unsigned char>(x[(c + 5) % R] >> 40)]
 			   ^ groestl_constants<void>::T[6][static_cast<unsigned char>(x[(c + 6) % R] >> 48)]
 			   ^ groestl_constants<void>::T[7][static_cast<unsigned char>(x[(c + (R == 16 ? 11 : 7)) % R] >> 56)];
@@ -43,7 +43,7 @@ namespace groestl_functions
 		   x[idx] ^= (0xffffffffffffffffull - (static_cast<uint64_t>(idx) << 60)) ^ i;
 
 	   for (int c = R - 1; c >= 0; c--)
-		   y[c] = groestl_constants<void>::T[0][static_cast<unsigned char>(x[(c + 1) % R])] 
+		   y[c] = groestl_constants<void>::T[0][static_cast<unsigned char>(x[(c + 1) % R])]
 			   ^ groestl_constants<void>::T[1][static_cast<unsigned char>(x[(c + 3) % R] >> 8)]
 			   ^ groestl_constants<void>::T[2][static_cast<unsigned char>(x[(c + 5) % R] >> 16)]
 			   ^ groestl_constants<void>::T[3][static_cast<unsigned char>(x[(c + (R == 16 ? 11 : 7)) % R] >> 24)]
@@ -127,7 +127,7 @@ public:
 
 	inline void update(const unsigned char* data, size_t len)
 	{
-		detail::absorb_bytes(data, len, block_bytes(), block_bytes(), m.data(), pos, total, 
+		detail::absorb_bytes(data, len, block_bytes(), block_bytes(), m.data(), pos, total,
 			[this](const unsigned char* data, size_t len) { transform(data, len); });
 	}
 
@@ -200,4 +200,3 @@ private:
 } // namespace digestpp
 
 #endif
-

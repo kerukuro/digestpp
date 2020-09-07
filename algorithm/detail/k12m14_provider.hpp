@@ -41,13 +41,14 @@ public:
 	{
 		main.init();
 		pos = 0;
+		total = 0;
 		chunk = 0;
 		squeezing = false;
 	}
 
 	inline void update(const unsigned char* data, size_t len)
 	{
-		detail::absorb_bytes(data, len, m.size(), m.size(), m.data(), pos, total, 
+		detail::absorb_bytes(data, len, m.size(), m.size(), m.data(), pos, total,
 			[this](const unsigned char* data, size_t len) { transform(data, len, len * 8192); });
 	}
 
@@ -59,7 +60,7 @@ public:
 			size_t len = shake_functions::right_encode(S.length(), buf, true);
 			if (!S.empty())
 				update(reinterpret_cast<const unsigned char*>(S.data()), S.length());
-			update(buf, len); 
+			update(buf, len);
 			if (pos)
 			{
 				if (!chunk)
@@ -85,6 +86,8 @@ public:
 
 	inline void transform(const unsigned char* data, uint64_t num_blks, size_t reallen)
 	{
+		(void)reallen;
+
 		for (uint64_t blk = 0; blk < num_blks; blk++)
 		{
 			if (!chunk)
@@ -134,5 +137,3 @@ private:
 } // namespace digestpp
 
 #endif // DIGESTPP_PROVIDERS_K12M14_HPP
-
-

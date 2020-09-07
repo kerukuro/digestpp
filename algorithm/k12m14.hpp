@@ -67,5 +67,3 @@ typedef hasher<detail::k12m14_provider<256>, mixin::k12m14_mixin> m14;
 } // namespace digestpp
 
 #endif // DIGESTPP_ALGORITHM_K12M14_HPP
-
-

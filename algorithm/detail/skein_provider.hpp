@@ -28,10 +28,10 @@ struct skein_functions<4>
 	template<size_t r> static inline void GTv4(uint64_t* G)
 	{
 		G[skein_constants<void>::I4[r][0]] += G[skein_constants<void>::I4[r][1]];
-		G[skein_constants<void>::I4[r][1]] = rotate_left(G[skein_constants<void>::I4[r][1]], 
+		G[skein_constants<void>::I4[r][1]] = rotate_left(G[skein_constants<void>::I4[r][1]],
 				skein_constants<void>::C4[r][0]) ^ G[skein_constants<void>::I4[r][0]];
 		G[skein_constants<void>::I4[r][2]] += G[skein_constants<void>::I4[r][3]];
-		G[skein_constants<void>::I4[r][3]] = rotate_left(G[skein_constants<void>::I4[r][3]], 
+		G[skein_constants<void>::I4[r][3]] = rotate_left(G[skein_constants<void>::I4[r][3]],
 				skein_constants<void>::C4[r][1]) ^ G[skein_constants<void>::I4[r][2]];
 	}
 
@@ -66,10 +66,10 @@ struct skein_functions<8>
 	template<size_t r> static inline void GTv4(uint64_t* G)
 	{
 		G[skein_constants<void>::I8[r][0]] += G[skein_constants<void>::I8[r][1]];
-		G[skein_constants<void>::I8[r][1]] = rotate_left(G[skein_constants<void>::I8[r][1]], 
+		G[skein_constants<void>::I8[r][1]] = rotate_left(G[skein_constants<void>::I8[r][1]],
 				skein_constants<void>::C8[r][0]) ^ G[skein_constants<void>::I8[r][0]];
 		G[skein_constants<void>::I8[r][2]] += G[skein_constants<void>::I8[r][3]];
-		G[skein_constants<void>::I8[r][3]] = rotate_left(G[skein_constants<void>::I8[r][3]], 
+		G[skein_constants<void>::I8[r][3]] = rotate_left(G[skein_constants<void>::I8[r][3]],
 				skein_constants<void>::C8[r][1]) ^ G[skein_constants<void>::I8[r][2]];
 		G[skein_constants<void>::I8[r][4]] += G[skein_constants<void>::I8[r][5]];
 		G[skein_constants<void>::I8[r][5]] = rotate_left(G[skein_constants<void>::I8[r][5]],
@@ -115,10 +115,10 @@ struct skein_functions<16>
 	template<size_t r> static inline void GTv4(uint64_t* G)
 	{
 		G[skein_constants<void>::I16[r][0]] += G[skein_constants<void>::I16[r][1]];
-		G[skein_constants<void>::I16[r][1]] = rotate_left(G[skein_constants<void>::I16[r][1]], 
+		G[skein_constants<void>::I16[r][1]] = rotate_left(G[skein_constants<void>::I16[r][1]],
 				skein_constants<void>::C16[r][0]) ^ G[skein_constants<void>::I16[r][0]];
 		G[skein_constants<void>::I16[r][2]] += G[skein_constants<void>::I16[r][3]];
-		G[skein_constants<void>::I16[r][3]] = rotate_left(G[skein_constants<void>::I16[r][3]], 
+		G[skein_constants<void>::I16[r][3]] = rotate_left(G[skein_constants<void>::I16[r][3]],
 				skein_constants<void>::C16[r][1]) ^ G[skein_constants<void>::I16[r][2]];
 		G[skein_constants<void>::I16[r][4]] += G[skein_constants<void>::I16[r][5]];
 		G[skein_constants<void>::I16[r][5]] = rotate_left(G[skein_constants<void>::I16[r][5]],
@@ -284,9 +284,9 @@ public:
 		return squeeze(hash, hs / 8);
 	}
 
-	inline size_t hash_size() const 
-	{ 
-		return hs; 
+	inline size_t hash_size() const
+	{
+		return hs;
 	}
 
 	inline void clear()
@@ -385,8 +385,3 @@ private:
 } // namespace digestpp
 
 #endif
-
-
-
-
-

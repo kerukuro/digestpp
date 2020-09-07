@@ -41,4 +41,3 @@ const unsigned char md5_constants<T>::S[64] = {
 } // namespace digestpp
 
 #endif
-

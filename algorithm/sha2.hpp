@@ -20,7 +20,7 @@ namespace digestpp
  *
  * @defaultsize 512 bits
  *
- * @throw std::runtime_error if the requested digest size is not divisible by 8 (full bytes), 
+ * @throw std::runtime_error if the requested digest size is not divisible by 8 (full bytes),
  * or is not within the supported range
  *
  * @par Example:\n
@@ -116,4 +116,3 @@ typedef hasher<detail::sha2_provider<uint32_t, 224>> sha224;
 } // namespace digestpp
 
 #endif
-

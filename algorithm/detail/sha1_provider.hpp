@@ -61,7 +61,7 @@ public:
 
 	inline void update(const unsigned char* data, size_t len)
 	{
-		detail::absorb_bytes(data, len, 64, 64, m.data(), pos, total, 
+		detail::absorb_bytes(data, len, 64, 64, m.data(), pos, total,
 			[this](const unsigned char* data, size_t len) { transform(data, len); });
 	}
 
@@ -160,4 +160,3 @@ private:
 } // namespace digestpp
 
 #endif
-

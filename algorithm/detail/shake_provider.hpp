@@ -81,6 +81,7 @@ public:
 	{
 		zero_memory(A);
 		pos = 0;
+		total = 0;
 		squeezing = false;
 		suffix = 0;
 
@@ -111,7 +112,7 @@ public:
 
 	inline void update(const unsigned char* data, size_t len)
 	{
-		detail::absorb_bytes(data, len, rate / 8, rate / 8, m.data(), pos, total, 
+		detail::absorb_bytes(data, len, rate / 8, rate / 8, m.data(), pos, total,
 			[this](const unsigned char* data, size_t len) { sha3_functions::transform<R>(data, len, A.data(), rate); });
 	}
 
@@ -177,5 +178,3 @@ private:
 } // namespace digestpp
 
 #endif // DIGESTPP_PROVIDERS_SHAKE_HPP
-
-

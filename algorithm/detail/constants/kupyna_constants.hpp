@@ -555,4 +555,3 @@ const uint64_t kupyna_constants<V>::T[8][256] = {
 } // namespace digestpp
 
 #endif
-

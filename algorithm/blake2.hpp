@@ -22,7 +22,7 @@ namespace digestpp
  *
  * @defaultsize 512 bits
  *
- * @throw std::runtime_error if the requested digest size is not divisible by 8 (full bytes), 
+ * @throw std::runtime_error if the requested digest size is not divisible by 8 (full bytes),
  * or is not within the supported range
  *
  * @mixinparams salt, personalization, key
@@ -53,7 +53,7 @@ typedef hasher<detail::blake2_provider<uint64_t, detail::blake2_type::hash>, mix
  *
  * @defaultsize 256 bits
  *
- * @throw std::runtime_error if the requested digest size is not divisible by 8 (full bytes), 
+ * @throw std::runtime_error if the requested digest size is not divisible by 8 (full bytes),
  * or is not within the supported range
  *
  * @mixinparams salt, personalization, key
@@ -194,4 +194,3 @@ typedef hasher<detail::blake2_provider<uint32_t, detail::blake2_type::xof>, mixi
 } // namespace digestpp
 
 #endif // DIGESTPP_ALGORITHM_BLAKE2_HPP
-

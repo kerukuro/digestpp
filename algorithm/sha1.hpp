@@ -40,4 +40,3 @@ typedef hasher<detail::sha1_provider> sha1;
 } // namespace digestpp
 
 #endif
-

@@ -23,11 +23,11 @@ namespace kupyna_functions
 	static inline void G(uint64_t* x, uint64_t* y)
 	{
 	   for (int c = 0; c != R; ++c)
-		   y[c] = kupyna_constants<void>::T[0][static_cast<unsigned char>(x[(c + R) % R])] 
-			   ^ kupyna_constants<void>::T[1][static_cast<unsigned char>(x[(c + R - 1) % R] >> 8)] 
-			   ^ kupyna_constants<void>::T[2][static_cast<unsigned char>(x[(c + R - 2) % R] >> 16)] 
+		   y[c] = kupyna_constants<void>::T[0][static_cast<unsigned char>(x[(c + R) % R])]
+			   ^ kupyna_constants<void>::T[1][static_cast<unsigned char>(x[(c + R - 1) % R] >> 8)]
+			   ^ kupyna_constants<void>::T[2][static_cast<unsigned char>(x[(c + R - 2) % R] >> 16)]
 			   ^ kupyna_constants<void>::T[3][static_cast<unsigned char>(x[(c + R - 3) % R] >> 24)]
-			   ^ kupyna_constants<void>::T[4][static_cast<unsigned char>(x[(c + R - 4) % R] >> 32)] 
+			   ^ kupyna_constants<void>::T[4][static_cast<unsigned char>(x[(c + R - 4) % R] >> 32)]
 			   ^ kupyna_constants<void>::T[5][static_cast<unsigned char>(x[(c + R - 5) % R] >> 40)]
 			   ^ kupyna_constants<void>::T[6][static_cast<unsigned char>(x[(c + R - 6) % R] >> 48)]
 			   ^ kupyna_constants<void>::T[7][static_cast<unsigned char>(x[(c + R - (R == 16 ? 11 : 7)) % R] >> 56)];
@@ -46,7 +46,7 @@ namespace kupyna_functions
 	static inline void roundQ(uint64_t* x, uint64_t* y, uint64_t i)
 	{
 		for (int j = 0; j < R; ++j)
-			x[j] += (0x00F0F0F0F0F0F0F3ULL 
+			x[j] += (0x00F0F0F0F0F0F0F3ULL
 					^ ((static_cast<uint64_t>(((R - 1 - j) * 0x10) ^ static_cast<unsigned char>(i))) << 56));
 
 	   G<R>(x, y);
@@ -125,7 +125,7 @@ public:
 
 	inline void update(const unsigned char* data, size_t len)
 	{
-		detail::absorb_bytes(data, len, block_bytes(), block_bytes(), m.data(), pos, total, 
+		detail::absorb_bytes(data, len, block_bytes(), block_bytes(), m.data(), pos, total,
 			[this](const unsigned char* data, size_t len) { transform(data, len); });
 	}
 
@@ -194,4 +194,3 @@ private:
 } // namespace digestpp
 
 #endif
-
