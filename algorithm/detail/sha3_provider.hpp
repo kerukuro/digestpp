@@ -37,7 +37,7 @@ namespace sha3_functions
 			D[3] = C[2] ^ rotate_left(C[4], 1);
 			D[4] = C[3] ^ rotate_left(C[0], 1);
 
-			uint64_t B0 = A[0 * 5 + 0] ^ D[0];
+			uint64_t B00 = A[0 * 5 + 0] ^ D[0];
 			uint64_t B10 = rotate_left(A[0 * 5 + 1] ^ D[1], 1);
 			uint64_t B20 = rotate_left(A[0 * 5 + 2] ^ D[2], 62);
 			uint64_t B5 = rotate_left(A[0 * 5 + 3] ^ D[3], 28);
@@ -67,11 +67,11 @@ namespace sha3_functions
 			uint64_t B19 = rotate_left(A[4 * 5 + 3] ^ D[3], 56);
 			uint64_t B4 = rotate_left(A[4 * 5 + 4] ^ D[4], 14);
 
-			A[0 * 5 + 0] = B0 ^ ((~B1) & B2);
+			A[0 * 5 + 0] = B00 ^ ((~B1) & B2);
 			A[0 * 5 + 1] = B1 ^ ((~B2) & B3);
 			A[0 * 5 + 2] = B2 ^ ((~B3) & B4);
-			A[0 * 5 + 3] = B3 ^ ((~B4) & B0);
-			A[0 * 5 + 4] = B4 ^ ((~B0) & B1);
+			A[0 * 5 + 3] = B3 ^ ((~B4) & B00);
+			A[0 * 5 + 4] = B4 ^ ((~B00) & B1);
 
 			A[1 * 5 + 0] = B5 ^ ((~B6) & B7);
 			A[1 * 5 + 1] = B6 ^ ((~B7) & B8);
