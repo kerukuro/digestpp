@@ -246,7 +246,7 @@ A: Skein256, Skein512 and Skein1024 are different algorithms. Each of them can p
 
 Q: Why there are so many typedefs for BLAKE2 hash function?
 
-A: BLAKE2 has many variants that produce incompatible digests for the same output sizes. We support different variants via different typedef. For the 512-bit version, `blake2b` is the oldest algorithm which can produce digests of any size up to 512 bits. `blake2xb` can be used to produce larger digests but requires the output size to be known in advance; it can't be merged with `blake2b` because their output are different for the same digest sizes. `blake2xb_xof` can be used in XOF mode when the output size is not known in advance. Then there is a 256-bit version `blake2s` which supports all this variants as well. Internally all BLAKE2 variants are implemented using one template class.
+A: BLAKE2 has many variants that produce incompatible digests for the same output sizes. We support different variants via different typedef. For the 512-bit version, `blake2b` is the oldest algorithm which can produce digests of any size up to 512 bits. `blake2xb` can be used to produce larger digests but requires the output size to be known in advance; it can't be merged with `blake2b` because their output are different for the same digest sizes. `blake2xb_xof` can be used in XOF mode when the output size is not known in advance. Then there is a 256-bit version `blake2s` which supports all these variants as well. Internally all BLAKE2 variants are implemented using one template class.
 
 ## Known limitations
 

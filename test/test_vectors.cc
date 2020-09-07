@@ -26,10 +26,6 @@ int main()
 	test_vectors(digestpp::blake2xs(256), "blake2xs/256", "testvectors/blake2xs_256.txt");
 	test_vectors(digestpp::blake2xs(2056), "blake2xs/2056", "testvectors/blake2xs_2056.txt");
 	test_vectors(digestpp::blake2xs(2056), "blake2xs/2056-param", "testvectors/blake2xs_2056param.txt");
-	// TODO: blake2s-salt,pers
-	// TODO: blake2b-salt,pers
-	// TODO: blake2xs
-	// TODO: blake2xb
 	test_vectors(digestpp::groestl(224), "groestl/224", "testvectors/groestl224.txt");
 	test_vectors(digestpp::groestl(256), "groestl/256", "testvectors/groestl256.txt");
 	test_vectors(digestpp::groestl(384), "groestl/384", "testvectors/groestl384.txt");
