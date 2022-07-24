@@ -175,6 +175,7 @@ blake2b|BLAKE2b|8-512|salt, personalization, key
 blake2s|BLAKE2s|8-256|salt, personalization, key
 blake2xb|BLAKE2xb|arbitrary|salt, personalization, key
 blake2xs|BLAKE2xs|arbitrary|salt, personalization, key
+esch|Esch|256, 384|-
 groestl|Grøstl|8-512|-
 jh|JH|8-512|-
 kmac128|KMAC128|arbitrary|key, customization
@@ -200,6 +201,8 @@ Typedef|Description|Optional parameters
 -------|-----------|-------------------
 blake2xb_xof|BLAKE2xb in XOF mode|salt, personalization, key
 blake2xs_xof|BLAKE2xs in XOF mode|salt, personalization, key
+esch256_xof|XOEsch256|-
+esch384_xof|XOEsch384|-
 k12|KangarooTwelve|customization
 m14|MarsupilamiFourteen|customization
 shake128|SHAKE-128|-

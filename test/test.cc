@@ -12,11 +12,49 @@ bool compare(const std::string& name, const std::string& actual, const std::stri
 	return true;
 }
 
+template<typename XOF>
+bool xof_test(const std::string& name, const std::string& ts)
+{
+	XOF xof1, xof2;
+	xof1.absorb(ts);
+	xof2.absorb(ts);
+
+	std::string s1 = xof1.hexsqueeze(1000);
+	std::string s2;
+	for (int i = 0; i != 1000; i++)
+		s2 += xof2.hexsqueeze(1);
+
+	if (s1 != s2)
+	{
+		std::cerr << name << " error: batch squeeze result is not equal to per-byte squeeze" << std::endl;
+		std::cerr << "s1: " << s1 << std::endl;
+		std::cerr << "s2: " << s2 << std::endl;
+		return false;
+	}
+	return true;
+}
+
 void basic_self_test()
 {
 	std::string ts = "The quick brown fox jumps over the lazy dog";
 
 	int errors = 0;
+
+	errors += !xof_test<digestpp::shake128>("SHAKE128", ts);
+	errors += !xof_test<digestpp::shake256>("SHAKE256", ts);
+	errors += !xof_test<digestpp::cshake128>("cSHAKE128", ts);
+	errors += !xof_test<digestpp::cshake256>("cSHAKE256", ts);
+	errors += !xof_test<digestpp::k12>("K12", ts);
+	errors += !xof_test<digestpp::m14>("M14", ts);
+	errors += !xof_test<digestpp::kmac128_xof>("KMAC128-XOF", ts);
+	errors += !xof_test<digestpp::kmac256_xof>("KMAC256-XOF", ts);
+	errors += !xof_test<digestpp::blake2xb_xof>("BLAKE2XB-XOF", ts);
+	errors += !xof_test<digestpp::blake2xs_xof>("BLAKE2XS-XOF", ts);
+	errors += !xof_test<digestpp::skein256_xof>("Skein256-XOF", ts);
+	errors += !xof_test<digestpp::skein512_xof>("Skein512-XOF", ts);
+	errors += !xof_test<digestpp::skein1024_xof>("Skein1024-XOF", ts);
+	errors += !xof_test<digestpp::esch256_xof>("ESCH256_XOF", ts);
+	errors += !xof_test<digestpp::esch384_xof>("ESCH384_XOF", ts);
 
 	errors += !compare("BLAKE/256", digestpp::blake(256).absorb(ts).hexdigest(),
 		"7576698ee9cad30173080678e5965916adbb11cb5245d386bf1ffda1cb26c9d7");

@@ -19,3 +19,5 @@ This code is written by kerukuro and released into public domain.
 #include "algorithm/k12m14.hpp"
 #include "algorithm/kupyna.hpp"
 #include "algorithm/kmac.hpp"
+#include "algorithm/esch.hpp"
+

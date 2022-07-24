@@ -141,6 +141,10 @@ public:
 			processed += to_copy;
 			pos += to_copy;
 		}
+		else if (pos == r)
+		{
+			sha3_functions::transform<R>(A.data());
+		}
 		while (processed < hs)
 		{
 			if (processed)
