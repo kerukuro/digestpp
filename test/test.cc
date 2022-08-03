@@ -1,6 +1,7 @@
 
 #include "../digestpp.hpp"
 #include <iostream>
+#include <numeric>
 
 bool compare(const std::string& name, const std::string& actual, const std::string& expected)
 {
@@ -8,6 +9,49 @@ bool compare(const std::string& name, const std::string& actual, const std::stri
 	{
 		std::cerr << name << " error: expected " << expected << ", actual " << actual << std::endl;
 		return false;
+	}
+	return true;
+}
+
+template<typename H, template<typename> class M, typename std::enable_if<!digestpp::detail::is_xof<H>::value>::type* = nullptr>
+std::string get_digest(size_t, digestpp::hasher<H, M>& hasher)
+{
+	return hasher.hexdigest();
+}
+
+template<typename H, template<typename> class M, typename std::enable_if<digestpp::detail::is_xof<H>::value>::type* = nullptr>
+std::string get_digest(size_t size, digestpp::hasher<H, M>& hasher)
+{
+	return hasher.hexsqueeze(size);
+}
+
+template<typename H>
+bool update_test(const std::string& name, const H& h)
+{
+	H h1 = h;
+	std::array<unsigned char, 256> m;
+	std::iota(std::begin(m), std::end(m), 0);
+
+	for (size_t l1 = 1; l1 < m.size() - 1; l1++)
+	{
+		for (size_t l2 = 1; l2 < m.size() - l1; l2++)
+		{
+			H h1 = h;
+			H h2 = h;
+			h1.absorb(m.data(), l1);
+			h1.absorb(m.data() + l1, l2);
+			h2.absorb(m.data(), l1 + l2);
+			std::string s1 = get_digest(32, h1);
+			std::string s2 = get_digest(32, h2);
+
+			if (s1 != s2)
+			{
+				std::cerr << name << " error: update test failed (l1=" << l1 <<", l2=" << l2 << ')' << std::endl;
+				std::cerr << "s1: " << s1 << std::endl;
+				std::cerr << "s2: " << s2 << std::endl;
+				return false;
+			}
+		}
 	}
 	return true;
 }
@@ -39,6 +83,58 @@ void basic_self_test()
 	std::string ts = "The quick brown fox jumps over the lazy dog";
 
 	int errors = 0;
+
+	errors += !update_test("BLAKE/256", digestpp::blake(256));
+	errors += !update_test("BLAKE/512", digestpp::blake(512));
+	errors += !update_test("BLAKE2B/256", digestpp::blake2b(256));
+	errors += !update_test("BLAKE2B/512", digestpp::blake2b(512));
+	errors += !update_test("BLAKE2S/256", digestpp::blake2s(256));
+	errors += !update_test("BLAKE2XB/256", digestpp::blake2xb(256));
+	errors += !update_test("BLAKE2XB/512", digestpp::blake2xb(512));
+	errors += !update_test("BLAKE2XS/256", digestpp::blake2xs(256));
+	errors += !update_test("ECHO/256", digestpp::echo(256));
+	errors += !update_test("ECHO/512", digestpp::echo(512));
+	errors += !update_test("Esch/256", digestpp::esch(256));
+	errors += !update_test("Esch/384", digestpp::esch(384));
+	errors += !update_test("Groestl/256", digestpp::groestl(256));
+	errors += !update_test("Groestl/512", digestpp::groestl(512));
+	errors += !update_test("JH/256", digestpp::jh(256));
+	errors += !update_test("JH/512", digestpp::jh(512));
+	errors += !update_test("SHA512/256", digestpp::sha512(256));
+	errors += !update_test("SHA512/512", digestpp::sha512(512));
+	errors += !update_test("SHA256", digestpp::sha256());
+	errors += !update_test("SHA-3/256", digestpp::sha3(256));
+	errors += !update_test("SHA-3/512", digestpp::sha3(512));
+	errors += !update_test("SM3", digestpp::sm3());
+	errors += !update_test("Whirlpool", digestpp::whirlpool());
+	errors += !update_test("Kupyna/256", digestpp::kupyna(256));
+	errors += !update_test("Kupyna/512", digestpp::kupyna(512));
+	errors += !update_test("Streebog/256", digestpp::streebog(256));
+	errors += !update_test("Streebog/512", digestpp::streebog(512));
+	errors += !update_test("Skein256/256", digestpp::skein256(256));
+	errors += !update_test("Skein512/256", digestpp::skein512(256));
+	errors += !update_test("Skein512/512", digestpp::skein512(512));
+	errors += !update_test("Skein1024/256", digestpp::skein1024(256));
+	errors += !update_test("Skein1024/512", digestpp::skein1024(512));
+	errors += !update_test("Skein1024/1024", digestpp::skein1024(1024));
+	errors += !update_test("KMAC128/256", digestpp::kmac128(256));
+	errors += !update_test("KMAC256/512", digestpp::kmac256(512));
+	errors += !update_test("SHAKE128", digestpp::shake128());
+	errors += !update_test("SHAKE256", digestpp::shake256());
+	errors += !update_test("cSHAKE128", digestpp::cshake128());
+	errors += !update_test("cSHAKE256", digestpp::cshake256());
+	errors += !update_test("K12", digestpp::k12());
+	errors += !update_test("M14", digestpp::m14());
+	errors += !update_test("KMAC128-XOF", digestpp::kmac128_xof());
+	errors += !update_test("KMAC256-XOF", digestpp::kmac256_xof());
+	errors += !update_test("BLAKE2XB-XOF", digestpp::blake2xb_xof());
+	errors += !update_test("BLAKE2XS-XOF", digestpp::blake2xs_xof());
+	errors += !update_test("Skein256-XOF", digestpp::skein256_xof());
+	errors += !update_test("Skein512-XOF", digestpp::skein512_xof());
+	errors += !update_test("Skein1024-XOF", digestpp::skein1024_xof());
+	errors += !update_test("ESCH256_XOF", digestpp::esch256_xof());
+	errors += !update_test("ESCH384_XOF", digestpp::esch256_xof());
+
 
 	errors += !xof_test<digestpp::shake128>("SHAKE128", ts);
 	errors += !xof_test<digestpp::shake256>("SHAKE256", ts);

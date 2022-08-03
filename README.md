@@ -175,6 +175,7 @@ blake2b|BLAKE2b|8-512|salt, personalization, key
 blake2s|BLAKE2s|8-256|salt, personalization, key
 blake2xb|BLAKE2xb|arbitrary|salt, personalization, key
 blake2xs|BLAKE2xs|arbitrary|salt, personalization, key
+echo|Echo|8-512|salt
 esch|Esch|256, 384|-
 groestl|Grøstl|8-512|-
 jh|JH|8-512|-

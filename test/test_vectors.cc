@@ -21,11 +21,16 @@ int main()
 	test_vectors(digestpp::blake2b(512), "blake2b/512", "testvectors/blake2b_512.txt");
 	test_vectors(digestpp::blake2xb(256), "blake2xb/256", "testvectors/blake2xb_256.txt");
 	test_vectors(digestpp::blake2xb(512), "blake2xb/512", "testvectors/blake2xb_512.txt");
+	test_vectors(digestpp::blake2xb(2040), "blake2xb/2040", "testvectors/blake2xb_2040.txt");
 	test_vectors(digestpp::blake2xb(2056), "blake2xb/2056", "testvectors/blake2xb_2056.txt");
 	test_vectors(digestpp::blake2xb(2056), "blake2xb/2056-param", "testvectors/blake2xb_2056param.txt");
 	test_vectors(digestpp::blake2xs(256), "blake2xs/256", "testvectors/blake2xs_256.txt");
 	test_vectors(digestpp::blake2xs(2056), "blake2xs/2056", "testvectors/blake2xs_2056.txt");
 	test_vectors(digestpp::blake2xs(2056), "blake2xs/2056-param", "testvectors/blake2xs_2056param.txt");
+	test_vectors(digestpp::echo(224), "echo/224", "testvectors/echo224.txt");
+	test_vectors(digestpp::echo(256), "echo/256", "testvectors/echo256.txt");
+	test_vectors(digestpp::echo(384), "echo/384", "testvectors/echo384.txt");
+	test_vectors(digestpp::echo(512), "echo/512", "testvectors/echo512.txt");
 	test_vectors(digestpp::esch(256), "esch/256", "testvectors/esch256.txt");
 	test_vectors(digestpp::esch(384), "esch/384", "testvectors/esch384.txt");
 	test_vectors(digestpp::groestl(224), "groestl/224", "testvectors/groestl224.txt");
