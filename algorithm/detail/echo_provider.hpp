@@ -164,6 +164,7 @@ public:
 		: hs(hashsize)
 	{
 		validate_hash_size(hashsize, 512);
+		zero_memory(salt);
 	}
 
 	~echo_provider()
