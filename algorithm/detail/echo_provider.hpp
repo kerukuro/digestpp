@@ -58,8 +58,6 @@ namespace echo_functions
 				uint64_t dblC = ((c << 1) & firstbits) ^ (((c >> 7) & lastbit) * 0x1b);
 				uint64_t dblD = ((d << 1) & firstbits) ^ (((d >> 7) & lastbit) * 0x1b);
 
-				uint64_t WT4 = w[idx] ^ w[idx + 2] ^ w[idx + 4] ^ w[idx + 6];
-
 				w[idx] = dblA ^ dblB ^ b ^ c ^ d;
 				w[idx + 2] = dblB ^ dblC ^ c ^ d ^ a;
 				w[idx + 4] = dblC ^ dblD ^ d ^ a ^ b;
