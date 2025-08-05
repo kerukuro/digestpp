@@ -2,7 +2,7 @@
 #include <regex>
 #include <iostream>
 #include <fstream>
-#include "../digestpp.hpp"
+#include <digestpp/digestpp.hpp>
 
 template<typename T>
 class has_customization
