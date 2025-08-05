@@ -1,5 +1,5 @@
 
-#include "../digestpp.hpp"
+#include <digestpp/digestpp.hpp>
 #include <iostream>
 #include <numeric>
 
@@ -25,6 +25,18 @@ std::string get_digest(size_t size, digestpp::hasher<H, M>& hasher)
 	return hasher.hexsqueeze(size);
 }
 
+template<typename H, template<typename> class M, typename std::enable_if<!digestpp::detail::is_xof<H>::value>::type* = nullptr>
+bool is_xof(const digestpp::hasher<H, M>&)
+{
+	return false;
+}
+
+template<typename H, template<typename> class M, typename std::enable_if<digestpp::detail::is_xof<H>::value>::type* = nullptr>
+bool is_xof(const digestpp::hasher<H, M>&)
+{
+	return true;
+}
+
 template<typename H>
 bool update_test(const std::string& name, const H& h)
 {
@@ -39,12 +51,15 @@ bool update_test(const std::string& name, const H& h)
 			H h1 = h;
 			H h2 = h;
 			h1.absorb(m.data(), l1);
+			std::string dummy;
+			if (!is_xof(h1)) // also check that intermediate hexdigest doesn't change the result
+				dummy = get_digest(32, h1);
 			h1.absorb(m.data() + l1, l2);
 			h2.absorb(m.data(), l1 + l2);
 			std::string s1 = get_digest(32, h1);
 			std::string s2 = get_digest(32, h2);
 
-			if (s1 != s2)
+			if (s1 != s2 || dummy == s1)
 			{
 				std::cerr << name << " error: update test failed (l1=" << l1 <<", l2=" << l2 << ')' << std::endl;
 				std::cerr << "s1: " << s1 << std::endl;
@@ -59,9 +74,10 @@ bool update_test(const std::string& name, const H& h)
 template<typename XOF>
 bool xof_test(const std::string& name, const std::string& ts)
 {
-	XOF xof1, xof2;
+	XOF xof1, xof2, xof3;
 	xof1.absorb(ts);
 	xof2.absorb(ts);
+	xof3.absorb(ts);
 
 	std::string s1 = xof1.hexsqueeze(1000);
 	std::string s2;
@@ -75,13 +91,33 @@ bool xof_test(const std::string& name, const std::string& ts)
 		std::cerr << "s2: " << s2 << std::endl;
 		return false;
 	}
+
+#ifdef VERY_SLOW_TEST
+	for (size_t l1 = 1; l1 < 1000; l1++)
+	{
+		for (size_t l2 = 1; l2 < 1000 - l1; l2++)
+		{
+			XOF xof4(xof3);
+			std::string s3 = xof4.hexsqueeze(l1);
+			s3 += xof4.hexsqueeze(l2);
+
+			std::string expected = s1.substr(0, (l1+l2)*2);
+			if (expected != s3)
+			{
+				std::cerr << name << " error: squeeze test failed (l1=" << l1 <<", l2=" << l2 << ')' << std::endl;
+				std::cerr << "s1: " << expected << std::endl;
+				std::cerr << "s3: " << s3 << std::endl;
+				return false;
+			}
+		}
+	}
+#endif
+
 	return true;
 }
 
 void basic_self_test()
 {
-	std::string ts = "The quick brown fox jumps over the lazy dog";
-
 	int errors = 0;
 
 	errors += !update_test("BLAKE/256", digestpp::blake(256));
@@ -135,6 +171,7 @@ void basic_self_test()
 	errors += !update_test("ESCH256_XOF", digestpp::esch256_xof());
 	errors += !update_test("ESCH384_XOF", digestpp::esch256_xof());
 
+	std::string ts = "The quick brown fox jumps over the lazy dog";
 
 	errors += !xof_test<digestpp::shake128>("SHAKE128", ts);
 	errors += !xof_test<digestpp::shake256>("SHAKE256", ts);

@@ -192,7 +192,7 @@ void test_vectors(const H& hasher, const char* name, const char* filename)
 	if (failed)
 		std::cout << failed << "/" << count << " FAILED";
 	if (!success && !failed)
-		std::cout << "No tests found";
+		std::cout << "No tests found. Make sure that file " << filename << " exists.";
 	std::cout << std::endl;
 }
 

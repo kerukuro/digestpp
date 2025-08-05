@@ -1,5 +1,5 @@
 
-#include "../digestpp.hpp"
+#include <digestpp/digestpp.hpp>
 #include <numeric>
 #include <iostream>
 #include <iomanip>
