@@ -88,6 +88,42 @@ class hasher : public Mixin<HashProvider>
 	}
 
 	/**
+	 * \brief Absorbs bytes from a C-style array to character buffer
+	 * \param[in] arr Array to data to absorb
+	 * \return Reference to *this
+	 *
+	 * @par Example:\n
+	 * @code // Calculate SHA-512/256 digest of a C array and output it in hex format
+	 * unsigned char c[32];
+	 * std::iota(c, c + sizeof(c), 0);
+	 * cout << digestpp::sha512(256).absorb(c).hexdigest() << std::endl;
+	 * @endcode
+	 */
+	template<typename T, size_t N, typename std::enable_if<detail::is_byte<T>::value>::type* = nullptr>
+	inline hasher& absorb(const T(&arr)[N])
+	{
+		return absorb(arr, N);
+	}
+
+	/**
+	 * \brief Absorbs bytes from a C++ style array to character buffer
+	 * \param[in] arr Array to data to absorb
+	 * \return Reference to *this
+	 *
+	 * @par Example:\n
+	 * @code // Calculate SHA-512/256 digest of a C array and output it in hex format
+	 * std::array<unsigned char, 32> c;
+	 * std::iota(c.data(), c.size(), 0);
+	 * cout << digestpp::sha512(256).absorb(c).hexdigest() << std::endl;
+	 * @endcode
+	 */
+	template<typename T, size_t N, typename std::enable_if<detail::is_byte<T>::value>::type* = nullptr>
+	inline hasher& absorb(const std::array<T, N>& arr)
+	{
+		return absorb(arr.data(), arr.size());
+	}
+
+	/**
 	 * \brief Absorbs bytes from std::basic_string
 	 * \param[in] str String to absorb
 	 * \return Reference to *this
@@ -186,6 +222,42 @@ class hasher : public Mixin<HashProvider>
 	inline void squeeze(T* buf, size_t len)
 	{
 		provider.squeeze(reinterpret_cast<unsigned char*>(buf), len);
+	}
+
+	/**
+	 * \brief Squeeze bytes into user-provided preallocated buffer.
+	 *
+	 * After each invocation of this function the internal state of the hasher changes
+	 * so that the next call will generate different (additional) output bytes.
+	 * To reset the state and start new digest calculation, use \ref reset function.
+	 *
+	 * \available_if HashProvider is an extendable output function (XOF)
+	 *
+	 * \param[out] arr Buffer to squeeze data to; must be of byte type (char, unsigned char or signed char)
+	 */
+	template<typename T, size_t N, typename H=HashProvider,
+		typename std::enable_if<detail::is_byte<T>::value && detail::is_xof<H>::value>::type* = nullptr>
+	inline void squeeze(T(&arr)[N])
+	{
+		squeeze(arr, N);
+	}
+
+	/**
+	 * \brief Squeeze bytes into user-provided preallocated buffer.
+	 *
+	 * After each invocation of this function the internal state of the hasher changes
+	 * so that the next call will generate different (additional) output bytes.
+	 * To reset the state and start new digest calculation, use \ref reset function.
+	 *
+	 * \available_if HashProvider is an extendable output function (XOF)
+	 *
+	 * \param[out] arr Buffer to squeeze data to; must be of byte type (char, unsigned char or signed char)
+	 */
+	template<typename T, size_t N, typename H=HashProvider,
+		typename std::enable_if<detail::is_byte<T>::value && detail::is_xof<H>::value>::type* = nullptr>
+	inline void squeeze(std::array<T, N>& arr)
+	{
+		squeeze(arr.data(), arr.size());
 	}
 
 	/**
