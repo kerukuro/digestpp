@@ -2,6 +2,7 @@
 #include <digestpp/digestpp.hpp>
 #include <iostream>
 #include <numeric>
+#include <sstream>
 
 bool compare(const std::string& name, const std::string& actual, const std::string& expected)
 {
@@ -114,6 +115,43 @@ bool xof_test(const std::string& name, const std::string& ts)
 #endif
 
 	return true;
+}
+
+void test_examples()
+{
+	int errors = 0;
+
+	std::string res = digestpp::blake2b().absorb("The quick brown fox jumps over the lazy dog").hexdigest();
+	errors += !compare("BLAKE2B", res, "a8add4bdddfd93e4877d2746e62817b116364a1fa7bc148d95090bc7333b3673f82401cf7aa2e4cb1ecd90296e3f14cb5413f8ed77be73045b13914cdcd6a918");
+
+	std::string str = "The quick brown fox jumps over the lazy dog";
+	res = digestpp::blake2b(256).absorb(str).hexdigest();
+	errors += !compare("BLAKE2B", res, "01718cec35cd3d796dd00020e0bfecb473ad23457d063b75eff29c0ffa2e58a9");
+
+	std::vector<unsigned char> v(100);
+	std::iota(v.begin(), v.end(), 0);
+	res = digestpp::sha512().absorb(v.begin(), v.end()).hexdigest();
+	errors += !compare("SHA512", res, "af216a7122d29d6a7dc7b89c8b41c111e7c9a00781d4a867a1d75110b48a5a9c92a15d1dc2aeabb53b83bcffc50f44cfdcae29dc9984c8c84febd0189322be25");
+
+	unsigned char c[32];
+	std::iota(c, c + sizeof(c), 0);
+	res = digestpp::sha512(256).absorb(c, sizeof(c)).hexdigest();
+	errors += !compare("SHA512/256", res, "b1915eae84b12616ce51d7e259b7aec3798d427a735bb13226d07119f651e981");
+
+	std::string empty;
+	std::istringstream istream(empty);
+	res = digestpp::sha256().absorb(istream).hexdigest();
+	errors += !compare("SHA256", res, "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855");
+
+	res = digestpp::sha3(224).absorb("The quick brown fox ").absorb("jumps over the lazy dog").hexdigest();
+	errors += !compare("SHA3/224", res, "d15dadceaa4d5d7bb3b48f446421d542e08ad8887305e28d58335795");
+
+	digestpp::cshake256 xof;
+	xof.set_customization("Customization");
+	res = xof.absorb("The quick brown fox jumps over the lazy dog").hexsqueeze(64);
+	errors += !compare("CSHAKE256", res, "202501c95942b134284eb379fc95841dc2439da8ed7f5206fc8a9ce87b77d0cc6a0ee7431a69eb1295f4f5e292ad63b6f0163d624f9586dc43c0a2fe7b4136f5");
+
+	std::cout << "Example-test completed with " << errors << " errors." << std::endl;
 }
 
 void basic_self_test()
@@ -353,5 +391,8 @@ void basic_self_test()
 
 int main()
 {
+	std::cout << "Now doing example-test..." << std::endl;
+	test_examples();
+	std::cout << "Now doing self-test, this can take a while..." << std::endl;
 	basic_self_test();
 }
