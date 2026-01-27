@@ -88,24 +88,6 @@ class hasher : public Mixin<HashProvider>
 	}
 
 	/**
-	 * \brief Absorbs bytes from a C-style array to character buffer
-	 * \param[in] arr Array to data to absorb
-	 * \return Reference to *this
-	 *
-	 * @par Example:\n
-	 * @code // Calculate SHA-512/256 digest of a C array and output it in hex format
-	 * unsigned char c[32];
-	 * std::iota(c, c + sizeof(c), 0);
-	 * cout << digestpp::sha512(256).absorb(c).hexdigest() << std::endl;
-	 * @endcode
-	 */
-	template<typename T, size_t N, typename std::enable_if<detail::is_byte<T>::value>::type* = nullptr>
-	inline hasher& absorb(const T(&arr)[N])
-	{
-		return absorb(arr, N);
-	}
-
-	/**
 	 * \brief Absorbs bytes from a C++ style array to character buffer
 	 * \param[in] arr Array to data to absorb
 	 * \return Reference to *this
