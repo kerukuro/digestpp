@@ -84,6 +84,7 @@ int main()
 	test_vectors(digestpp::shake256(), "shake256", "testvectors/shake256.txt");
 	test_vectors(digestpp::cshake256().set_customization("Email Signature"), "cshake256", "testvectors/cshake256.txt");
 	test_vectors(digestpp::k12(), "k12", "testvectors/k12.txt");
+	test_vectors(digestpp::kt256(), "kt256", "testvectors/kt256.txt");
 	test_vectors(digestpp::kmac128(256), "kmac128", "testvectors/kmac128.txt");
 	test_vectors(digestpp::kmac256(512), "kmac256", "testvectors/kmac256.txt");
 	test_vectors(digestpp::skein256_xof(), "skein256-XOF", "testvectors/skein256_xof.txt");

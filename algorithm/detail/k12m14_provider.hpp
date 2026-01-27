@@ -16,7 +16,13 @@ namespace digestpp
 namespace detail
 {
 
-template<size_t B>
+enum class kangaroo_type
+{
+	k12,
+	m14
+};
+
+template<size_t B, kangaroo_type type>
 class k12m14_provider
 {
 public:
@@ -48,7 +54,7 @@ public:
 
 	inline void update(const unsigned char* data, size_t len)
 	{
-		detail::absorb_bytes(data, len, m.size(), m.size(), m.data(), pos, total,
+		detail::absorb_bytes(data, len, m.size(), m.size() + 1, m.data(), pos, total,
 			[this](const unsigned char* data, size_t len) { transform(data, len, len * 8192); });
 	}
 
@@ -79,6 +85,8 @@ public:
 					main.update(reinterpret_cast<const unsigned char*>("\xFF\xFF"), 2);
 				}
 			}
+			else
+				main.set_suffix(0x07);
 			squeezing = true;
 		}
 		main.squeeze(hash, hs);
@@ -121,7 +129,7 @@ public:
 	}
 
 private:
-	constexpr static size_t R = B == 128 ? 12 : 14;
+	constexpr static size_t R = type == kangaroo_type::k12 ? 12 : 14;
 	shake_provider<B, R> main;
 	shake_provider<B, R> child;
 	std::array<unsigned char, 8192> m;

@@ -205,6 +205,8 @@ blake2xs_xof|BLAKE2xs in XOF mode|salt, personalization, key
 esch256_xof|XOEsch256|-
 esch384_xof|XOEsch384|-
 k12|KangarooTwelve|customization
+kt128|KangarooTwelve (alias for k12)|customization
+kt256|256bit KangarooTwelve|customization
 m14|MarsupilamiFourteen|customization
 shake128|SHAKE-128|-
 shake256|SHAKE-256|-

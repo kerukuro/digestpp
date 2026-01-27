@@ -36,7 +36,9 @@ namespace digestpp
  *
  * @sa hasher, mixin::k12m14_mixin
  */
-typedef hasher<detail::k12m14_provider<128>, mixin::k12m14_mixin> k12;
+typedef hasher<detail::k12m14_provider<128, detail::kangaroo_type::k12>, mixin::k12m14_mixin> k12;
+
+typedef k12 kt128;
 
 /**
  * @brief MarsupilamiFourteen function
@@ -62,7 +64,33 @@ typedef hasher<detail::k12m14_provider<128>, mixin::k12m14_mixin> k12;
  *
  * @sa hasher, mixin::k12m14_mixin
  */
-typedef hasher<detail::k12m14_provider<256>, mixin::k12m14_mixin> m14;
+typedef hasher<detail::k12m14_provider<256, detail::kangaroo_type::m14>, mixin::k12m14_mixin> m14;
+
+/**
+ * @brief KT256 function
+ *
+ * Extendable output function similar to SHAKE256 but with reduced number of rounds.
+ *
+ * @xof
+ *
+ * @mixinparams customization
+ *
+ * @mixin{mixin::k12m14_mixin}
+ *
+ * @par Example:\n
+ * @code // Absorb a string and squeeze 32 bytes of output
+ * digestpp::kt256 hasher;
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexsqueeze(32) << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code b23d2e9cea9f4904e02bec06817fc10ce38ce8e93ef4c89e6537076af8646404
+ * @endcode
+ *
+ * @sa hasher, mixin::k12m14_mixin
+ */
+typedef hasher<detail::k12m14_provider<256, detail::kangaroo_type::k12>, mixin::k12m14_mixin> kt256;
 
 } // namespace digestpp
 
