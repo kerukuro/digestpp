@@ -21,4 +21,5 @@ This code is written by kerukuro and released into public domain.
 #include "algorithm/kmac.hpp"
 #include "algorithm/esch.hpp"
 #include "algorithm/echo.hpp"
+#include "algorithm/lsh.hpp"
 

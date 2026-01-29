@@ -182,6 +182,8 @@ jh|JH|8-512|-
 kmac128|KMAC128|arbitrary|key, customization
 kmac256|KMAC256|arbitrary|key, customization
 kupyna|Kupyna|256, 512|-
+lsh256|LSH-256|8-256|-
+lsh512|LSH-512|8-512|-
 md5|MD5|128|-
 sha1|SHA-1|160|-
 sha224|SHA-224|224|-

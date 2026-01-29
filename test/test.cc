@@ -174,6 +174,9 @@ void basic_self_test()
 	errors += !update_test("Groestl/512", digestpp::groestl(512));
 	errors += !update_test("JH/256", digestpp::jh(256));
 	errors += !update_test("JH/512", digestpp::jh(512));
+	errors += !update_test("LSH256/256", digestpp::lsh256(256));
+	errors += !update_test("LSH512/256", digestpp::lsh512(256));
+	errors += !update_test("LSH512/512", digestpp::lsh512(512));
 	errors += !update_test("SHA512/256", digestpp::sha512(256));
 	errors += !update_test("SHA512/512", digestpp::sha512(512));
 	errors += !update_test("SHA256", digestpp::sha256());
@@ -385,6 +388,11 @@ void basic_self_test()
 		"1755133f1534752aad0748f2c706fb5c784512cab835cd15676b16c0c6647fa9"
 		"6faa7af634a0bf8ff6df39374fa00fad9a39e322a7c92065a64eb1fb0801eb2b");
 
+	errors += !compare("LSH256/256", digestpp::lsh256(256).absorb(ts).hexdigest(),
+		"f8025b61eb10d80a7f03ccfb906222a0645bb175fdeee9595f223936edbf7070");
+
+	errors += !compare("LSH512/256", digestpp::lsh512(256).absorb(ts).hexdigest(),
+		"5e4ebe2017e84f35420bda7486ebbd791e0ece579cc18e49341b9a526466e633");
 
 	std::cout << "Self-test completed with " << errors << " errors." << std::endl;
 }

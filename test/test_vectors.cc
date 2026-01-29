@@ -43,6 +43,12 @@ int main()
 	test_vectors(digestpp::jh(512), "jh/512", "testvectors/jh512.txt");
 	test_vectors(digestpp::kupyna(256), "kupyna/256", "testvectors/kupyna256.txt");
 	test_vectors(digestpp::kupyna(512), "kupyna/512", "testvectors/kupyna512.txt");
+	test_vectors(digestpp::lsh256(224), "lsh256/224", "testvectors/lsh256_224.txt");
+	test_vectors(digestpp::lsh256(256), "lsh256/256", "testvectors/lsh256_256.txt");
+	test_vectors(digestpp::lsh512(224), "lsh512/224", "testvectors/lsh512_224.txt");
+	test_vectors(digestpp::lsh512(256), "lsh512/256", "testvectors/lsh512_256.txt");
+	test_vectors(digestpp::lsh512(384), "lsh512/384", "testvectors/lsh512_384.txt");
+	test_vectors(digestpp::lsh512(512), "lsh512/512", "testvectors/lsh512_512.txt");
 	test_vectors(digestpp::md5(), "md5", "testvectors/md5.txt");
 	test_vectors(digestpp::sha1(), "sha1", "testvectors/sha1.txt");
 	test_vectors(digestpp::sha224(), "sha224", "testvectors/sha224.txt");
