@@ -75,6 +75,7 @@ public:
 	lsh_provider(size_t hashsize)
 		: hs(hashsize)
 	{
+		static_assert(sizeof(T) == 4 || sizeof(T) == 8, "LSH only supports 4 and 8 bits word size");
 		validate_hash_size(hashsize, N);
 	}
 

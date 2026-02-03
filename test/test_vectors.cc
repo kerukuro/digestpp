@@ -3,6 +3,7 @@
 
 int main()
 {
+	test_vectors(digestpp::ascon_hash(), "ascon_hash", "testvectors/ascon_hash256.txt");
 	test_vectors(digestpp::blake(224), "blake/224", "testvectors/blake224.txt");
 	test_vectors(digestpp::blake(256), "blake/256", "testvectors/blake256.txt");
 	test_vectors(digestpp::blake(384), "blake/384", "testvectors/blake384.txt");
@@ -84,11 +85,13 @@ int main()
 	test_vectors(digestpp::whirlpool(), "whirlpool", "testvectors/whirlpool.txt");
 
 	// XOFs
+	test_vectors(digestpp::ascon_xof128(), "ascon_xof", "testvectors/ascon_xof128.txt");
+	test_vectors(digestpp::ascon_cxof128(), "ascon_cxof", "testvectors/ascon_cxof128.txt");
 	test_vectors(digestpp::blake2xb_xof(), "blake2xb_xof", "testvectors/blake2xb_xof.txt");
 	test_vectors(digestpp::blake2xs_xof(), "blake2xs_xof", "testvectors/blake2xs_xof.txt");
 	test_vectors(digestpp::shake128(), "shake128", "testvectors/shake128.txt");
 	test_vectors(digestpp::shake256(), "shake256", "testvectors/shake256.txt");
-	test_vectors(digestpp::cshake256().set_customization("Email Signature"), "cshake256", "testvectors/cshake256.txt");
+	test_vectors(digestpp::cshake256(), "cshake256", "testvectors/cshake256.txt");
 	test_vectors(digestpp::k12(), "k12", "testvectors/k12.txt");
 	test_vectors(digestpp::kt256(), "kt256", "testvectors/kt256.txt");
 	test_vectors(digestpp::kmac128(256), "kmac128", "testvectors/kmac128.txt");

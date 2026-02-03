@@ -96,7 +96,6 @@ void example11()
 	cout << xof.absorb("The quick brown fox jumps over the lazy dog").hexsqueeze(64) << endl;
 }
 
-
 int main()
 {
 	example1();

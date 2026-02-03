@@ -170,6 +170,7 @@ Individual hash algorithms are defined by typedefs, e.g.
 
 Typedef|Description|Supported output sizes|Optional parameters
 -------|-----------|----------------------|-------------------
+ascon|Ascon (NIST SP 800-232)|256|-
 blake|Original BLAKE algorithm|224, 256, 384, 512|salt
 blake2b|BLAKE2b|8-512|salt, personalization, key
 blake2s|BLAKE2s|8-256|salt, personalization, key
@@ -202,6 +203,8 @@ whirlpool|Whirlpool|512|-
 
 Typedef|Description|Optional parameters
 -------|-----------|-------------------
+ascon_xof128|Ascon-XOF128|-
+ascon_cxof128|Ascon-CXOF128|customization
 blake2xb_xof|BLAKE2xb in XOF mode|salt, personalization, key
 blake2xs_xof|BLAKE2xs in XOF mode|salt, personalization, key
 esch256_xof|XOEsch256|-
