@@ -144,15 +144,25 @@ namespace blake_functions
 	}
 }
 
+template<size_t HS = 0>
 class blake_provider
 {
 public:
 	static const bool is_xof = false;
 
+	template<size_t hss=HS, typename std::enable_if<hss == 0>::type* = nullptr>
 	blake_provider(size_t hashsize)
 		: hs(hashsize)
 	{
 		validate_hash_size(hashsize, {224, 256, 384, 512});
+		zero_memory(u.H512);
+	}
+
+	template<size_t hss=HS, typename std::enable_if<hss != 0>::type* = nullptr>
+	blake_provider()
+		: hs(hss)
+	{
+		static_assert(hss == 224 || hss == 256 || hss == 384 || hss == 512);
 		zero_memory(u.H512);
 	}
 

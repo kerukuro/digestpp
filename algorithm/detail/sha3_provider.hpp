@@ -118,16 +118,26 @@ namespace sha3_functions
 } // namespace sha3_functions
 
 
+template<size_t HS = 0>
 class sha3_provider
 {
 public:
 	static const bool is_xof = false;
 
+	template<size_t hss=HS, typename std::enable_if<hss == 0>::type* = nullptr>
 	sha3_provider(size_t hashsize)
 		: hs(hashsize)
 	{
 		validate_hash_size(hashsize, {224, 256, 384, 512});
 		rate = 1600U - hs * 2;
+	}
+
+	template<size_t hss=HS, typename std::enable_if<hss != 0>::type* = nullptr>
+	sha3_provider()
+		: hs(hss)
+	{
+		static_assert(hss == 224 || hss == 256 || hss == 384 || hss == 512);
+		rate = 1600U - hss * 2;
 	}
 
 	~sha3_provider()

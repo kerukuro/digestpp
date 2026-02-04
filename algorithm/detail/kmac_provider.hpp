@@ -34,17 +34,25 @@ namespace kmac_functions
 } // namespace kmac_functions
 
 
-template<size_t B, bool XOF>
+template<size_t B, bool XOF, size_t HS = 0>
 class kmac_provider
 {
 public:
 	static const bool is_xof = XOF;
 
-	template<bool xof=XOF, typename std::enable_if<!xof>::type* = nullptr>
+	template<bool xof=XOF, size_t hss=HS, typename std::enable_if<!xof && hss == 0>::type* = nullptr>
 	kmac_provider(size_t hashsize) : hs(hashsize)
 	{
 		static_assert(B == 128 || B == 256, "KMAC only supports 128 and 256 bits");
 		validate_hash_size(hashsize, SIZE_MAX);
+		set_key("");
+	}
+
+	template<bool xof=XOF, size_t hss=HS, typename std::enable_if<!xof && hss != 0>::type* = nullptr>
+	kmac_provider() : hs(hss)
+	{
+		static_assert(B == 128 || B == 256, "KMAC only supports 128 and 256 bits");
+		static_assert(hss % 8 == 0);
 		set_key("");
 	}
 

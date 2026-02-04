@@ -106,12 +106,13 @@ namespace blake2_functions
 
 }
 
-template<typename T, blake2_type type>
+template<typename T, blake2_type type, size_t HS = 0>
 class blake2_provider
 {
 public:
 	static const bool is_xof = type == blake2_type::xof;
 
+	template<size_t hss=HS, typename std::enable_if<hss == 0>::type* = nullptr>
 	blake2_provider(size_t hashsize = N)
 		: hs(hashsize), squeezing(false)
 	{
@@ -121,6 +122,19 @@ public:
 			detail::validate_hash_size(hashsize, N);
 		else if (type == blake2_type::x_hash)
 			detail::validate_hash_size(hashsize, N * sizeof(T) * 4 - 16);
+
+		zero_memory(s);
+		zero_memory(p);
+	}
+
+	template<size_t hss=HS, typename std::enable_if<hss != 0>::type* = nullptr>
+	blake2_provider()
+		: hs(hss), squeezing(false)
+	{
+		static_assert(sizeof(T) == 8 || sizeof(T) == 4, "Invalid T size");
+
+		const size_t limit = type == blake2_type::hash ? N : type == blake2_type::x_hash ? N * sizeof(T) * 4 - 16 : SIZE_MAX;
+		static_assert(hss <= limit && hss > 0 && hss % 8 == 0);
 
 		zero_memory(s);
 		zero_memory(p);

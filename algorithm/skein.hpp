@@ -186,6 +186,92 @@ typedef hasher<detail::skein_provider<512, true>, mixin::skein_mixin> skein512_x
  */
 typedef hasher<detail::skein_provider<256, true>, mixin::skein_mixin> skein256_xof;
 
+namespace static_length
+{
+
+/**
+ * @brief Skein1024 hash function (static-length version)
+ *
+ * @hash
+ *
+ * @outputsize arbitrary
+ *
+ * @mixinparams personalization, nonce, key
+ *
+ * @mixin{mixin::skein_mixin}
+ *
+ * @par Example:\n
+ * @code // Output a 256-bit Skein1024 digest of a string
+ * digestpp::static_length::skein1024<256> hasher;
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code 054922d4393e36af62143986221555bee407671f6e57631bd7273e215a714833
+ * @endcode
+ *
+ * @sa hasher, mixin::skein_mixin, skein1024_xof
+ */
+template<size_t N>
+using skein1024 = hasher<detail::skein_provider<1024, false, N>, mixin::skein_mixin>;
+
+/**
+ * @brief Skein512 hash function (static-length version)
+ *
+ * @hash
+ *
+ * @outputsize arbitrary
+ *
+ * @mixinparams personalization, nonce, key
+ *
+ * @mixin{mixin::skein_mixin}
+ *
+ * @par Example:\n
+ * @code // Output a 256-bit Skein512 digest of a string
+ * digestpp::static_length::skein512<256> hasher;
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code b3250457e05d3060b1a4bbc1428bc75a3f525ca389aeab96cfa34638d96e492a
+ * @endcode
+ *
+ * @sa hasher, mixin::skein_mixin, skein512_xof
+ */
+template<size_t N>
+using skein512 = hasher<detail::skein_provider<512, false, N>, mixin::skein_mixin>;
+
+/**
+ * @brief Skein256 hash function (static-length version)
+ *
+ * @hash
+ *
+ * @outputsize arbitrary
+ *
+ * @mixinparams personalization, nonce, key
+ *
+ * @mixin{mixin::skein_mixin}
+ *
+ * @par Example:\n
+ * @code // Output a 512-bit Skein256 digest of a string
+ * digestpp::static_length::skein256<512> hasher;
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code f8138e72cdd9e11cf09e4be198c234acb0d21a9f75f936e989cf532f1fa9f4fb21d255811f0f1592fb3617d04704add875ae7bd16ddbbeaed4eca6eb9675d2c6
+ * @endcode
+ *
+ * @sa hasher, mixin::skein_mixin, skein256_xof
+ */
+template<size_t N>
+using skein256 = hasher<detail::skein_provider<256, false, N>, mixin::skein_mixin>;
+
+}
+
 } // namespace digestpp
 
 #endif

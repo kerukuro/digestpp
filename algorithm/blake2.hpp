@@ -191,6 +191,120 @@ typedef hasher<detail::blake2_provider<uint64_t, detail::blake2_type::xof>, mixi
  */
 typedef hasher<detail::blake2_provider<uint32_t, detail::blake2_type::xof>, mixin::blake2_mixin> blake2xs_xof;
 
+namespace static_length
+{
+
+/**
+ * @brief BLAKE2b hash function (static-length version)
+ *
+ * @hash
+ *
+ * @outputsize 8 - 512 bits
+ *
+ * @mixinparams salt, personalization, key
+ *
+ * @mixin{mixin::blake2_mixin}
+ *
+ * @par Example:\n
+ * @code // Output a 256-bit BLAKE2b digest of a string
+ * digestpp::static_length::blake2b<256> hasher;
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code 01718cec35cd3d796dd00020e0bfecb473ad23457d063b75eff29c0ffa2e58a9
+ * @endcode
+ *
+ * @sa hasher, mixin::blake2_mixin
+ */
+template<size_t N>
+using blake2b = hasher<detail::blake2_provider<uint64_t, detail::blake2_type::hash, N>, mixin::blake2_mixin>;
+
+/**
+ * @brief BLAKE2s hash function (static-length version)
+ *
+ * @hash
+ *
+ * @outputsize 8 - 256 bits
+ *
+ * @mixinparams salt, personalization, key
+ *
+ * @mixin{mixin::blake2_mixin}
+ *
+ * @par Example:\n
+ * @code // Output a 256-bit BLAKE2s digest of a string
+ * digestpp::static_length::blake2s<256> hasher;
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code 606beeec743ccbeff6cbcdf5d5302aa855c256c29b88c8ed331ea1a6bf3c8812
+ * @endcode
+ *
+ * @sa hasher, mixin::blake2_mixin
+ */
+template<size_t N>
+using blake2s = hasher<detail::blake2_provider<uint32_t, detail::blake2_type::hash, N>, mixin::blake2_mixin>;
+
+/**
+ * @brief BLAKE2xb hash function (static-length version)
+ *
+ * @hash
+ *
+ * @outputsize arbitrary
+ *
+ * @mixinparams salt, personalization, key
+ *
+ * @mixin{mixin::blake2_mixin}
+ *
+ * @par Example:\n
+ * @code // Output a 256-bit BLAKE2xb digest of a string
+ * digestpp::static_length::blake2xb<256> hasher;
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code ca7a0c9c54b4b93c0bee0aa3a4d63e4f7fb87e3e0a9050522377fde76f0b6c01
+ * @endcode
+ *
+ * @sa hasher, mixin::blake2_mixin
+ */
+template<size_t N>
+using blake2xb = hasher<detail::blake2_provider<uint64_t, detail::blake2_type::x_hash, N>, mixin::blake2_mixin>;
+
+/**
+ * @brief BLAKE2xs hash function (static-length version)
+ *
+ * @hash
+ *
+ * @outputsize arbitrary
+ *
+ * @mixinparams salt, personalization, key
+ *
+ * @mixin{mixin::blake2_mixin}
+ *
+ * @par Example:\n
+ * @code // Output a 512-bit BLAKE2xs digest of a string
+ * digestpp::static_length::blake2xs<512> hasher;
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code e709f8377d21507c166e5dd2279a1f58b290792d65dafcc5647b6e439a974227503c341341572725709b874e95f13a438677aa6f9648467fd341e0f3e5421840
+ * @endcode
+ *
+ * @sa hasher, mixin::blake2_mixin
+ */
+template<size_t N>
+using blake2xs = hasher<detail::blake2_provider<uint32_t, detail::blake2_type::x_hash, N>, mixin::blake2_mixin>;
+
+}
+
+
 } // namespace digestpp
 
 #endif // DIGESTPP_ALGORITHM_BLAKE2_HPP

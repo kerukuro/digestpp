@@ -95,15 +95,24 @@ namespace jh_functions
 	}
 }
 
+template<size_t HS = 0>
 class jh_provider
 {
 public:
 	static const bool is_xof = false;
 
+	template<size_t hss=HS, typename std::enable_if<hss == 0>::type* = nullptr>
 	jh_provider(size_t hashsize = 512)
 		: hs(hashsize)
 	{
 		validate_hash_size(hashsize, 512);
+	}
+
+	template<size_t hss=HS, typename std::enable_if<hss != 0>::type* = nullptr>
+	jh_provider()
+		: hs(hss)
+	{
+		static_assert(hss <= 512 && hss > 0 && hss % 8 == 0);
 	}
 
 	~jh_provider()

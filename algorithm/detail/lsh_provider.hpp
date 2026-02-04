@@ -66,17 +66,26 @@ namespace lsh_functions
 	}
 }
 
-template<typename T>
+template<typename T, size_t HS = 0>
 class lsh_provider
 {
 public:
 	static const bool is_xof = false;
 
+	template<size_t hss=HS, typename std::enable_if<hss == 0>::type* = nullptr>
 	lsh_provider(size_t hashsize)
 		: hs(hashsize)
 	{
 		static_assert(sizeof(T) == 4 || sizeof(T) == 8, "LSH only supports 4 and 8 bits word size");
 		validate_hash_size(hashsize, N);
+	}
+
+	template<size_t hss=HS, typename std::enable_if<hss != 0>::type* = nullptr>
+	lsh_provider()
+		: hs(hss)
+	{
+		static_assert(sizeof(T) == 4 || sizeof(T) == 8, "LSH only supports 4 and 8 bits word size");
+		static_assert(hss <= N && hss > 0 && hss % 8 == 0);
 	}
 
 	~lsh_provider()

@@ -40,7 +40,39 @@ namespace digestpp
  *
  * @sa hasher, mixin::blake_mixin
  */
-typedef hasher<detail::blake_provider, mixin::blake_mixin> blake;
+typedef hasher<detail::blake_provider<>, mixin::blake_mixin> blake;
+
+namespace static_length
+{
+
+/**
+ * @brief BLAKE hash function (static-length version)
+ *
+ * @hash
+ *
+ * @outputsize 224 / 256 / 384 / 512 bits
+ *
+ * @mixinparams salt
+ *
+ * @mixin{mixin::blake_mixin}
+ *
+ * @par Example:\n
+ * @code // Output a 256-bit BLAKE digest of a string
+ * digestpp::static_length::blake<256> hasher;
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code 7576698ee9cad30173080678e5965916adbb11cb5245d386bf1ffda1cb26c9d7
+ * @endcode
+ *
+ * @sa hasher, mixin::blake_mixin
+ */
+template<size_t N>
+using blake = hasher<detail::blake_provider<N>, mixin::blake_mixin>;
+
+}
 
 } // namespace digestpp
 

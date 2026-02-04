@@ -78,6 +78,34 @@ typedef hasher<detail::esch_provider<384, true>> esch256_xof;
  */
 typedef hasher<detail::esch_provider<512, true>> esch384_xof;
 
+namespace static_length
+{
+
+/**
+ * @brief Esch hash function (static-length version)
+ *
+ * @hash
+ *
+ * @outputsize 256 / 384 bits
+ *
+ * @par Example:\n
+ * @code // Output a 256-bit Esch digest of a string
+ * digestpp::static_length::esch<256> hasher;
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code d43f87a0fe60fc5925064880c6116c136b6d94fa24a93dffcb35d178c3af932c
+ * @endcode
+ *
+ * @sa hasher
+ */
+template<size_t N>
+using esch = hasher<detail::esch_provider<512, false, N>>;
+
+}
+
 } // namespace digestpp
 
 #endif // DIGESTPP_ALGORITHM_ESCH_HPP

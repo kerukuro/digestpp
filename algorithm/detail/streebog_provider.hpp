@@ -99,15 +99,24 @@ namespace streebog_functions
 
 }
 
+template<size_t HS = 0>
 class streebog_provider
 {
 public:
 	static const bool is_xof = false;
 
+	template<size_t hss=HS, typename std::enable_if<hss == 0>::type* = nullptr>
 	streebog_provider(size_t hashsize)
 		: hs(hashsize)
 	{
 		validate_hash_size(hashsize, { 256, 512 });
+	}
+
+	template<size_t hss=HS, typename std::enable_if<hss != 0>::type* = nullptr>
+	streebog_provider()
+		: hs(hss)
+	{
+		static_assert(hss == 256 || hss == 512);
 	}
 
 	~streebog_provider()

@@ -100,15 +100,24 @@ namespace groestl_functions
 
 }
 
+template<size_t HS = 0>
 class groestl_provider
 {
 public:
 	static const bool is_xof = false;
 
+	template<size_t hss=HS, typename std::enable_if<hss == 0>::type* = nullptr>
 	groestl_provider(size_t hashsize)
 		: hs(hashsize)
 	{
 		validate_hash_size(hashsize, 512);
+	}
+
+	template<size_t hss=HS, typename std::enable_if<hss != 0>::type* = nullptr>
+	groestl_provider()
+		: hs(hss)
+	{
+		static_assert(hss <= 512 && hss > 0 && hss % 8 == 0);
 	}
 
 	~groestl_provider()
@@ -121,8 +130,8 @@ public:
 		pos = 0;
 		total = 0;
 		memset(&h[0], 0, sizeof(uint64_t)*16);
-		uint64_t hs = hash_size();
-		h[hs > 256 ? 15 : 7] = byteswap(hs);
+		uint64_t hss = static_cast<uint64_t>(hash_size());
+		h[hss > 256 ? 15 : 7] = byteswap(hss);
 	}
 
 	inline void update(const unsigned char* data, size_t len)

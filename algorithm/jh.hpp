@@ -36,7 +36,35 @@ namespace digestpp
  *
  * @sa hasher
  */
-typedef hasher<detail::jh_provider> jh;
+typedef hasher<detail::jh_provider<>> jh;
+
+namespace static_length
+{
+
+/**
+ * @brief JH hash function (static-length version)
+ *
+ * @hash
+ *
+ * @outputsize 8 - 512 bits
+ *
+ * @par Example:\n
+ * @code // Output a 256-bit JH digest of a string
+ * digestpp::static_length::jh<256> hasher;
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code 6a049fed5fc6874acfdc4a08b568a4f8cbac27de933496f031015b38961608a0
+ * @endcode
+ *
+ * @sa hasher
+ */
+template<size_t N>
+using jh = hasher<detail::jh_provider<N>>;
+
+}
 
 } // namespace digestpp
 

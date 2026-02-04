@@ -73,18 +73,26 @@ static inline void sparkle(std::array<uint32_t, N>& H, int rounds, int ns)
 
 }
 
-template<size_t N, bool XOF>
+template<size_t N, bool XOF, size_t HS = 0>
 class esch_provider
 {
 public:
 	static const bool is_xof = XOF;
 
-	template<bool xof=XOF, typename std::enable_if<!xof>::type* = nullptr>
+	template<bool xof=XOF, size_t hss = HS, typename std::enable_if<!xof && hss == 0>::type* = nullptr>
 	esch_provider(size_t hashsize)
 		: hs(hashsize), squeezing(false)
 	{
 		static_assert(N == 384 || N == 512, "Esch only supports 384 and 512 bits state size");
 		validate_hash_size(hashsize, {256, 384});
+	}
+
+	template<bool xof=XOF, size_t hss = HS, typename std::enable_if<!xof && hss != 0>::type* = nullptr>
+	esch_provider()
+		: hs(hss), squeezing(false)
+	{
+		static_assert(N == 384 || N == 512, "Esch only supports 384 and 512 bits state size");
+		static_assert(hss == 256 || hss == 384, "Esch only supports output size of 256 and 384 bits");
 	}
 
 	template<bool xof=XOF, typename std::enable_if<xof>::type* = nullptr>

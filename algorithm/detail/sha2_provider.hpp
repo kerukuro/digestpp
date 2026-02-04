@@ -31,6 +31,21 @@ namespace sha2_functions
 		return (x & y) ^ (x & z) ^ (y & z);
 	}
 
+	template<typename T>
+	inline T getK(int t);
+
+	template<>
+	inline uint32_t getK(int t)
+	{
+		return sha256_constants<void>::K[t];
+	}
+
+	template<>
+	inline uint64_t getK(int t)
+	{
+		return sha512_constants<void>::K[t];
+	}
+
 	static inline uint64_t sum0(uint64_t x)
 	{
 		return rotate_right(x, 28) ^ rotate_right(x, 34) ^ rotate_right(x, 39);
@@ -80,10 +95,12 @@ class sha2_provider
 public:
 	static const bool is_xof = false;
 
-	template<typename t=T, size_t o=O, typename std::enable_if<o && (sizeof(t) == 4 || o == 384)>::type* = nullptr>
+	template<typename t=T, size_t o=O, typename std::enable_if<o != 0>::type* = nullptr>
 	sha2_provider()
 		: hs(O)
 	{
+		static_assert((sizeof(t) == 4 && (o == 224 || o == 256))
+				|| (sizeof(t) == 8 && o > 0 && o <= 512 && o % 8 == 0));
 	}
 
 	template<typename t=T, size_t o=O, typename std::enable_if<sizeof(t) == 8 && !o>::type* = nullptr>
@@ -196,8 +213,6 @@ public:
 
 	inline size_t hash_size() const { return hs; }
 
-	inline T getK(int t) const;
-
 private:
 	inline void transform(const unsigned char* data, size_t num_blks)
 	{
@@ -225,7 +240,7 @@ private:
 
 			for (int t = 0; t < rounds; t++)
 			{
-				T T1 = h + sha2_functions::sum1(e) + sha2_functions::Ch(e, f, g) + getK(t) + W[t];
+				T T1 = h + sha2_functions::sum1(e) + sha2_functions::Ch(e, f, g) + sha2_functions::getK<T>(t) + W[t];
 				T T2 = sha2_functions::sum0(a) + sha2_functions::Maj(a, b, c);
 				h = g;
 				g = f;
@@ -256,30 +271,6 @@ private:
 	uint64_t total;
 	size_t hs;
 };
-
-template<>
-inline uint32_t sha2_provider<uint32_t, 256>::getK(int t) const
-{
-	return sha256_constants<void>::K[t];
-}
-
-template<>
-inline uint32_t sha2_provider<uint32_t, 224>::getK(int t) const
-{
-	return sha256_constants<void>::K[t];
-}
-
-template<>
-inline uint64_t sha2_provider<uint64_t, 384>::getK(int t) const
-{
-	return sha512_constants<void>::K[t];
-}
-
-template<>
-inline uint64_t sha2_provider<uint64_t, 0>::getK(int t) const
-{
-	return sha512_constants<void>::K[t];
-}
 
 template<>
 inline void sha2_provider<uint32_t, 224>::init()

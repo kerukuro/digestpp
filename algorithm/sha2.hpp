@@ -112,6 +112,33 @@ typedef hasher<detail::sha2_provider<uint32_t, 256>> sha256;
  */
 typedef hasher<detail::sha2_provider<uint32_t, 224>> sha224;
 
+namespace static_length
+{
+
+/**
+ * @brief SHA-512 hash function (static-length version)
+ *
+ * @hash
+ *
+ * @outputsize 8 - 512 bits
+ *
+ * @par Example:\n
+ * @code // Output a SHA-512/256 digest of a string
+ * digestpp::static_length sha512<256> hasher;
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code dd9d67b371519c339ed8dbd25af90e976a1eeefd4ad3d889005e532fc5bef04d
+ * @endcode
+ *
+ * @sa hasher
+ */
+template<size_t N>
+using sha512 = hasher<detail::sha2_provider<uint64_t, N>>;
+
+}
 
 } // namespace digestpp
 

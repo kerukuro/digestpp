@@ -41,7 +41,39 @@ namespace digestpp
  *
  * @sa hasher
  */
-typedef hasher<detail::echo_provider, mixin::echo_mixin> echo;
+typedef hasher<detail::echo_provider<>, mixin::echo_mixin> echo;
+
+namespace static_length
+{
+
+/**
+ * @brief Echo hash function (static-length version)
+ *
+ * @hash
+ *
+ * @outputsize 8 - 512 bits
+ *
+ * @mixinparams salt
+ *
+ * @mixin{mixin::echo_mixin}
+ *
+ * @par Example:\n
+ * @code // Output a 256-bit Echo digest of a string
+ * digestpp::static_length::echo<256> hasher;
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code 3c3c10b84e818cbddfd71e1aefc6cb9cd7fd1b84acb5765813e716734a97d422
+ * @endcode
+ *
+ * @sa hasher
+ */
+template<size_t N>
+using echo = hasher<detail::echo_provider<N>, mixin::echo_mixin>;
+
+}
 
 } // namespace digestpp
 

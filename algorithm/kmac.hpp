@@ -136,6 +136,71 @@ typedef hasher<detail::kmac_provider<128, true>, mixin::kmac_mixin> kmac128_xof;
  */
 typedef hasher<detail::kmac_provider<256, true>, mixin::kmac_mixin> kmac256_xof;
 
+namespace static_length
+{
+
+/**
+ * @brief KMAC128 in hash mode (static-length version)
+ *
+ * While primary usage of KMAC is message authentication, it can also be used without a key as a regular hash function.
+ *
+ * @hash
+ *
+ * @outputsize arbitrary
+ *
+ * @mixinparams customization, key
+ *
+ * @mixin{mixin::kmac_mixin}
+ *
+ * @par Example:\n
+ * @code // Set key and output a 256-bit KMAC128 of a string
+ * digestpp::static_length::kmac128<256> hasher;
+ * hasher.set_key(R"(@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_)");
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code bbd4ebf20aacc8e4dfd2cc91f2b6cbf33e2a45d805996b48a17b8d3e42b4b010
+ * @endcode
+ *
+ * @sa hasher, kmac128_xof, mixin::kmac_mixin
+ */
+template<size_t N>
+using kmac128 = hasher<detail::kmac_provider<128, false, N>, mixin::kmac_mixin>;
+
+/**
+ * @brief KMAC256 in hash mode (static-length version)
+ *
+ * While primary usage of KMAC is message authentication, it can also be used without a key as a regular hash function.
+ *
+ * @hash
+ *
+ * @throw std::runtime_error if the requested digest size is not divisible by 8 (full bytes)
+ *
+ * @mixinparams customization, key
+ *
+ * @mixin{mixin::kmac_mixin}
+ *
+ * @par Example:\n
+ * @code // Set key and output a 256-bit KMAC256 of a string
+ * digestpp::static_length::kmac256<256> hasher;
+ * hasher.set_key(R("@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_"));
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code bbe7d65fe0e7574254a13e0f3f79482275b96887287fc8b620a92ed5e5de3bce
+ * @endcode
+ *
+ * @sa hasher, kmac256_xof, mixin::kmac_mixin
+ */
+template<size_t N>
+using kmac256 = hasher<detail::kmac_provider<256, false, N>, mixin::kmac_mixin>;
+
+}
+
 } // namespace digestpp
 
 #endif // DIGESTPP_ALGORITHM_KMAC_HPP

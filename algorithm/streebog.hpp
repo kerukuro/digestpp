@@ -34,7 +34,34 @@ namespace digestpp
  *
  * @sa hasher
  */
-typedef hasher<detail::streebog_provider> streebog;
+typedef hasher<detail::streebog_provider<>> streebog;
+
+namespace static_length
+{
+
+/** @brief Streebog hash function (static-length version)
+ *
+ * @hash
+ *
+ * @outputsize 256 / 512 bits
+ *
+ * @par Example:\n
+ * @code // Output a 256-bit Streebog digest of a string
+ * digestpp::static_length::streebog<256> hasher;
+ * hasher.absorb("The quick brown fox jumps over the lazy dog");
+ * std::cout << hasher.hexdigest() << '\n';
+ * @endcode
+ *
+ * @par Example output:\n
+ * @code 3e7dea7f2384b6c5a3d0e24aaa29c05e89ddd762145030ec22c71a6db8b2c1f4
+ * @endcode
+ *
+ * @sa hasher
+ */
+template<size_t N>
+using streebog = hasher<detail::streebog_provider<N>>;
+
+}
 
 } // namespace digestpp
 

@@ -153,15 +153,25 @@ namespace echo_functions
 
 }
 
+template<size_t HS = 0>
 class echo_provider
 {
 public:
 	static const bool is_xof = false;
 
+	template<size_t hss=HS, typename std::enable_if<hss == 0>::type* = nullptr>
 	echo_provider(size_t hashsize)
 		: hs(hashsize)
 	{
 		validate_hash_size(hashsize, 512);
+		zero_memory(salt);
+	}
+
+	template<size_t hss=HS, typename std::enable_if<hss != 0>::type* = nullptr>
+	echo_provider()
+		: hs(hss)
+	{
+		static_assert(hss <= 512 && hss > 0 && hss % 8 == 0);
 		zero_memory(salt);
 	}
 

@@ -177,16 +177,24 @@ struct skein_functions<16>
 	}
 };
 
-template<size_t N, bool XOF>
+template<size_t N, bool XOF, size_t HS = 0>
 class skein_provider
 {
 public:
 	static const bool is_xof = XOF;
 
+	template<size_t hss=HS, typename std::enable_if<hss == 0>::type* = nullptr>
 	skein_provider(size_t hashsize = N)
 		: hs(hashsize)
 	{
 		validate_hash_size(hashsize, SIZE_MAX);
+	}
+
+	template<size_t hss=HS, typename std::enable_if<hss != 0>::type* = nullptr>
+	skein_provider(size_t hashsize = N)
+		: hs(hss)
+	{
+		static_assert(hss > 0 && hss % 8 == 0);
 	}
 
 	~skein_provider()
