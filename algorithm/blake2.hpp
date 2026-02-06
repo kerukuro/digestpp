@@ -23,7 +23,13 @@ namespace digestpp
  * @brief BLAKE2b hash function
  * 
  * Fast cryptographic hash function optimized for 64-bit platforms.
- * 
+ *
+ * BLAKE2b deliberately reduces the number of rounds from 16 (BLAKE-512) to 12 rounds.
+ * The round reduction was based on the argument that BLAKE's original 16 rounds
+ * were overly conservative relative to known cryptanalysis. However, users should
+ * be aware this is a performance-vs-security trade-off, not a pure improvement.
+ * For maximum security margin, consider SHA-3 or original BLAKE.
+ *
  * Designed by Jean-Philippe Aumasson, Samuel Neves, Zooko Wilcox-O'Hearn, and Christian Winnerlein.
  * 
  * Standardized as RFC 7693 (Informational, November 2015).
@@ -57,7 +63,7 @@ namespace digestpp
  * @code 01718cec35cd3d796dd00020e0bfecb473ad23457d063b75eff29c0ffa2e58a9
  * @endcode
  *
- * @sa hasher, mixin::blake2_mixin, digestpp::blake2xb
+ * @sa hasher, mixin::blake2_mixin, digestpp::blake2xb, digestpp::blake, digestpp::static_size::blake2b
  */
 typedef hasher<detail::blake2_provider<uint64_t, detail::blake2_type::hash>, mixin::blake2_mixin> blake2b;
 
@@ -66,6 +72,14 @@ typedef hasher<detail::blake2_provider<uint64_t, detail::blake2_type::hash>, mix
  * 
  * Fast cryptographic hash function optimized for 8- to 32-bit platforms.
  * Designed for environments where BLAKE2b's 64-bit operations are not optimal.
+ *
+ * BLAKE2s reduces the number of rounds from 14 (BLAKE-256) to 10 rounds,
+ * The round reduction was based on the argument that BLAKE's original 16 rounds
+ * were overly conservative relative to known cryptanalysis. However, users should
+ * be aware this is a performance-vs-security trade-off, not a pure improvement.
+ * For maximum security margin, consider SHA-3 or original BLAKE.
+ *
+ * Designed by Jean-Philippe Aumasson, Samuel Neves, Zooko Wilcox-O'Hearn, and Christian Winnerlein.
  * 
  * Standardized as RFC 7693 (Informational, November 2015).
  *
@@ -98,7 +112,7 @@ typedef hasher<detail::blake2_provider<uint64_t, detail::blake2_type::hash>, mix
  * @code 606beeec743ccbeff6cbcdf5d5302aa855c256c29b88c8ed331ea1a6bf3c8812
  * @endcode
  *
- * @sa hasher, mixin::blake2_mixin, digestpp::blake2xs
+ * @sa hasher, mixin::blake2_mixin, digestpp::blake2xs, digestpp::blake, digestpp::static_size::blake2s
  */
 typedef hasher<detail::blake2_provider<uint32_t, detail::blake2_type::hash>, mixin::blake2_mixin> blake2s;
 
@@ -142,7 +156,7 @@ typedef hasher<detail::blake2_provider<uint32_t, detail::blake2_type::hash>, mix
  * @code ca7a0c9c54b4b93c0bee0aa3a4d63e4f7fb87e3e0a9050522377fde76f0b6c01
  * @endcode
  *
- * @sa hasher, mixin::blake2_mixin, blake2b, blake2xb_xof
+ * @sa hasher, mixin::blake2_mixin, blake2b, blake2xb_xof, blake, digestpp::static_size::blake2xb
  */
 typedef hasher<detail::blake2_provider<uint64_t, detail::blake2_type::x_hash>, mixin::blake2_mixin> blake2xb;
 
@@ -185,7 +199,7 @@ typedef hasher<detail::blake2_provider<uint64_t, detail::blake2_type::x_hash>, m
  * @code e709f8377d21507c166e5dd2279a1f58b290792d65dafcc5647b6e439a974227503c341341572725709b874e95f13a438677aa6f9648467fd341e0f3e5421840
  * @endcode
  *
- * @sa hasher, mixin::blake2_mixin, blake2s, blake2xs_xof
+ * @sa hasher, mixin::blake2_mixin, blake2s, blake2xs_xof, blake, digestpp::static_size::blake2xs
  */
 typedef hasher<detail::blake2_provider<uint32_t, detail::blake2_type::x_hash>, mixin::blake2_mixin> blake2xs;
 
@@ -220,7 +234,7 @@ typedef hasher<detail::blake2_provider<uint32_t, detail::blake2_type::x_hash>, m
  * @code 364e84ca4c103df292306c93ebba6f6633d5e9cc8a95e040498e9a012d5ca534
  * @endcode
  *
- * @sa hasher, mixin::blake2_mixin
+ * @sa hasher, mixin::blake2_mixin, kt128, kt256
  */
 typedef hasher<detail::blake2_provider<uint64_t, detail::blake2_type::xof>, mixin::blake2_mixin> blake2xb_xof;
 
@@ -255,7 +269,7 @@ typedef hasher<detail::blake2_provider<uint64_t, detail::blake2_type::xof>, mixi
  * @code 0650cde4df888a06eada0f0fecb3c17594304b4a03fdd678182f27db1238b1747e33c34ae539fe2179a7594442b5cc9a7a0f398bb15ac3095a397de6a60061d6
  * @endcode
  *
- * @sa hasher, mixin::blake2_mixin
+ * @sa hasher, mixin::blake2_mixin, k12
  */
 typedef hasher<detail::blake2_provider<uint32_t, detail::blake2_type::xof>, mixin::blake2_mixin> blake2xs_xof;
 
@@ -298,7 +312,7 @@ namespace static_size
  * @code 01718cec35cd3d796dd00020e0bfecb473ad23457d063b75eff29c0ffa2e58a9
  * @endcode
  *
- * @sa hasher, mixin::blake2_mixin, digestpp::blake2b
+ * @sa hasher, mixin::blake2_mixin, digestpp::blake2b, blake
  */
 template<size_t N>
 using blake2b = hasher<detail::blake2_provider<uint64_t, detail::blake2_type::hash, N>, mixin::blake2_mixin>;
@@ -332,7 +346,7 @@ using blake2b = hasher<detail::blake2_provider<uint64_t, detail::blake2_type::ha
  * @code 606beeec743ccbeff6cbcdf5d5302aa855c256c29b88c8ed331ea1a6bf3c8812
  * @endcode
  *
- * @sa hasher, mixin::blake2_mixin, digestpp::blake2s
+ * @sa hasher, mixin::blake2_mixin, digestpp::blake2s, blake
  */
 template<size_t N>
 using blake2s = hasher<detail::blake2_provider<uint32_t, detail::blake2_type::hash, N>, mixin::blake2_mixin>;
@@ -366,7 +380,7 @@ using blake2s = hasher<detail::blake2_provider<uint32_t, detail::blake2_type::ha
  * @code ca7a0c9c54b4b93c0bee0aa3a4d63e4f7fb87e3e0a9050522377fde76f0b6c01
  * @endcode
  *
- * @sa hasher, mixin::blake2_mixin, digestpp::blake2xb
+ * @sa hasher, mixin::blake2_mixin, digestpp::blake2xb, blake
  */
 template<size_t N>
 using blake2xb = hasher<detail::blake2_provider<uint64_t, detail::blake2_type::x_hash, N>, mixin::blake2_mixin>;
@@ -400,7 +414,7 @@ using blake2xb = hasher<detail::blake2_provider<uint64_t, detail::blake2_type::x
  * @code e709f8377d21507c166e5dd2279a1f58b290792d65dafcc5647b6e439a974227503c341341572725709b874e95f13a438677aa6f9648467fd341e0f3e5421840
  * @endcode
  *
- * @sa hasher, mixin::blake2_mixin, digestpp::blake2xs
+ * @sa hasher, mixin::blake2_mixin, digestpp::blake2xs, blake
  */
 template<size_t N>
 using blake2xs = hasher<detail::blake2_provider<uint32_t, detail::blake2_type::x_hash, N>, mixin::blake2_mixin>;

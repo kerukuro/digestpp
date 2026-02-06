@@ -51,7 +51,7 @@ namespace digestpp
  * @code 9e107d9d372bb6826bd81d3542a419d6
  * @endcode
  *
- * @sa hasher, sha256
+ * @sa hasher, sha256, blake2b, skein512
  */
 typedef hasher<detail::md5_provider> md5;
 

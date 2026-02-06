@@ -44,7 +44,7 @@ namespace digestpp
  * @code 2fd4e1c67a2d28fced849ee1bb76e7391b93eb12
  * @endcode
  *
- * @sa hasher
+ * @sa hasher, sha256, sha512, sha3
  */
 typedef hasher<detail::sha1_provider> sha1;
 

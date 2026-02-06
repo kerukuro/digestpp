@@ -67,7 +67,7 @@ namespace digestpp
  * @code bbd4ebf20aacc8e4dfd2cc91f2b6cbf33e2a45d805996b48a17b8d3e42b4b010
  * @endcode
  *
- * @sa hasher, kmac128_xof, kmac256, mixin::kmac_mixin
+ * @sa hasher, kmac128_xof, kmac256, mixin::kmac_mixin, digestpp::static_size::kmac128
  */
 typedef hasher<detail::kmac_provider<128, false>, mixin::kmac_mixin> kmac128;
 
@@ -120,7 +120,7 @@ typedef hasher<detail::kmac_provider<128, false>, mixin::kmac_mixin> kmac128;
  * @code bbe7d65fe0e7574254a13e0f3f79482275b96887287fc8b620a92ed5e5de3bce
  * @endcode
  *
- * @sa hasher, kmac256_xof, kmac128, mixin::kmac_mixin
+ * @sa hasher, kmac256_xof, kmac128, mixin::kmac_mixin, digestpp::static_size::kmac256
  */
 typedef hasher<detail::kmac_provider<256, false>, mixin::kmac_mixin> kmac256;
 
@@ -252,7 +252,7 @@ namespace static_size
  * @code bbd4ebf20aacc8e4dfd2cc91f2b6cbf33e2a45d805996b48a17b8d3e42b4b010
  * @endcode
  *
- * @sa hasher, digestpp::kmac128, kmac128_xof, mixin::kmac_mixin
+ * @sa hasher, digestpp::kmac128, kmac128_xof, mixin::kmac_mixin, digestpp::kmac128
  */
 template<size_t N>
 using kmac128 = hasher<detail::kmac_provider<128, false, N>, mixin::kmac_mixin>;
@@ -290,7 +290,7 @@ using kmac128 = hasher<detail::kmac_provider<128, false, N>, mixin::kmac_mixin>;
  * @code bbe7d65fe0e7574254a13e0f3f79482275b96887287fc8b620a92ed5e5de3bce
  * @endcode
  *
- * @sa hasher, kmac256_xof, mixin::kmac_mixin
+ * @sa hasher, kmac256_xof, mixin::kmac_mixin, digestpp::kmac256
  */
 template<size_t N>
 using kmac256 = hasher<detail::kmac_provider<256, false, N>, mixin::kmac_mixin>;

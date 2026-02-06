@@ -56,7 +56,7 @@ namespace digestpp
  * @code f8025b61eb10d80a7f03ccfb906222a0645bb175fdeee9595f223936edbf7070
  * @endcode
  *
- * @sa hasher, lsh512
+ * @sa hasher, lsh512, digestpp::static_size::lsh256
  */
 typedef hasher<detail::lsh_provider<uint32_t>> lsh256;
 
@@ -94,7 +94,7 @@ typedef hasher<detail::lsh_provider<uint32_t>> lsh256;
  * @code 5e4ebe2017e84f35420bda7486ebbd791e0ece579cc18e49341b9a526466e633
  * @endcode
  *
- * @sa hasher, lsh256
+ * @sa hasher, lsh256, digestpp::static_size::lsh512
  */
 typedef hasher<detail::lsh_provider<uint64_t>> lsh512;
 

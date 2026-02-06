@@ -148,6 +148,7 @@ Typedefs</h2></td></tr>
 
 <p>BLAKE2b hash function. </p>
 <p>Fast cryptographic hash function optimized for 64-bit platforms.</p>
+<p>BLAKE2b deliberately reduces the number of rounds from 16 (BLAKE-512) to 12 rounds. The round reduction was based on the argument that BLAKE's original 16 rounds were overly conservative relative to known cryptanalysis. However, users should be aware this is a performance-vs-security trade-off, not a pure improvement. For maximum security margin, consider SHA-3 or original BLAKE.</p>
 <p>Designed by Jean-Philippe Aumasson, Samuel Neves, Zooko Wilcox-O'Hearn, and Christian Winnerlein.</p>
 <p>Standardized as RFC 7693 (Informational, November 2015).</p>
 <dl class="section user"><dt>Type:</dt><dd>Cryptographic hash function.</dd></dl>
@@ -176,7 +177,7 @@ Typedefs</h2></td></tr>
 </div><!-- fragment --></dd></dl>
 <dl class="section user"><dt>Example output:</dt><dd><div class="fragment"><div class="line">01718cec35cd3d796dd00020e0bfecb473ad23457d063b75eff29c0ffa2e58a9</div>
 </div><!-- fragment --></dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#ga47975780ffe7d66a274fafb292cbec29" title="BLAKE2xb hash function.">digestpp::blake2xb</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#ga47975780ffe7d66a274fafb292cbec29" title="BLAKE2xb hash function.">digestpp::blake2xb</a>, <a class="el" href="group___b_l_a_k_e.html#gafc49173c1d473ada74310f4951399ebc" title="BLAKE hash function (SHA-3 finalist)">digestpp::blake</a>, <a class="el" href="#ga2aa9bf67ad177832877a9f7c3f1726c8" title="BLAKE2b hash function (static-size version)">digestpp::static_size::blake2b</a> </dd></dl>
 
 </div>
 </div>
@@ -212,7 +213,7 @@ template&lt;size_t N&gt; </div>
 </div><!-- fragment --></dd></dl>
 <dl class="section user"><dt>Example output:</dt><dd><div class="fragment"><div class="line">01718cec35cd3d796dd00020e0bfecb473ad23457d063b75eff29c0ffa2e58a9</div>
 </div><!-- fragment --></dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#gaba880b81cd06ac625a680797a9c34f6c" title="BLAKE2b hash function.">digestpp::blake2b</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#gaba880b81cd06ac625a680797a9c34f6c" title="BLAKE2b hash function.">digestpp::blake2b</a>, <a class="el" href="group___b_l_a_k_e.html#ga9ac473046ab07b3ceb0a95cc6d36392b" title="BLAKE hash function (static-size version)">blake</a> </dd></dl>
 
 </div>
 </div>
@@ -230,6 +231,8 @@ template&lt;size_t N&gt; </div>
 
 <p>BLAKE2s hash function. </p>
 <p>Fast cryptographic hash function optimized for 8- to 32-bit platforms. Designed for environments where BLAKE2b's 64-bit operations are not optimal.</p>
+<p>BLAKE2s reduces the number of rounds from 14 (BLAKE-256) to 10 rounds, The round reduction was based on the argument that BLAKE's original 16 rounds were overly conservative relative to known cryptanalysis. However, users should be aware this is a performance-vs-security trade-off, not a pure improvement. For maximum security margin, consider SHA-3 or original BLAKE.</p>
+<p>Designed by Jean-Philippe Aumasson, Samuel Neves, Zooko Wilcox-O'Hearn, and Christian Winnerlein.</p>
 <p>Standardized as RFC 7693 (Informational, November 2015).</p>
 <dl class="section user"><dt>Type:</dt><dd>Cryptographic hash function.</dd></dl>
 <dl class="section user"><dt>Output size:</dt><dd>8 - 256 bits</dd></dl>
@@ -254,7 +257,7 @@ template&lt;size_t N&gt; </div>
 </div><!-- fragment --></dd></dl>
 <dl class="section user"><dt>Example output:</dt><dd><div class="fragment"><div class="line">606beeec743ccbeff6cbcdf5d5302aa855c256c29b88c8ed331ea1a6bf3c8812</div>
 </div><!-- fragment --></dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#gaef4af42ce803e4dd8adc0d3fa8c44dd6" title="BLAKE2xs hash function.">digestpp::blake2xs</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#gaef4af42ce803e4dd8adc0d3fa8c44dd6" title="BLAKE2xs hash function.">digestpp::blake2xs</a>, <a class="el" href="group___b_l_a_k_e.html#gafc49173c1d473ada74310f4951399ebc" title="BLAKE hash function (SHA-3 finalist)">digestpp::blake</a>, <a class="el" href="#ga92f603aaa15ffff84c033f8652e8ed12" title="BLAKE2s hash function (static-size version)">digestpp::static_size::blake2s</a> </dd></dl>
 
 </div>
 </div>
@@ -290,7 +293,7 @@ template&lt;size_t N&gt; </div>
 </div><!-- fragment --></dd></dl>
 <dl class="section user"><dt>Example output:</dt><dd><div class="fragment"><div class="line">606beeec743ccbeff6cbcdf5d5302aa855c256c29b88c8ed331ea1a6bf3c8812</div>
 </div><!-- fragment --></dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#gaef9e48cee90947e400f975c9ca126aee" title="BLAKE2s hash function.">digestpp::blake2s</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#gaef9e48cee90947e400f975c9ca126aee" title="BLAKE2s hash function.">digestpp::blake2s</a>, <a class="el" href="group___b_l_a_k_e.html#ga9ac473046ab07b3ceb0a95cc6d36392b" title="BLAKE hash function (static-size version)">blake</a> </dd></dl>
 
 </div>
 </div>
@@ -333,7 +336,7 @@ template&lt;size_t N&gt; </div>
 </div><!-- fragment --></dd></dl>
 <dl class="section user"><dt>Example output:</dt><dd><div class="fragment"><div class="line">ca7a0c9c54b4b93c0bee0aa3a4d63e4f7fb87e3e0a9050522377fde76f0b6c01</div>
 </div><!-- fragment --></dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#gaba880b81cd06ac625a680797a9c34f6c" title="BLAKE2b hash function.">blake2b</a>, <a class="el" href="#ga7e88d6565dc956c49573f71cba23bddc" title="BLAKE2xb in XOF mode.">blake2xb_xof</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#gaba880b81cd06ac625a680797a9c34f6c" title="BLAKE2b hash function.">blake2b</a>, <a class="el" href="#ga7e88d6565dc956c49573f71cba23bddc" title="BLAKE2xb in XOF mode.">blake2xb_xof</a>, <a class="el" href="group___b_l_a_k_e.html#gafc49173c1d473ada74310f4951399ebc" title="BLAKE hash function (SHA-3 finalist)">blake</a>, <a class="el" href="#ga64579bc51f8a07ebd48064f7e7e70e66" title="BLAKE2xb hash function (static-size version)">digestpp::static_size::blake2xb</a> </dd></dl>
 
 </div>
 </div>
@@ -369,7 +372,7 @@ template&lt;size_t N&gt; </div>
 </div><!-- fragment --></dd></dl>
 <dl class="section user"><dt>Example output:</dt><dd><div class="fragment"><div class="line">ca7a0c9c54b4b93c0bee0aa3a4d63e4f7fb87e3e0a9050522377fde76f0b6c01</div>
 </div><!-- fragment --></dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#ga47975780ffe7d66a274fafb292cbec29" title="BLAKE2xb hash function.">digestpp::blake2xb</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#ga47975780ffe7d66a274fafb292cbec29" title="BLAKE2xb hash function.">digestpp::blake2xb</a>, <a class="el" href="group___b_l_a_k_e.html#ga9ac473046ab07b3ceb0a95cc6d36392b" title="BLAKE hash function (static-size version)">blake</a> </dd></dl>
 
 </div>
 </div>
@@ -404,7 +407,7 @@ template&lt;size_t N&gt; </div>
 </div><!-- fragment --></dd></dl>
 <dl class="section user"><dt>Example output:</dt><dd><div class="fragment"><div class="line">364e84ca4c103df292306c93ebba6f6633d5e9cc8a95e040498e9a012d5ca534</div>
 </div><!-- fragment --></dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="group___kangaroo_twelve.html#ga6bbb5bfec126f8ac26885a14ea760bad" title="KT128 - alias for KangarooTwelve.">kt128</a>, <a class="el" href="group___kangaroo_twelve.html#gac77fd2c57cdfccb9409d6bab5e9edf30" title="KT256 extendable output function.">kt256</a> </dd></dl>
 
 </div>
 </div>
@@ -447,7 +450,7 @@ template&lt;size_t N&gt; </div>
 </div><!-- fragment --></dd></dl>
 <dl class="section user"><dt>Example output:</dt><dd><div class="fragment"><div class="line">e709f8377d21507c166e5dd2279a1f58b290792d65dafcc5647b6e439a974227503c341341572725709b874e95f13a438677aa6f9648467fd341e0f3e5421840</div>
 </div><!-- fragment --></dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#gaef9e48cee90947e400f975c9ca126aee" title="BLAKE2s hash function.">blake2s</a>, <a class="el" href="#gab95d8383d5ea7b1c167f8c735a83fe6a" title="BLAKE2xs in XOF mode.">blake2xs_xof</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#gaef9e48cee90947e400f975c9ca126aee" title="BLAKE2s hash function.">blake2s</a>, <a class="el" href="#gab95d8383d5ea7b1c167f8c735a83fe6a" title="BLAKE2xs in XOF mode.">blake2xs_xof</a>, <a class="el" href="group___b_l_a_k_e.html#gafc49173c1d473ada74310f4951399ebc" title="BLAKE hash function (SHA-3 finalist)">blake</a>, <a class="el" href="#gadb26269e73ee252b5a85fc966caaa5e7" title="BLAKE2xs hash function (static-size version)">digestpp::static_size::blake2xs</a> </dd></dl>
 
 </div>
 </div>
@@ -483,7 +486,7 @@ template&lt;size_t N&gt; </div>
 </div><!-- fragment --></dd></dl>
 <dl class="section user"><dt>Example output:</dt><dd><div class="fragment"><div class="line">e709f8377d21507c166e5dd2279a1f58b290792d65dafcc5647b6e439a974227503c341341572725709b874e95f13a438677aa6f9648467fd341e0f3e5421840</div>
 </div><!-- fragment --></dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#gaef4af42ce803e4dd8adc0d3fa8c44dd6" title="BLAKE2xs hash function.">digestpp::blake2xs</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="#gaef4af42ce803e4dd8adc0d3fa8c44dd6" title="BLAKE2xs hash function.">digestpp::blake2xs</a>, <a class="el" href="group___b_l_a_k_e.html#ga9ac473046ab07b3ceb0a95cc6d36392b" title="BLAKE hash function (static-size version)">blake</a> </dd></dl>
 
 </div>
 </div>
@@ -517,7 +520,7 @@ template&lt;size_t N&gt; </div>
 </div><!-- fragment --></dd></dl>
 <dl class="section user"><dt>Example output:</dt><dd><div class="fragment"><div class="line">0650cde4df888a06eada0f0fecb3c17594304b4a03fdd678182f27db1238b1747e33c34ae539fe2179a7594442b5cc9a7a0f398bb15ac3095a397de6a60061d6</div>
 </div><!-- fragment --></dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classdigestpp_1_1hasher.html" title="Main class template implementing the public API for hashing.">hasher</a>, <a class="el" href="classdigestpp_1_1mixin_1_1blake2__mixin.html" title="Defines additional public functions for BLAKE2 family of algorithms.">mixin::blake2_mixin</a>, <a class="el" href="group___kangaroo_twelve.html#ga26c593701991246fad59e0f71e077f8a" title="KangarooTwelve (K12) extendable output function.">k12</a> </dd></dl>
 
 </div>
 </div>

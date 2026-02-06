@@ -49,7 +49,7 @@ namespace digestpp
  * @code 6a049fed5fc6874acfdc4a08b568a4f8cbac27de933496f031015b38961608a0
  * @endcode
  *
- * @sa hasher
+ * @sa hasher, digestpp::static_size::jh
  */
 typedef hasher<detail::jh_provider<>> jh;
 
@@ -83,7 +83,7 @@ namespace static_size
  * @code 6a049fed5fc6874acfdc4a08b568a4f8cbac27de933496f031015b38961608a0
  * @endcode
  *
- * @sa hasher
+ * @sa hasher, digestpp::jh
  */
 template<size_t N>
 using jh = hasher<detail::jh_provider<N>>;

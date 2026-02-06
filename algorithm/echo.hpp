@@ -57,7 +57,7 @@ namespace digestpp
  * @code 3c3c10b84e818cbddfd71e1aefc6cb9cd7fd1b84acb5765813e716734a97d422
  * @endcode
  *
- * @sa hasher
+ * @sa hasher, digestpp::static_size::echo
  */
 typedef hasher<detail::echo_provider<>, mixin::echo_mixin> echo;
 
@@ -98,7 +98,7 @@ namespace static_size
  * @code 3c3c10b84e818cbddfd71e1aefc6cb9cd7fd1b84acb5765813e716734a97d422
  * @endcode
  *
- * @sa hasher, groestl
+ * @sa hasher, groestl, digestpp::echo
  */
 template<size_t N>
 using echo = hasher<detail::echo_provider<N>, mixin::echo_mixin>;

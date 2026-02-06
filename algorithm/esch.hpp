@@ -51,7 +51,7 @@ namespace digestpp
  * @code d43f87a0fe60fc5925064880c6116c136b6d94fa24a93dffcb35d178c3af932c
  * @endcode
  *
- * @sa hasher, esch256_xof
+ * @sa hasher, esch256_xof, digestpp::static_size::esch
  */
 typedef hasher<detail::esch_provider<512, false>> esch;
 
@@ -138,7 +138,7 @@ namespace static_size
  * @code d43f87a0fe60fc5925064880c6116c136b6d94fa24a93dffcb35d178c3af932c
  * @endcode
  *
- * @sa hasher
+ * @sa hasher, digestpp::esch
  */
 template<size_t N>
 using esch = hasher<detail::esch_provider<512, false, N>>;

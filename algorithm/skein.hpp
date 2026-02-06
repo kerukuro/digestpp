@@ -65,7 +65,7 @@ namespace digestpp
  * @code 054922d4393e36af62143986221555bee407671f6e57631bd7273e215a714833
  * @endcode
  *
- * @sa hasher, mixin::skein_mixin, skein1024_xof
+ * @sa hasher, mixin::skein_mixin, skein1024_xof, digestpp::static_size::skein1024
  */
 typedef hasher<detail::skein_provider<1024, false>, mixin::skein_mixin> skein1024;
 
@@ -113,7 +113,7 @@ typedef hasher<detail::skein_provider<1024, false>, mixin::skein_mixin> skein102
  * @code b3250457e05d3060b1a4bbc1428bc75a3f525ca389aeab96cfa34638d96e492a
  * @endcode
  *
- * @sa hasher, mixin::skein_mixin, skein512_xof
+ * @sa hasher, mixin::skein_mixin, skein512_xof, digestpp::static_size::skein512
  */
 typedef hasher<detail::skein_provider<512, false>, mixin::skein_mixin> skein512;
 
@@ -161,7 +161,7 @@ typedef hasher<detail::skein_provider<512, false>, mixin::skein_mixin> skein512;
  * @code f8138e72cdd9e11cf09e4be198c234acb0d21a9f75f936e989cf532f1fa9f4fb21d255811f0f1592fb3617d04704add875ae7bd16ddbbeaed4eca6eb9675d2c6
  * @endcode
  *
- * @sa hasher, mixin::skein_mixin, skein256_xof
+ * @sa hasher, mixin::skein_mixin, skein256_xof, digestpp::static_size::skein256
  */
 typedef hasher<detail::skein_provider<256, false>, mixin::skein_mixin> skein256;
 
@@ -309,7 +309,7 @@ namespace static_size
  * @code 054922d4393e36af62143986221555bee407671f6e57631bd7273e215a714833
  * @endcode
  *
- * @sa hasher, mixin::skein_mixin, skein1024_xof
+ * @sa hasher, mixin::skein_mixin, skein1024_xof, digestpp::skein1024
  */
 template<size_t N>
 using skein1024 = hasher<detail::skein_provider<1024, false, N>, mixin::skein_mixin>;
@@ -377,7 +377,7 @@ using skein512 = hasher<detail::skein_provider<512, false, N>, mixin::skein_mixi
  * @code f8138e72cdd9e11cf09e4be198c234acb0d21a9f75f936e989cf532f1fa9f4fb21d255811f0f1592fb3617d04704add875ae7bd16ddbbeaed4eca6eb9675d2c6
  * @endcode
  *
- * @sa hasher, mixin::skein_mixin, skein256_xof
+ * @sa hasher, mixin::skein_mixin, skein256_xof, digestpp::skein256
  */
 template<size_t N>
 using skein256 = hasher<detail::skein_provider<256, false, N>, mixin::skein_mixin>;

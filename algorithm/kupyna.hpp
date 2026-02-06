@@ -52,7 +52,7 @@ namespace digestpp
  * @code 996899f2d7422ceaf552475036b2dc120607eff538abf2b8dff471a98a4740c6
  * @endcode
  *
- * @sa hasher, groestl
+ * @sa hasher, groestl, digestpp::static_size::kupyna
  */
 
 typedef hasher<detail::kupyna_provider<>> kupyna;
@@ -87,7 +87,7 @@ namespace static_size
  * @code 996899f2d7422ceaf552475036b2dc120607eff538abf2b8dff471a98a4740c6
  * @endcode
  *
- * @sa hasher, groestl
+ * @sa hasher, groestl, digestpp::kupyna
  */
 
 template<size_t N>

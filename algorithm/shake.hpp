@@ -46,7 +46,7 @@ namespace digestpp
  * @code f4202e3c5852f9182a0430fd8144f0a74b95e7417ecae17db0f8cfeed0e3e66e
  * @endcode
  *
- * @sa hasher, cshake128, kmac128
+ * @sa hasher, cshake128, kmac128, k12
  */
 typedef hasher<detail::shake_provider<128, 24>> shake128;
 
@@ -77,7 +77,7 @@ typedef hasher<detail::shake_provider<128, 24>> shake128;
  * @code 2f671343d9b2e1604dc9dcf0753e5fe15c7c64a0d283cbbf722d411a0e36f6ca
  * @endcode
  *
- * @sa hasher, cshake256, kmac256
+ * @sa hasher, cshake256, kmac256, m14
  */
 typedef hasher<detail::shake_provider<256, 24>> shake256;
 
@@ -117,7 +117,7 @@ typedef hasher<detail::shake_provider<256, 24>> shake256;
  * @code 5b831bfe752f7f05d81f18f0e83a92eb48b9e3d460c10022ecb4852aa8b1f9d4
  * @endcode
  *
- * @sa hasher, shake128, mixin::cshake_mixin
+ * @sa hasher, shake128, mixin::cshake_mixin, k12
  */
 typedef hasher<detail::shake_provider<128, 24>, mixin::cshake_mixin> cshake128;
 
@@ -156,7 +156,7 @@ typedef hasher<detail::shake_provider<128, 24>, mixin::cshake_mixin> cshake128;
  * @code bcebde2c2e18f6efd99ee9e0def1383e86595d72e49b4754f7f727a962c3cd3d
  * @endcode
  *
- * @sa hasher, shake256, mixin::cshake_mixin
+ * @sa hasher, shake256, mixin::cshake_mixin, m14
  */
 typedef hasher<detail::shake_provider<256, 24>, mixin::cshake_mixin> cshake256;
 
