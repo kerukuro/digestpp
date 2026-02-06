@@ -13,6 +13,7 @@ This code is written by kerukuro and released into public domain.
 #include <sstream>
 #include <cstring>
 #include <iomanip>
+#include <cstdint>
 
 #include "detail/traits.hpp"
 #include "detail/stream_width_fixer.hpp"
@@ -40,7 +41,8 @@ class hasher : public Mixin<HashProvider>
 	/**
 	 * \brief Default constructor
 	 *
-	 * \available_if * HashProvider is a hash function with fixed output size, OR
+	 * \available_if
+	 * * HashProvider is a hash function with fixed output size, OR
 	 * * HashProvider is a hash function with sensible default output size, OR
 	 * * HashProvider is an extendable output function (XOF)
 	 */
@@ -73,7 +75,7 @@ class hasher : public Mixin<HashProvider>
 	 * \param[in] len Size of data to absorb (in bytes)
 	 * \return Reference to *this
 	 *
-	 * @par Example:\n
+	 * @par Example:
 	 * @code // Calculate SHA-512/256 digest of a C array and output it in hex format
 	 * unsigned char c[32];
 	 * std::iota(c, c + sizeof(c), 0);
@@ -92,7 +94,7 @@ class hasher : public Mixin<HashProvider>
 	 * \param[in] arr Array to data to absorb
 	 * \return Reference to *this
 	 *
-	 * @par Example:\n
+	 * @par Example:
 	 * @code // Calculate SHA-512/256 digest of a C array and output it in hex format
 	 * std::array<unsigned char, 32> c;
 	 * std::iota(c.data(), c.size(), 0);
@@ -123,7 +125,7 @@ class hasher : public Mixin<HashProvider>
 	 * \brief Absorbs bytes from std::string
 	 * \param[in] str String to absorb
 	 * \return Reference to *this
-	 * @par Example:\n
+	 * @par Example:
 	 * @code // Calculate BLAKE2b-256 digest from an std::string and output it in hex format
 	 * std::string str = "The quick brown fox jumps over the lazy dog";
 	 * std::cout << digestpp::blake2b(256).absorb(str).hexdigest() << std::endl;
@@ -140,7 +142,7 @@ class hasher : public Mixin<HashProvider>
 	 * \brief Absorbs bytes from std::istream
 	 * \param[in] istr Stream to absorb
 	 * \return Reference to *this
-	 * @par Example:\n
+	 * @par Example:
 	 * @code // Calculate SHA-256 digest of a file and output it in hex format
 	 * std::ifstream file("filename", std::ios_base::in|std::ios_base::binary);
 	 * std::cout << digestpp::sha256().absorb(file).hexdigest() << std::endl;
@@ -169,7 +171,7 @@ class hasher : public Mixin<HashProvider>
 	 * \param[in] end End iterator
 	 * \return Reference to *this
 	 *
-	 * @par Example:\n
+	 * @par Example:
 	 * @code // Calculate SHA-512 digest of a vector and output it in hex format
      * std::vector<unsigned char> v(100);
 	 * std::iota(v.begin(), v.end(), 0);
@@ -253,7 +255,7 @@ class hasher : public Mixin<HashProvider>
 	 *
 	 * \param[in] len Size of data to squeeze (in bytes)
 	 * \param[out] it output iterator to a byte container
-	 * @par Example:\n
+	 * @par Example:
 	 * @code // Generate long output using SHAKE-256 extendable output function using multiple calls to squeeze()
 	 * std::vector<unsigned char> v;
 	 * digestpp::shake256 xof;
@@ -283,7 +285,7 @@ class hasher : public Mixin<HashProvider>
 	 *
 	 * \param[in] len Size of data to squeeze (in bytes)
 	 * \return Calculated digest as a hexademical string
-	 * @par Example:\n
+	 * @par Example:
 	 * @code // Generate 64-byte digest using customizable cSHAKE-256 algorithm and print it in hex format
 	 * digestpp::cshake256 xof;
 	 * xof.set_customization("My Customization");
@@ -311,7 +313,7 @@ class hasher : public Mixin<HashProvider>
 	 * \param[in] len Size of the buffer
 	 * \throw std::runtime_error if the buffer size is not enough to fit the calculated digest
 	 * (fixed by the algorithm or specified in the hasher constructor).
-	 * @par Example:\n
+	 * @par Example:
 	 * @code // Output binary digest to a raw C array
 	 * unsigned char buf[32];
 	 * digestpp::sha3(256).absorb("The quick brown fox jumps over the lazy dog").digest(buf, sizeof(buf));
@@ -337,7 +339,7 @@ class hasher : public Mixin<HashProvider>
 	 * \available_if HashProvider is a hash function (not XOF)
 	 *
 	 * \param[out] it Output iterator to a byte container.
-	 * @par Example:\n
+	 * @par Example:
 	 * @code // Output binary SHA3-256 digest to a vector
 	 * vector<unsigned char> v;
 	 * digestpp::sha3(256).absorb("The quick brown fox jumps over the lazy dog").digest(back_inserter(v));
@@ -361,7 +363,7 @@ class hasher : public Mixin<HashProvider>
 	 * \available_if HashProvider is a hash function (not XOF)
 	 *
 	 * \return Calculated digest as a hexademical string
-	 * @par Example:\n
+	 * @par Example:
 	 * @code // Calculate BLAKE2b digest from a double quoted string and output it in hex format
 	 * std::cout << digestpp::blake2b().absorb("The quick brown fox jumps over the lazy dog").hexdigest() << std::endl;
 	 * @endcode

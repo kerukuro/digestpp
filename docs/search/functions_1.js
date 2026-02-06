@@ -1,4 +1,9 @@
 var searchData=
 [
-  ['digest',['digest',['../classdigestpp_1_1hasher.html#a3c1c07aa70580501eb59149956b5ee33',1,'digestpp::hasher::digest(T *buf, size_t len) const'],['../classdigestpp_1_1hasher.html#a933121da1174c66deb2961ccb7136433',1,'digestpp::hasher::digest(OI it) const']]]
+  ['basic_5fself_5ftest_0',['basic_self_test',['../test_8cc.html#ac286ca31b61c753bd2d7d21edf57819b',1,'test.cc']]],
+  ['bitswap_1',['bitswap',['../namespacedigestpp_1_1detail_1_1jh__functions.html#a485be8ff4e2ea89bdaafdda17d229980',1,'digestpp::detail::jh_functions::bitswap(uint64_t &amp;x, uint64_t mask, int shift)'],['../namespacedigestpp_1_1detail_1_1jh__functions.html#a41be4e4d88b83f7d220dd4cc701bae89',1,'digestpp::detail::jh_functions::bitswap(std::array&lt; uint64_t, 16 &gt; &amp;H, uint64_t mask, int shift)']]],
+  ['blake2_5fprovider_2',['blake2_provider',['../classdigestpp_1_1detail_1_1blake2__provider.html#a86cb26d79b16f9143b919c25c4e7ed18',1,'digestpp::detail::blake2_provider::blake2_provider(size_t hashsize=N)'],['../classdigestpp_1_1detail_1_1blake2__provider.html#a229dafdb988b74fdabcf11b067dab2a3',1,'digestpp::detail::blake2_provider::blake2_provider()']]],
+  ['blake_5fprovider_3',['blake_provider',['../classdigestpp_1_1detail_1_1blake__provider.html#a7c02e131537beb88340c8b98954ad3a9',1,'digestpp::detail::blake_provider::blake_provider(size_t hashsize)'],['../classdigestpp_1_1detail_1_1blake__provider.html#a0ea7419f6aefc1833d5e59d7dcb0ec1f',1,'digestpp::detail::blake_provider::blake_provider()']]],
+  ['bytepad_4',['bytepad',['../namespacedigestpp_1_1detail_1_1kmac__functions.html#a9c376c27e6c46bbef64593aa0bf6cf79',1,'digestpp::detail::kmac_functions']]],
+  ['byteswap_5',['byteswap',['../namespacedigestpp_1_1detail.html#a05da3640834eeb3c2db6addc6226b0e1',1,'digestpp::detail::byteswap(uint16_t val)'],['../namespacedigestpp_1_1detail.html#a40b9c8e636b3b837b8d472812533754f',1,'digestpp::detail::byteswap(uint32_t val)'],['../namespacedigestpp_1_1detail.html#ac9de9a21edb24656a8bc028089b35300',1,'digestpp::detail::byteswap(uint64_t val)']]]
 ];

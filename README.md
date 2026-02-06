@@ -10,72 +10,72 @@ Just copy the `digestpp` folder to your project or include path and `#include <d
 
 ## Examples
 Calculate BLAKE2b digest from a double quoted string and output it in hex format:
-````C++
+````cpp
 std::cout << digestpp::blake2b().absorb("The quick brown fox jumps over the lazy dog").hexdigest();
 ````
 Calculate BLAKE2b-256 digest from an std::string and output it in hex format:
-````C++
+````cpp
 std::string str = "The quick brown fox jumps over the lazy dog";
 // with digest length specified at runtime
 std::cout << digestpp::blake2b(256).absorb(str).hexdigest();
 // OR with digest length specified at compile-time
-std::cout << digestpp::static_length::blake2b<256>().absorb(str).hexdigest();
+std::cout << digestpp::static_size::blake2b<256>().absorb(str).hexdigest();
 ````
 Calculate SHA-512 digest of a vector<unsigned char> and output it in hex format:
-````C++
+````cpp
 std::vector<unsigned char> v;
 // ...fill the vector
 std::cout << digestpp::sha512().absorb(v.begin(), v.end()).hexdigest();
 ````
 Calculate SHA-512/256 digest of a C array and output it in hex format:
-````C++
+````cpp
 unsigned char c[32];
 // ...fill the array
 // with digest length specified at runtime
 std::cout << digestpp::sha512(256).absorb(c, sizeof(c)).hexdigest();
 // OR with digest length specified at compile-time
-std::cout << digestpp::static_length::sha512<256>().absorb(c, sizeof(c)).hexdigest();
+std::cout << digestpp::static_size::sha512<256>().absorb(c, sizeof(c)).hexdigest();
 ````
 Calculate SHA-256 digest of a file and output it in hex format:
-````C++
+````cpp
 std::ifstream file("filename", std::ios_base::in|std::ios_base::binary);
 std::cout << digestpp::sha256().absorb(file).hexdigest();
 ````
 Generate SHA3-224 digest using multiple calls to absorb():
-````C++
+````cpp
 // with digest length specified at runtime
 std::cout << digestpp::sha3(224).absorb("The quick brown fox ").absorb("jumps over the lazy dog").hexdigest();
 // OR with digest length specified at compile-time
-std::cout << digestpp::static_length::sha3<224>().absorb("The quick brown fox ").absorb("jumps over the lazy dog").hexdigest();
+std::cout << digestpp::static_size::sha3<224>().absorb("The quick brown fox ").absorb("jumps over the lazy dog").hexdigest();
 ````
 Output binary digest to a vector<unsigned char>:
-````C++
+````cpp
 std::vector<unsigned char> v;
 // with digest length specified at runtime
 digestpp::sha3(256).absorb("The quick brown fox jumps over the lazy dog").digest(std::back_inserter(v));
 // OR with digest length specified at compile-time
-digestpp::static_length::sha3<256>().absorb("The quick brown fox jumps over the lazy dog").digest(std::back_inserter(v));
+digestpp::static_size::sha3<256>().absorb("The quick brown fox jumps over the lazy dog").digest(std::back_inserter(v));
 ````
 Output binary digest to a raw C array:
-````C++
+````cpp
 unsigned char buf[32];
 // with digest length specified at runtime
 digestpp::sha3(256).absorb("The quick brown fox jumps over the lazy dog").digest(buf, sizeof(buf));
 // OR with digest length specified at compile-time
-digestpp::static_length::sha3<256>().absorb("The quick brown fox jumps over the lazy dog").digest(buf, sizeof(buf));
+digestpp::static_size::sha3<256>().absorb("The quick brown fox jumps over the lazy dog").digest(buf, sizeof(buf));
 ````
 Output binary digest to a stream:
-````C++
+````cpp
 std::string str = "The quick brown fox jumps over the lazy dog";
 std::string output;
 std::ostringstream os(output);
 // with digest length specified at runtime
 digestpp::sha3(256).absorb(str).digest(std::ostream_iterator<char>(os, ""));
 // OR with digest length specified at compile-time
-digestpp::static_length::sha3<256>().absorb(str).digest(std::ostream_iterator<char>(os, ""));
+digestpp::static_size::sha3<256>().absorb(str).digest(std::ostream_iterator<char>(os, ""));
 ````
 Generate long output using SHAKE-256 extendable output function using multiple calls to squeeze():
-````C++
+````cpp
 std::vector<unsigned char> v;
 digestpp::shake256 xof;
 xof.absorb("The quick brown fox jumps over the lazy dog");
@@ -85,7 +85,7 @@ xof.squeeze(1000, std::back_inserter(v));
 std::cout << "Squeezed " << v.size() << " bytes." << std::endl;
 ````
 Generate 64-byte digest using customizable cSHAKE-256 algorithm and print it in hex format:
-````C++
+````cpp
 digestpp::cshake256 xof;
 xof.set_customization("Customization");
 std::cout << xof.absorb("The quick brown fox jumps over the lazy dog").hexsqueeze(64);
@@ -99,7 +99,7 @@ It has two template parameters:
 - HashProvider is a class implementing the algorithm via the traditional init/update/final interface. We provide our own implementations of hash functions listed in the next section, but using the traditional interface allows anyone to trivially implement the providers as wrappers around popular libraries, such as OpenSSL, Crypto++, or Botan.
 - Mixin is a class template which can be used to inject additional functions into the public API of the hasher, for example for setting the customization string for cSHAKE, the salt for BLAKE, etc.
 
-````C++
+````cpp
 template<class HashProvider, template <class> class Mixin = detail::null_mixin>
 class hasher : public Mixin<HashProvider>
 {
@@ -138,19 +138,19 @@ public:
     template<typename IT>
     inline hasher& absorb(IT begin, IT end);
 
-    // In case HashProvider is an extendable output function, squeeze <len> bytes from absorbed data
+    // In case HashProvider is an extendable output function, squeeze len bytes from absorbed data
     // into a user-provided preallocated buffer.
     template<typename T, typename H=HashProvider,
         typename std::enable_if<detail::is_byte<T>::value && detail::is_xof<H>::value>::type* = nullptr>
     inline void squeeze(T* buf, size_t len);
 
-    // In case HashProvider is an extendable output function, squeeze <len> bytes from absorbed data
+    // In case HashProvider is an extendable output function, squeeze len bytes from absorbed data
     // and write them to the output iterator.
     template<typename OI, typename H=HashProvider,
         typename std::enable_if<detail::is_xof<H>::value>::type* = nullptr>
     inline void squeeze(size_t len, OI it);
 
-    // In case HashProvider is an extendable output function, squeeze <len> bytes from absorbed data
+    // In case HashProvider is an extendable output function, squeeze len bytes from absorbed data
     // and return them as a hex string.
     template<typename H=HashProvider, typename std::enable_if<detail::is_xof<H>::value>::type* = nullptr>
     inline std::string hexsqueeze(size_t len);
@@ -177,7 +177,7 @@ public:
 ````
 
 Individual hash algorithms are defined by typedefs, e.g.
-````C++
+````cpp
     typedef hasher<detail::sha3_provider> sha3;
 
     typedef hasher<detail::blake_provider, detail::blake_mixin> blake;
@@ -189,60 +189,60 @@ Individual hash algorithms are defined by typedefs, e.g.
 
 ### Hash functions
 
-Typedef|Description|Supported output sizes|Optional parameters
--------|-----------|----------------------|-------------------
-ascon|Ascon (NIST SP 800-232)|256|-
-blake|Original BLAKE algorithm|224, 256, 384, 512|salt
-blake2b|BLAKE2b|8-512|salt, personalization, key
-blake2s|BLAKE2s|8-256|salt, personalization, key
-blake2xb|BLAKE2xb|arbitrary|salt, personalization, key
-blake2xs|BLAKE2xs|arbitrary|salt, personalization, key
-echo|Echo|8-512|salt
-esch|Esch|256, 384|-
-groestl|Grøstl|8-512|-
-jh|JH|8-512|-
-kmac128|KMAC128|arbitrary|key, customization
-kmac256|KMAC256|arbitrary|key, customization
-kupyna|Kupyna|256, 512|-
-lsh256|LSH-256|8-256|-
-lsh512|LSH-512|8-512|-
-md5|MD5|128|-
-sha1|SHA-1|160|-
-sha224|SHA-224|224|-
-sha256|SHA-256|256|-
-sha384|SHA-384|384|-
-sha512|SHA-512|8-512|-
-sha3|SHA-3|224, 256, 384, 512|-
-skein256|Skein256|arbitrary|personalization, key, nonce
-skein512|Skein512|arbitrary|personalization, key, nonce
-skein1024|Skein1024|arbitrary|personalization, key, nonce
-sm3|SM3|256|-
-streebog|Streebog|256, 512|-
-whirlpool|Whirlpool|512|-
+Dynamic Size Variant|Static Size Variant|Description|Supported output sizes|Optional parameters
+-------|-------|-----------|----------------------|-------------------
+N/A|digestpp::ascon_hash|Ascon (NIST SP 800-232)|256|-
+digestpp::blake|digestpp::static_size::blake|Original BLAKE algorithm|224, 256, 384, 512|salt
+digestpp::blake2b|digestpp::static_size::blake2b|BLAKE2b|8-512|salt, personalization, key
+digestpp::blake2s|digestpp::static_size::blake2s|BLAKE2s|8-256|salt, personalization, key
+digestpp::blake2xb|digestpp::static_size::blake2xb|BLAKE2xb|arbitrary|salt, personalization, key
+digestpp::blake2xs|digestpp::static_size::blake2xs|BLAKE2xs|arbitrary|salt, personalization, key
+digestpp::echo|digestpp::static_size::echo|Echo|8-512|salt
+digestpp::esch|digestpp::static_size::esch|Esch|256, 384|-
+digestpp::groestl|digestpp::static_size::groestl|Grøstl|8-512|-
+digestpp::jh|digestpp::static_size::jh|JH|8-512|-
+digestpp::kmac128|digestpp::static_size::kmac128|KMAC128|arbitrary|key, customization
+digestpp::kmac256|digestpp::static_size::kmac256|KMAC256|arbitrary|key, customization
+digestpp::kupyna|digestpp::static_size::kupyna|Kupyna|256, 512|-
+digestpp::lsh256|digestpp::static_size::lsh256|LSH-256|8-256|-
+digestpp::lsh512|digestpp::static_size::lsh512|LSH-512|8-512|-
+N/A|digestpp::md5|MD5|128|-
+N/A|digestpp::sha1|SHA-1|160|-
+N/A|digestpp::sha224|SHA-224|224|-
+N/A|digestpp::sha256|SHA-256|256|-
+N/A|digestpp::sha384|SHA-384|384|-
+digestpp::sha512|digestpp::static_size::sha512|SHA-512|8-512|-
+digestpp::sha3|digestpp::static_size::sha3|SHA-3|224, 256, 384, 512|-
+digestpp::skein256|digestpp::static_size::skein256|Skein256|arbitrary|personalization, key, nonce
+digestpp::skein512|digestpp::static_size::skein512|Skein512|arbitrary|personalization, key, nonce
+digestpp::skein1024|digestpp::static_size::skein1024|Skein1024|arbitrary|personalization, key, nonce
+N/A|digestpp::sm3|SM3|256|-
+digestpp::streebog|digestpp::static_size::streebog|Streebog|256, 512|-
+N/A|digestpp::whirlpool|Whirlpool|512|-
 
 ### Extendable output functions
 
 Typedef|Description|Optional parameters
 -------|-----------|-------------------
-ascon_xof128|Ascon-XOF128|-
-ascon_cxof128|Ascon-CXOF128|customization
-blake2xb_xof|BLAKE2xb in XOF mode|salt, personalization, key
-blake2xs_xof|BLAKE2xs in XOF mode|salt, personalization, key
-esch256_xof|XOEsch256|-
-esch384_xof|XOEsch384|-
-k12|KangarooTwelve|customization
-kt128|KangarooTwelve (alias for k12)|customization
-kt256|256bit KangarooTwelve|customization
-m14|MarsupilamiFourteen|customization
-shake128|SHAKE-128|-
-shake256|SHAKE-256|-
-cshake128|cSHAKE-128|function name, customization
-cshake256|cSHAKE-256|function name, customization
-kmac128_xof|KMAC128 in XOF mode|key, customization
-kmac256_xof|KMAC256 in XOF mode|key, customization
-skein256_xof|Skein256 in XOF mode|personalization, key, nonce
-skein512_xof|Skein512 in XOF mode|personalization, key, nonce
-skein1024_xof|Skein1024 in XOF mode|personalization, key, nonce
+digestpp::ascon_xof128|Ascon-XOF128|-
+digestpp::ascon_cxof128|Ascon-CXOF128|customization
+digestpp::blake2xb_xof|BLAKE2xb in XOF mode|salt, personalization, key
+digestpp::blake2xs_xof|BLAKE2xs in XOF mode|salt, personalization, key
+digestpp::esch256_xof|XOEsch256|-
+digestpp::esch384_xof|XOEsch384|-
+digestpp::k12|KangarooTwelve|customization
+digestpp::kt128|KangarooTwelve (alias for k12)|customization
+digestpp::kt256|256bit KangarooTwelve|customization
+digestpp::m14|MarsupilamiFourteen|customization
+digestpp::shake128|SHAKE-128|-
+digestpp::shake256|SHAKE-256|-
+digestpp::cshake128|cSHAKE-128|function name, customization
+digestpp::cshake256|cSHAKE-256|function name, customization
+digestpp::kmac128_xof|KMAC128 in XOF mode|key, customization
+digestpp::kmac256_xof|KMAC256 in XOF mode|key, customization
+digestpp::skein256_xof|Skein256 in XOF mode|personalization, key, nonce
+digestpp::skein512_xof|Skein512 in XOF mode|personalization, key, nonce
+digestpp::skein1024_xof|Skein1024 in XOF mode|personalization, key, nonce
 
 ## Design rationale in questions and answers
 
@@ -256,7 +256,7 @@ Q: What is the difference between `digest()` and `squeeze()`?
 A. `digest()` is used with hash functions; it retrieves a digest of a certain length (defined by the algorithm or specified in the constructor). Calling `digest()` or `hexdigest()` does not change the internal state, so these functions can be called more than once and will produce the same output. `squeeze()` is used with XOF functions; it can be called multiple times to squeeze an arbitrary number of output bytes. After each invocation of `squeeze()`, the internal state changes so that the next call to `squeeze()` will generate different (additional) output bytes.
 
 
-Q: For hash functions with variable output size, why do you provide two options: with output size as a template parameter, e.g. `digestpp::static_length::sha3<256>()`, and with output size specified at runtime, e.g. `digestpp::sha3(256)`?
+Q: For hash functions with variable output size, why do you provide two options: with output size as a template parameter, e.g. `digestpp::static_size::sha3<256>()`, and with output size specified at runtime, e.g. `digestpp::sha3(256)`?
 
 A: In some usage scenarios, the required digest size is not known at compile time. One simple example is the Argon2 password hashing algorithm, which requires us to hash its state using BLAKE2b with a dynamically calculated digest size. We can't just use the largest digest size and truncate the result because most hash functions (unlike XOFs) produce completely different digests depending on the requested output size.
 

@@ -18,7 +18,7 @@ void example2()
 	// with digest length specified at runtime
 	std::cout << digestpp::blake2b(256).absorb(str).hexdigest();
 	// OR with digest length specified at compile-time
-	std::cout << digestpp::static_length::blake2b<256>().absorb(str).hexdigest();
+	std::cout << digestpp::static_size::blake2b<256>().absorb(str).hexdigest();
 }
 
 // Calculate SHA-512 digest of a vector and output it in hex format
@@ -37,7 +37,7 @@ void example4()
 	// with digest length specified at runtime
 	std::cout << digestpp::sha512(256).absorb(c, sizeof(c)).hexdigest();
 	// OR with digest length specified at compile-time
-	std::cout << digestpp::static_length::sha512<256>().absorb(c, sizeof(c)).hexdigest();
+	std::cout << digestpp::static_size::sha512<256>().absorb(c, sizeof(c)).hexdigest();
 }
 
 // Calculate SHA-256 digest of a file and output it in hex format
@@ -53,7 +53,7 @@ void example6()
 	// with digest length specified at runtime
 	std::cout << digestpp::sha3(224).absorb("The quick brown fox ").absorb("jumps over the lazy dog").hexdigest();
 	// OR with digest length specified at compile-time
-	std::cout << digestpp::static_length::sha3<224>().absorb("The quick brown fox ").absorb("jumps over the lazy dog").hexdigest();
+	std::cout << digestpp::static_size::sha3<224>().absorb("The quick brown fox ").absorb("jumps over the lazy dog").hexdigest();
 }
 
 // Output binary digest to a vector
@@ -63,7 +63,7 @@ void example7()
 	// with digest length specified at runtime
 	digestpp::sha3(256).absorb("The quick brown fox jumps over the lazy dog").digest(std::back_inserter(v));
 	// OR with digest length specified at compile-time
-	digestpp::static_length::sha3<256>().absorb("The quick brown fox jumps over the lazy dog").digest(std::back_inserter(v));
+	digestpp::static_size::sha3<256>().absorb("The quick brown fox jumps over the lazy dog").digest(std::back_inserter(v));
 }
 
 // Output binary digest to a raw C array
@@ -73,7 +73,7 @@ void example8()
 	// with digest length specified at runtime
 	digestpp::sha3(256).absorb("The quick brown fox jumps over the lazy dog").digest(buf, sizeof(buf));
 	// OR with digest length specified at compile-time
-	digestpp::static_length::sha3<256>().absorb("The quick brown fox jumps over the lazy dog").digest(buf, sizeof(buf));
+	digestpp::static_size::sha3<256>().absorb("The quick brown fox jumps over the lazy dog").digest(buf, sizeof(buf));
 }
 
 // Output binary digest to a stream
@@ -85,7 +85,7 @@ void example9()
 	// with digest length specified at runtime
 	digestpp::sha3(256).absorb(str).digest(std::ostream_iterator<char>(os, ""));
 	// OR with digest length specified at compile-time
-	digestpp::static_length::sha3<256>().absorb(str).digest(std::ostream_iterator<char>(os, ""));
+	digestpp::static_size::sha3<256>().absorb(str).digest(std::ostream_iterator<char>(os, ""));
 }
 
 // Generate long output using SHAKE-256 extendable output function using multiple calls to squeeze()
