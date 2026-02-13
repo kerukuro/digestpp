@@ -178,342 +178,386 @@ $(function(){ initResizable(false); });
 </div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
 <div class="foldopen" id="foldopen00075" data-start="{" data-end="}">
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#adf2eda88e9a159b69ed1527291ed216b">   75</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#adf2eda88e9a159b69ed1527291ed216b">initH</a>(std::array&lt;uint32_t, 8&gt;&amp; H)</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a0e5960c2f7639e583a4b71f3503d8c0e">   75</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a0e5960c2f7639e583a4b71f3503d8c0e">initH</a>(std::array&lt;uint32_t, 8&gt;&amp; H, uint8_t fanout)</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    {</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        memcpy(&amp;H[0], <a class="code hl_struct" href="structdigestpp_1_1detail_1_1blake2s__constants.html">blake2s_constants&lt;void&gt;::IV</a>, 32);</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        H[0] ^= 0x01010000ULL;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    }</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>        <span class="keywordflow">if</span> (!fanout)</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            H[0] ^= 0x01010000ULL;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    }</div>
 </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="foldopen" id="foldopen00081" data-start="{" data-end="}">
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno"><a class="line" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a58ce9c0111d36e3b3e5468458543650b">   81</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#adf2eda88e9a159b69ed1527291ed216b">initH</a>(std::array&lt;uint64_t, 8&gt;&amp; H)</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    {</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        memcpy(&amp;H[0], <a class="code hl_struct" href="structdigestpp_1_1detail_1_1blake2b__constants.html">blake2b_constants&lt;void&gt;::IV</a>, 64);</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        H[0] ^= 0x0000000001010000ULL;</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a4db5fb0cc3b516f53985bdd564fa5065">   82</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a0e5960c2f7639e583a4b71f3503d8c0e">initH</a>(std::array&lt;uint64_t, 8&gt;&amp; H, uint8_t fanout)</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    {</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        memcpy(&amp;H[0], <a class="code hl_struct" href="structdigestpp_1_1detail_1_1blake2b__constants.html">blake2b_constants&lt;void&gt;::IV</a>, 64);</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordflow">if</span> (!fanout)</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            H[0] ^= 0x0000000001010000ULL;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    }</div>
 </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="foldopen" id="foldopen00087" data-start="{" data-end="}">
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno"><a class="line" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad56e731d953585c4316b677806a795c0">   87</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad56e731d953585c4316b677806a795c0">initX</a>(std::array&lt;uint32_t, 8&gt;&amp; H, <span class="keywordtype">size_t</span> hs, <span class="keywordtype">size_t</span> processed, <span class="keywordtype">size_t</span> xoffset, uint32_t rhs)</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    {</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        memcpy(&amp;H[0], <a class="code hl_struct" href="structdigestpp_1_1detail_1_1blake2s__constants.html">blake2s_constants&lt;void&gt;::IV</a>, 32);</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        H[0] ^= (rhs == std::numeric_limits&lt;uint32_t&gt;::max() ? <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(32) : std::min(hs - processed, <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(32)));</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        H[1] ^= 0x00000020;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        H[2] ^= xoffset;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        H[3] ^= 0x20000000;</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        H[3] ^= <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(rhs);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="foldopen" id="foldopen00089" data-start="{" data-end="}">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad56e731d953585c4316b677806a795c0">   89</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad56e731d953585c4316b677806a795c0">initX</a>(std::array&lt;uint32_t, 8&gt;&amp; H, <span class="keywordtype">size_t</span> hs, <span class="keywordtype">size_t</span> processed, <span class="keywordtype">size_t</span> xoffset, uint32_t rhs)</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        memcpy(&amp;H[0], <a class="code hl_struct" href="structdigestpp_1_1detail_1_1blake2s__constants.html">blake2s_constants&lt;void&gt;::IV</a>, 32);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        H[0] ^= (rhs == std::numeric_limits&lt;uint32_t&gt;::max() ? <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(32) : std::min(hs - processed, <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(32)));</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        H[1] ^= 0x00000020;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        H[2] ^= xoffset;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        H[3] ^= 0x20000000;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        H[3] ^= <span class="keyword">static_cast&lt;</span>uint16_t<span class="keyword">&gt;</span>(rhs);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    }</div>
 </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="foldopen" id="foldopen00097" data-start="{" data-end="}">
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a4a0339a510ccde7e2b493ed1dd5960fa">   97</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad56e731d953585c4316b677806a795c0">initX</a>(std::array&lt;uint64_t, 8&gt;&amp; H, <span class="keywordtype">size_t</span> hs, <span class="keywordtype">size_t</span> processed, <span class="keywordtype">size_t</span> xoffset, uint64_t rhs)</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    {</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        memcpy(&amp;H[0], <a class="code hl_struct" href="structdigestpp_1_1detail_1_1blake2b__constants.html">blake2b_constants&lt;void&gt;::IV</a>, 64);</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        H[0] ^= (rhs == std::numeric_limits&lt;uint64_t&gt;::max() ? <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(64) : std::min(hs - processed, <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(64)));</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        H[0] ^= 0x0000004000000000ULL;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        H[1] ^= xoffset;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        H[1] ^= rhs &lt;&lt; 32;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        H[2] ^= 0x0000000000004000ULL;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    }</div>
-</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>}</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="foldopen" id="foldopen00099" data-start="{" data-end="}">
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno"><a class="line" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a4a0339a510ccde7e2b493ed1dd5960fa">   99</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad56e731d953585c4316b677806a795c0">initX</a>(std::array&lt;uint64_t, 8&gt;&amp; H, <span class="keywordtype">size_t</span> hs, <span class="keywordtype">size_t</span> processed, <span class="keywordtype">size_t</span> xoffset, uint64_t rhs)</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>        memcpy(&amp;H[0], <a class="code hl_struct" href="structdigestpp_1_1detail_1_1blake2b__constants.html">blake2b_constants&lt;void&gt;::IV</a>, 64);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        H[0] ^= (rhs == std::numeric_limits&lt;uint64_t&gt;::max() ? <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(64) : std::min(hs - processed, <span class="keyword">static_cast&lt;</span><span class="keywordtype">size_t</span><span class="keyword">&gt;</span>(64)));</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        H[0] ^= 0x0000004000000000ULL;</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        H[1] ^= xoffset;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        H[1] ^= rhs &lt;&lt; 32;</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        H[2] ^= 0x0000000000004000ULL;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    }</div>
 </div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, blake2_type type, <span class="keywordtype">size_t</span> HS = 0&gt;</div>
-<div class="foldopen" id="foldopen00110" data-start="{" data-end="};">
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html">  110</a></span><span class="keyword">class </span><a class="code hl_class" href="classdigestpp_1_1detail_1_1blake2__provider.html">blake2_provider</a></div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>{</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a2967598e68ace4d357e82a382e6ae023">  113</a></span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> <a class="code hl_struct" href="structdigestpp_1_1detail_1_1is__xof.html">is_xof</a> = type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1cad113b01d608d36d99c6b7eae8cdd61de">blake2_type::xof</a>;</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    template&lt;size_t hss=HS, typename std::enable_if&lt;hss == 0&gt;::type* = <span class="keyword">nullptr</span>&gt;</div>
-<div class="foldopen" id="foldopen00116" data-start="{" data-end="}">
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a86cb26d79b16f9143b919c25c4e7ed18">  116</a></span>    <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a86cb26d79b16f9143b919c25c4e7ed18">blake2_provider</a>(<span class="keywordtype">size_t</span> hashsize = N)</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        : hs(hashsize), squeezing(false)</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    {</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>(T) == 8 || <span class="keyword">sizeof</span>(T) == 4, <span class="stringliteral">&quot;Invalid T size&quot;</span>);</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        <span class="keywordflow">if</span> (type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1ca0800fc577294c34e0b28ad2839435945">blake2_type::hash</a>)</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail.html#a2150c1691b90caa41d39477002c363bb">detail::validate_hash_size</a>(hashsize, N);</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1ca848d2f763af4efece2ae2af84f2a527f">blake2_type::x_hash</a>)</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail.html#a2150c1691b90caa41d39477002c363bb">detail::validate_hash_size</a>(hashsize, N * <span class="keyword">sizeof</span>(T) * 4 - 16);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>}</div>
+</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, blake2_type type, <span class="keywordtype">size_t</span> HS&gt;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="keyword">class </span>blake2p_provider;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, blake2_type type, <span class="keywordtype">size_t</span> HS = 0&gt;</div>
+<div class="foldopen" id="foldopen00115" data-start="{" data-end="};">
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html">  115</a></span><span class="keyword">class </span><a class="code hl_class" href="classdigestpp_1_1detail_1_1blake2__provider.html">blake2_provider</a></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>{</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a2967598e68ace4d357e82a382e6ae023">  118</a></span>    <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">bool</span> <a class="code hl_struct" href="structdigestpp_1_1detail_1_1is__xof.html">is_xof</a> = type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1cad113b01d608d36d99c6b7eae8cdd61de">blake2_type::xof</a>;</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    template&lt;size_t hss=HS, typename std::enable_if&lt;hss == 0&gt;::type* = <span class="keyword">nullptr</span>&gt;</div>
+<div class="foldopen" id="foldopen00121" data-start="{" data-end="}">
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a86cb26d79b16f9143b919c25c4e7ed18">  121</a></span>    <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a86cb26d79b16f9143b919c25c4e7ed18">blake2_provider</a>(<span class="keywordtype">size_t</span> hashsize = N)</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>        : hs(hashsize), squeezing(false)</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    {</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>(T) == 8 || <span class="keyword">sizeof</span>(T) == 4, <span class="stringliteral">&quot;Invalid T size&quot;</span>);</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(s);</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(p);</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <span class="keywordflow">if</span> (type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1ca0800fc577294c34e0b28ad2839435945">blake2_type::hash</a>)</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail.html#a2150c1691b90caa41d39477002c363bb">detail::validate_hash_size</a>(hashsize, N);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1ca848d2f763af4efece2ae2af84f2a527f">blake2_type::x_hash</a>)</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail.html#a2150c1691b90caa41d39477002c363bb">detail::validate_hash_size</a>(hashsize, N * <span class="keyword">sizeof</span>(T) * 4 - 16);</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(s);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(p);</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        fanout = 0;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        nodedepth = 0;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        nodeoffset = 0;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    }</div>
 </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    template&lt;size_t hss=HS, typename std::enable_if&lt;hss != 0&gt;::type* = <span class="keyword">nullptr</span>&gt;</div>
-<div class="foldopen" id="foldopen00131" data-start="{" data-end="}">
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a229dafdb988b74fdabcf11b067dab2a3">  131</a></span>    <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a229dafdb988b74fdabcf11b067dab2a3">blake2_provider</a>()</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        : hs(hss), squeezing(false)</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    {</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>(T) == 8 || <span class="keyword">sizeof</span>(T) == 4, <span class="stringliteral">&quot;Invalid T size&quot;</span>);</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keyword">const</span> <span class="keywordtype">size_t</span> limit = type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1ca0800fc577294c34e0b28ad2839435945">blake2_type::hash</a> ? N : type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1ca848d2f763af4efece2ae2af84f2a527f">blake2_type::x_hash</a> ? N * <span class="keyword">sizeof</span>(T) * 4 - 16 : SIZE_MAX;</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keyword">static_assert</span>(hss &lt;= limit &amp;&amp; hss &gt; 0 &amp;&amp; hss % 8 == 0);</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(s);</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(p);</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    }</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    template&lt;size_t hss=HS, typename std::enable_if&lt;hss != 0&gt;::type* = <span class="keyword">nullptr</span>&gt;</div>
+<div class="foldopen" id="foldopen00139" data-start="{" data-end="}">
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a229dafdb988b74fdabcf11b067dab2a3">  139</a></span>    <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a229dafdb988b74fdabcf11b067dab2a3">blake2_provider</a>()</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        : hs(hss), squeezing(false)</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    {</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <span class="keyword">static_assert</span>(<span class="keyword">sizeof</span>(T) == 8 || <span class="keyword">sizeof</span>(T) == 4, <span class="stringliteral">&quot;Invalid T size&quot;</span>);</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="keyword">const</span> <span class="keywordtype">size_t</span> limit = type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1ca0800fc577294c34e0b28ad2839435945">blake2_type::hash</a> ? N : type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1ca848d2f763af4efece2ae2af84f2a527f">blake2_type::x_hash</a> ? N * <span class="keyword">sizeof</span>(T) * 4 - 16 : SIZE_MAX;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keyword">static_assert</span>(hss &lt;= limit &amp;&amp; hss &gt; 0 &amp;&amp; hss % 8 == 0);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(s);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(p);</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        fanout = 0;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        nodedepth = 0;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        nodeoffset = 0;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    }</div>
 </div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
-<div class="foldopen" id="foldopen00143" data-start="{" data-end="}">
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a96b4821f167470095b01bd1cced1d675">  143</a></span>    <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a96b4821f167470095b01bd1cced1d675">~blake2_provider</a>()</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    {</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#ac0f27bb07331b1dbc8c65ff94165bb52">clear</a>();</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    }</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
+<div class="foldopen" id="foldopen00154" data-start="{" data-end="}">
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a96b4821f167470095b01bd1cced1d675">  154</a></span>    <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a96b4821f167470095b01bd1cced1d675">~blake2_provider</a>()</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    {</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#ac0f27bb07331b1dbc8c65ff94165bb52">clear</a>();</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    }</div>
 </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="foldopen" id="foldopen00148" data-start="{" data-end="}">
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a77c42f6d0debc83c08bb0edf0b9def86">  148</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a77c42f6d0debc83c08bb0edf0b9def86">init</a>()</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    {</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        pos = 0;</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        total = 0;</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        xoffset = 0;</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        squeezing = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#adf2eda88e9a159b69ed1527291ed216b">blake2_functions::initH</a>(H);</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <span class="keywordflow">if</span> (type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1ca0800fc577294c34e0b28ad2839435945">blake2_type::hash</a>)</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            H[0] ^= <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#aaa693df4d1efa0fbf6112e0b1724bc0c">hash_size</a>()/8;</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        {</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            H[0] ^= N / 8;</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            T rhs = type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1ca848d2f763af4efece2ae2af84f2a527f">blake2_type::x_hash</a> ? <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(hs/8) : (<span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(-1) &gt;&gt; (<span class="keyword">sizeof</span>(T) * 4));</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            <span class="keywordflow">if</span> (N == 512)</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                H[1] ^= (rhs &lt;&lt; (N / 16));</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                H[3] ^= rhs;</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        }</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        H[0] ^= (k.size() &lt;&lt; 8);</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        H[4] ^= s[0];</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        H[5] ^= s[1];</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        H[6] ^= p[0];</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        H[7] ^= p[1];</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        absorb_key();</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="foldopen" id="foldopen00159" data-start="{" data-end="}">
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a77c42f6d0debc83c08bb0edf0b9def86">  159</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a77c42f6d0debc83c08bb0edf0b9def86">init</a>()</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    {</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        pos = 0;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        total = 0;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        xoffset = 0;</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        squeezing = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a0e5960c2f7639e583a4b71f3503d8c0e">blake2_functions::initH</a>(H, fanout);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <span class="keywordflow">if</span> (type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1ca0800fc577294c34e0b28ad2839435945">blake2_type::hash</a>)</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>            H[0] ^= <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#aaa693df4d1efa0fbf6112e0b1724bc0c">hash_size</a>()/8;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            H[0] ^= N / 8;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>            T rhs = type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1ca848d2f763af4efece2ae2af84f2a527f">blake2_type::x_hash</a> ? <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(hs/8) : (<span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(-1) &gt;&gt; (<span class="keyword">sizeof</span>(T) * 4));</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>            <span class="keywordflow">if</span> (N == 512)</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                H[1] ^= (rhs &lt;&lt; (N / 16));</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                H[3] ^= rhs;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        }</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        H[0] ^= (k.size() &lt;&lt; 8);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        H[4] ^= s[0];</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        H[5] ^= s[1];</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        H[6] ^= p[0];</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        H[7] ^= p[1];</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <span class="keywordflow">if</span> (fanout)</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        {</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>            H[0] ^= <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(fanout) &lt;&lt; 16 | <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(2) &lt;&lt; 24;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>            H[<span class="keyword">sizeof</span>(T) == 8 ? 1 : 2] ^= <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(nodeoffset);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            <span class="keywordflow">if</span> (<span class="keyword">sizeof</span>(T) == 8)</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>                H[2] ^= <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(nodedepth) | (<span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(N / 8) &lt;&lt; 8);</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>                H[3] ^= <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(nodedepth) &lt;&lt; 16 | <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(N / 8) &lt;&lt; 24;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        }</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        <span class="keywordflow">if</span> (!fanout || !nodedepth)</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>            absorb_key();</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    }</div>
 </div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
-<div class="foldopen" id="foldopen00176" data-start="{" data-end="}">
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a8b0757871bc6b79daddc177aa66ae0e1">  176</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a8b0757871bc6b79daddc177aa66ae0e1">update</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* data, <span class="keywordtype">size_t</span> len)</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>    {</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#af3b82c44c556a2b83f594cec77069bc3">detail::absorb_bytes</a>(data, len, N / 4, N / 4 + 1, m.data(), pos, total,</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* data, <span class="keywordtype">size_t</span> len) { transform(data, len, false); });</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    }</div>
-</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
-<div class="foldopen" id="foldopen00182" data-start="{" data-end="}">
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a4cf6282a1b29bcc9a3fe3b469fe93cb8">  182</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a4cf6282a1b29bcc9a3fe3b469fe93cb8">set_key</a>(<span class="keyword">const</span> std::string&amp; key)</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    {</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keywordflow">if</span> (key.length() &gt; N / 8)</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;invalid key length&quot;</span>);</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        k = key;</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    }</div>
-</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
-<div class="foldopen" id="foldopen00190" data-start="{" data-end="}">
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a11a24fbbd56c34ff1b08a64d6884c83a">  190</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a11a24fbbd56c34ff1b08a64d6884c83a">set_salt</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* salt, <span class="keywordtype">size_t</span> salt_len)</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>    {</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <span class="keywordflow">if</span> (salt_len &amp;&amp; salt_len != N / 32)</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;invalid salt length&quot;</span>);</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        memcpy(&amp;s[0], salt, salt_len);</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    }</div>
-</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
-<div class="foldopen" id="foldopen00198" data-start="{" data-end="}">
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#ae527693ad0b401eb8ab943d1af7fd964">  198</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#ae527693ad0b401eb8ab943d1af7fd964">set_personalization</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* personalization, <span class="keywordtype">size_t</span> personalization_len)</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    {</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keywordflow">if</span> (personalization_len &amp;&amp; personalization_len != N / 32)</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;invalid personalization length&quot;</span>);</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span> </div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        memcpy(&amp;p[0], personalization, personalization_len);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="foldopen" id="foldopen00200" data-start="{" data-end="}">
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a8b0757871bc6b79daddc177aa66ae0e1">  200</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a8b0757871bc6b79daddc177aa66ae0e1">update</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* data, <span class="keywordtype">size_t</span> len)</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    {</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#af3b82c44c556a2b83f594cec77069bc3">detail::absorb_bytes</a>(data, len, N / 4, N / 4 + 1, m.data(), pos, total,</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>            [<span class="keyword">this</span>](<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* data, <span class="keywordtype">size_t</span> len) { transform(data, len, false); });</div>
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    }</div>
 </div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
 <div class="foldopen" id="foldopen00206" data-start="{" data-end="}">
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a14decc09cc54f1eceb7c91e2701d67c6">  206</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a14decc09cc54f1eceb7c91e2701d67c6">squeeze</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a>, <span class="keywordtype">size_t</span> hs)</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a4cf6282a1b29bcc9a3fe3b469fe93cb8">  206</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a4cf6282a1b29bcc9a3fe3b469fe93cb8">set_key</a>(<span class="keyword">const</span> std::string&amp; key)</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    {</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <span class="keywordtype">size_t</span> processed = 0;</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <span class="keywordflow">if</span> (!squeezing)</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        {</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>            <span class="keywordflow">if</span> (type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1cad113b01d608d36d99c6b7eae8cdd61de">blake2_type::xof</a>)</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>                total += pos * 8;</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>            squeezing = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>            xoffset = 0;</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            <span class="keywordflow">if</span> (N / 4 != pos)</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                memset(&amp;m[pos], 0, N / 4 - pos);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>            transform(m.data(), 1, <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>            memcpy(&amp;m[0], H.data(), N / 8);</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        }</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pos &lt; N / 8)</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        {</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>            <span class="keywordtype">size_t</span> to_copy = std::min(hs, N / 8 - pos);</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>            memcpy(<a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a>, <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(H.data()) + pos, to_copy);</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            processed += to_copy;</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            pos += to_copy;</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        }</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        <span class="keywordflow">while</span> (processed &lt; hs)</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        {</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad56e731d953585c4316b677806a795c0">blake2_functions::initX</a>(H, hs, processed, xoffset++, type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1cad113b01d608d36d99c6b7eae8cdd61de">blake2_type::xof</a> ? <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(-1) : <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(hs));</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>            H[4] ^= s[0];</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>            H[5] ^= s[1];</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>            H[6] ^= p[0];</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>            H[7] ^= p[1];</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>            total = N;</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>            memset(&amp;m[N / 8], 0, m.size() - N / 8);</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>            transform(m.data(), 1, <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>            pos = std::min(hs - processed, N / 8);</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>            memcpy(<a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a> + processed, H.data(), pos);</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>            processed += pos;</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        }</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    }</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <span class="keywordflow">if</span> (key.length() &gt; N / 8)</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;invalid key length&quot;</span>);</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        k = key;</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    }</div>
 </div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span> </div>
-<div class="foldopen" id="foldopen00243" data-start="{" data-end="}">
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#aef8810fb8a8b5f48e000d4bc3e6f4da9">  243</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <span class="keyword">final</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a>)</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    {</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        total += pos * 8;</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <span class="keywordflow">if</span> (type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1ca0800fc577294c34e0b28ad2839435945">blake2_type::hash</a>)</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        {</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>            <span class="keywordflow">if</span> (N / 4 != pos)</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>                memset(&amp;m[pos], 0, N / 4 - pos);</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>            transform(m.data(), 1, <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>            memcpy(<a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a>, H.data(), <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#aaa693df4d1efa0fbf6112e0b1724bc0c">hash_size</a>() / 8);</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        }</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>            <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a14decc09cc54f1eceb7c91e2701d67c6">squeeze</a>(<a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a>, hs / 8);</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    }</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
+<div class="foldopen" id="foldopen00214" data-start="{" data-end="}">
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a11a24fbbd56c34ff1b08a64d6884c83a">  214</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a11a24fbbd56c34ff1b08a64d6884c83a">set_salt</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* salt, <span class="keywordtype">size_t</span> salt_len)</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    {</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>        <span class="keywordflow">if</span> (salt_len &amp;&amp; salt_len != N / 32)</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;invalid salt length&quot;</span>);</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>        memcpy(&amp;s[0], salt, salt_len);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    }</div>
 </div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
-<div class="foldopen" id="foldopen00257" data-start="{" data-end="}">
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#ac0f27bb07331b1dbc8c65ff94165bb52">  257</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#ac0f27bb07331b1dbc8c65ff94165bb52">clear</a>()</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>    {</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(H);</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(m);</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(s);</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(p);</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(k);</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        k.clear();</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    }</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
+<div class="foldopen" id="foldopen00222" data-start="{" data-end="}">
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#ae527693ad0b401eb8ab943d1af7fd964">  222</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#ae527693ad0b401eb8ab943d1af7fd964">set_personalization</a>(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* personalization, <span class="keywordtype">size_t</span> personalization_len)</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    {</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        <span class="keywordflow">if</span> (personalization_len &amp;&amp; personalization_len != N / 32)</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;invalid personalization length&quot;</span>);</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span> </div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        memcpy(&amp;p[0], personalization, personalization_len);</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    }</div>
 </div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span> </div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#aaa693df4d1efa0fbf6112e0b1724bc0c">  267</a></span>    <span class="keyword">inline</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#aaa693df4d1efa0fbf6112e0b1724bc0c">hash_size</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> hs; }</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> absorb_key()</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>    {</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        <span class="keywordflow">if</span> (k.empty())</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span> </div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> key[N / 4];</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        memcpy(key, k.data(), k.length());</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        <span class="keywordflow">if</span> (k.length() != N / 4)</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>            memset(key + k.length(), 0, N / 4 - k.length());</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a8b0757871bc6b79daddc177aa66ae0e1">update</a>(key, <span class="keyword">sizeof</span>(key));</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    }</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> transform(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* data, <span class="keywordtype">size_t</span> num_blks, <span class="keywordtype">bool</span> padding)</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    {</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> blk = 0; blk &lt; num_blks; blk++)</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        {</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>            T M[16];</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 16; i++)</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>                M[i] = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(data)[blk * 16 + i];</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>            uint64_t totalbytes = total / 8 + (padding ? 0 : (blk + 1) * N) / 4;</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>            T t0 = <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(totalbytes);</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>            T t1 = N == 512 ? 0 : <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(totalbytes &gt;&gt; 32);</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>            T f0 = 0;</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>            T f1 = 0;</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>            <span class="keywordflow">if</span> (padding)</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>            {</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>                f0 = <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(-1);</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>                f1 = 0;</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>            }</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>            T v[16];</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>            memcpy(v, H.data(), <span class="keyword">sizeof</span>(T) * 8);</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>            v[8 + 0] = <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(0);</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>            v[8 + 1] = <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(1);</div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>            v[8 + 2] = <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(2);</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>            v[8 + 3] = <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(3);</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>            v[12] = t0 ^ <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(4);</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>            v[13] = t1 ^ <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(5);</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>            v[14] = f0 ^ <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(6);</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>            v[15] = f1 ^ <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(7);</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(0, M, v);</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(1, M, v);</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(2, M, v);</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(3, M, v);</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(4, M, v);</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(5, M, v);</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(6, M, v);</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(7, M, v);</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(8, M, v);</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(9, M, v);</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>            <span class="keywordflow">if</span> (N == 512)</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>            {</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>                <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(10, M, v);</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>                <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(11, M, v);</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>            }</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span> </div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>            H[0] = H[0] ^ v[0] ^ v[0 + 8];</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>            H[0 + 4] = H[0 + 4] ^ v[0 + 4] ^ v[0 + 8 + 4];</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>            H[1] = H[1] ^ v[1] ^ v[1 + 8];</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>            H[1 + 4] = H[1 + 4] ^ v[1 + 4] ^ v[1 + 8 + 4];</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>            H[2] = H[2] ^ v[2] ^ v[2 + 8];</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>            H[2 + 4] = H[2 + 4] ^ v[2 + 4] ^ v[2 + 8 + 4];</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>            H[3] = H[3] ^ v[3] ^ v[3 + 8];</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>            H[3 + 4] = H[3 + 4] ^ v[3 + 4] ^ v[3 + 8 + 4];</div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>        }</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span> </div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>    }</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span> </div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>    <span class="keyword">constexpr</span> <span class="keyword">static</span> <span class="keywordtype">size_t</span> N = <span class="keyword">sizeof</span>(T) == 8 ? 512 : 256;</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>    std::array&lt;T, 8&gt; H;</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>    std::array&lt;T, 2&gt; s;</div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>    std::array&lt;T, 2&gt; p;</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    std::string k;</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>    std::array&lt;<span class="keywordtype">unsigned</span> char, N / 4&gt; m;</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>    <span class="keywordtype">size_t</span> pos;</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    uint64_t total;</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    <span class="keywordtype">size_t</span> hs;</div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>    <span class="keywordtype">size_t</span> xoffset;</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>    <span class="keywordtype">bool</span> squeezing;</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>};</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
+<div class="foldopen" id="foldopen00230" data-start="{" data-end="}">
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a8cf0d8d4656438b5b9fd2f68a922d79f">  230</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a8cf0d8d4656438b5b9fd2f68a922d79f">set_blake2p_params</a>(uint8_t fo, uint8_t nd, uint8_t no)</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    {</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        fanout = fo;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        nodedepth = nd;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        nodeoffset = no;</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    }</div>
 </div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span> </div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>} <span class="comment">// namespace detail</span></div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span> </div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>} <span class="comment">// namespace digestpp</span></div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span> </div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
+<div class="foldopen" id="foldopen00237" data-start="{" data-end="}">
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a14decc09cc54f1eceb7c91e2701d67c6">  237</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a14decc09cc54f1eceb7c91e2701d67c6">squeeze</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a>, <span class="keywordtype">size_t</span> hs)</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    {</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <span class="keywordtype">size_t</span> processed = 0;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        <span class="keywordflow">if</span> (!squeezing)</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>        {</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>            <span class="keywordflow">if</span> (type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1cad113b01d608d36d99c6b7eae8cdd61de">blake2_type::xof</a>)</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>                total += pos * 8;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>            squeezing = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>            xoffset = 0;</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>            <span class="keywordflow">if</span> (N / 4 != pos)</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>                memset(&amp;m[pos], 0, N / 4 - pos);</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>            transform(m.data(), 1, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>            memcpy(&amp;m[0], H.data(), N / 8);</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        }</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (pos &lt; N / 8)</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        {</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>            <span class="keywordtype">size_t</span> to_copy = std::min(hs, N / 8 - pos);</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>            memcpy(<a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a>, <span class="keyword">reinterpret_cast&lt;</span><span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(H.data()) + pos, to_copy);</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            processed += to_copy;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            pos += to_copy;</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        }</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        <span class="keywordflow">while</span> (processed &lt; hs)</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        {</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad56e731d953585c4316b677806a795c0">blake2_functions::initX</a>(H, hs, processed, xoffset++, type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1cad113b01d608d36d99c6b7eae8cdd61de">blake2_type::xof</a> ? <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(-1) : <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(hs));</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>            H[4] ^= s[0];</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>            H[5] ^= s[1];</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>            H[6] ^= p[0];</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            H[7] ^= p[1];</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            total = N;</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            memset(&amp;m[N / 8], 0, m.size() - N / 8);</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>            transform(m.data(), 1, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>            pos = std::min(hs - processed, N / 8);</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            memcpy(<a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a> + processed, H.data(), pos);</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>            processed += pos;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        }</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    }</div>
+</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
+<div class="foldopen" id="foldopen00274" data-start="{" data-end="}">
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a96bf84890160a37794d1aa3aec5a73ae">  274</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <span class="keyword">final</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a>, <span class="keywordtype">size_t</span> hs_override = 0)</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    {</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        total += pos * 8;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        <span class="keywordtype">size_t</span> hss = hs_override ? hs_override : hs;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <span class="keywordflow">if</span> (type == <a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1ca0800fc577294c34e0b28ad2839435945">blake2_type::hash</a>)</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>        {</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>            <span class="keywordflow">if</span> (N / 4 != pos)</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>                memset(&amp;m[pos], 0, N / 4 - pos);</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>            transform(m.data(), 1, <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>            memcpy(<a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a>, H.data(), hss / 8);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        }</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>            <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a14decc09cc54f1eceb7c91e2701d67c6">squeeze</a>(<a class="code hl_enumvalue" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a>, hss / 8);</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    }</div>
+</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
+<div class="foldopen" id="foldopen00289" data-start="{" data-end="}">
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#ac0f27bb07331b1dbc8c65ff94165bb52">  289</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#ac0f27bb07331b1dbc8c65ff94165bb52">clear</a>()</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    {</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(H);</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(m);</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(s);</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(p);</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>        <a class="code hl_function" href="namespacedigestpp_1_1detail.html#ad8488e9d80053587ba18105e5f4cde02">zero_memory</a>(k);</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>        k.clear();</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        fanout = 0;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        nodedepth = 0;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        nodeoffset = 0;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    }</div>
+</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#aaa693df4d1efa0fbf6112e0b1724bc0c">  302</a></span>    <span class="keyword">inline</span> <span class="keywordtype">size_t</span> <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#aaa693df4d1efa0fbf6112e0b1724bc0c">hash_size</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> hs; }</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> absorb_key()</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    {</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        <span class="keywordflow">if</span> (k.empty())</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>        <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> key[N / 4];</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        memcpy(key, k.data(), k.length());</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        <span class="keywordflow">if</span> (k.length() != N / 4)</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>            memset(key + k.length(), 0, N / 4 - k.length());</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>        <a class="code hl_function" href="classdigestpp_1_1detail_1_1blake2__provider.html#a8b0757871bc6b79daddc177aa66ae0e1">update</a>(key, <span class="keyword">sizeof</span>(key));</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    }</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span> </div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno"><a class="line" href="classdigestpp_1_1detail_1_1blake2__provider.html#a0de3e194f98fbd7844feedcfc782f1f7">  317</a></span>    <span class="keyword">inline</span> <span class="keywordtype">void</span> transform(<span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span>* data, <span class="keywordtype">size_t</span> num_blks, <span class="keywordtype">bool</span> padding)</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    {</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> blk = 0; blk &lt; num_blks; blk++)</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        {</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>            T M[16];</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 16; i++)</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>                M[i] = <span class="keyword">reinterpret_cast&lt;</span><span class="keyword">const </span>T*<span class="keyword">&gt;</span>(data)[blk * 16 + i];</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>            uint64_t totalbytes = total / 8 + (padding ? 0 : (blk + 1) * N) / 4;</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>            T t0 = <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(totalbytes);</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>            T t1 = N == 512 ? 0 : <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(totalbytes &gt;&gt; 32);</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>            T f0 = 0;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>            T f1 = 0;</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>            <span class="keywordflow">if</span> (padding)</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>            {</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>                f0 = <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(-1);</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>                f1 = fanout &amp;&amp; (nodeoffset == fanout - 1 || nodedepth) ? <span class="keyword">static_cast&lt;</span>T<span class="keyword">&gt;</span>(-1) : 0;</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>            }</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>            T v[16];</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>            memcpy(v, H.data(), <span class="keyword">sizeof</span>(T) * 8);</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>            v[8 + 0] = <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(0);</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>            v[8 + 1] = <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(1);</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>            v[8 + 2] = <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(2);</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>            v[8 + 3] = <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(3);</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>            v[12] = t0 ^ <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(4);</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>            v[13] = t1 ^ <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(5);</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>            v[14] = f0 ^ <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(6);</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>            v[15] = f1 ^ <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">blake2_functions::IV&lt;T&gt;</a>(7);</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(0, M, v);</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(1, M, v);</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(2, M, v);</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(3, M, v);</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(4, M, v);</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(5, M, v);</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(6, M, v);</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(7, M, v);</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(8, M, v);</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>            <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(9, M, v);</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>            <span class="keywordflow">if</span> (N == 512)</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>            {</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>                <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(10, M, v);</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>                <a class="code hl_function" href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">blake2_functions::round</a>(11, M, v);</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>            }</div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>            H[0] = H[0] ^ v[0] ^ v[0 + 8];</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>            H[0 + 4] = H[0 + 4] ^ v[0 + 4] ^ v[0 + 8 + 4];</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>            H[1] = H[1] ^ v[1] ^ v[1 + 8];</div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>            H[1 + 4] = H[1 + 4] ^ v[1 + 4] ^ v[1 + 8 + 4];</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>            H[2] = H[2] ^ v[2] ^ v[2 + 8];</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>            H[2 + 4] = H[2 + 4] ^ v[2 + 4] ^ v[2 + 8 + 4];</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>            H[3] = H[3] ^ v[3] ^ v[3 + 8];</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>            H[3 + 4] = H[3 + 4] ^ v[3 + 4] ^ v[3 + 8 + 4];</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>        }</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span> </div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>    }</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classdigestpp_1_1detail_1_1blake2p__provider.html">blake2p_provider</a>&lt;T, type, HS&gt;;</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span> </div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>    <span class="keyword">constexpr</span> <span class="keyword">static</span> <span class="keywordtype">size_t</span> N = <span class="keyword">sizeof</span>(T) == 8 ? 512 : 256;</div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    std::array&lt;T, 8&gt; H;</div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    std::array&lt;T, 2&gt; s;</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    std::array&lt;T, 2&gt; p;</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>    std::string k;</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>    std::array&lt;<span class="keywordtype">unsigned</span> char, N / 4&gt; m;</div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>    <span class="keywordtype">size_t</span> pos;</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>    uint64_t total;</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>    <span class="keywordtype">size_t</span> hs;</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>    <span class="keywordtype">size_t</span> xoffset;</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    <span class="keywordtype">bool</span> squeezing;</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>    uint8_t fanout;</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>    uint8_t nodedepth;</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>    uint8_t nodeoffset;</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>};</div>
+</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span> </div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>} <span class="comment">// namespace detail</span></div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span> </div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>} <span class="comment">// namespace digestpp</span></div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aabsorb__data_8hpp_html"><div class="ttname"><a href="absorb__data_8hpp.html">absorb_data.hpp</a></div></div>
 <div class="ttc" id="ablake2__constants_8hpp_html"><div class="ttname"><a href="blake2__constants_8hpp.html">blake2_constants.hpp</a></div></div>
-<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html">digestpp::detail::blake2_provider</a></div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:111</div></div>
-<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a11a24fbbd56c34ff1b08a64d6884c83a"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a11a24fbbd56c34ff1b08a64d6884c83a">digestpp::detail::blake2_provider::set_salt</a></div><div class="ttdeci">void set_salt(const unsigned char *salt, size_t salt_len)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:190</div></div>
-<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a14decc09cc54f1eceb7c91e2701d67c6"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a14decc09cc54f1eceb7c91e2701d67c6">digestpp::detail::blake2_provider::squeeze</a></div><div class="ttdeci">void squeeze(unsigned char *hash, size_t hs)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:206</div></div>
-<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a229dafdb988b74fdabcf11b067dab2a3"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a229dafdb988b74fdabcf11b067dab2a3">digestpp::detail::blake2_provider::blake2_provider</a></div><div class="ttdeci">blake2_provider()</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:131</div></div>
-<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a4cf6282a1b29bcc9a3fe3b469fe93cb8"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a4cf6282a1b29bcc9a3fe3b469fe93cb8">digestpp::detail::blake2_provider::set_key</a></div><div class="ttdeci">void set_key(const std::string &amp;key)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:182</div></div>
-<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a77c42f6d0debc83c08bb0edf0b9def86"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a77c42f6d0debc83c08bb0edf0b9def86">digestpp::detail::blake2_provider::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:148</div></div>
-<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a86cb26d79b16f9143b919c25c4e7ed18"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a86cb26d79b16f9143b919c25c4e7ed18">digestpp::detail::blake2_provider::blake2_provider</a></div><div class="ttdeci">blake2_provider(size_t hashsize=N)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:116</div></div>
-<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a8b0757871bc6b79daddc177aa66ae0e1"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a8b0757871bc6b79daddc177aa66ae0e1">digestpp::detail::blake2_provider::update</a></div><div class="ttdeci">void update(const unsigned char *data, size_t len)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:176</div></div>
-<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a96b4821f167470095b01bd1cced1d675"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a96b4821f167470095b01bd1cced1d675">digestpp::detail::blake2_provider::~blake2_provider</a></div><div class="ttdeci">~blake2_provider()</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:143</div></div>
-<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_aaa693df4d1efa0fbf6112e0b1724bc0c"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#aaa693df4d1efa0fbf6112e0b1724bc0c">digestpp::detail::blake2_provider::hash_size</a></div><div class="ttdeci">size_t hash_size() const</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:267</div></div>
-<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_ac0f27bb07331b1dbc8c65ff94165bb52"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#ac0f27bb07331b1dbc8c65ff94165bb52">digestpp::detail::blake2_provider::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:257</div></div>
-<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_ae527693ad0b401eb8ab943d1af7fd964"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#ae527693ad0b401eb8ab943d1af7fd964">digestpp::detail::blake2_provider::set_personalization</a></div><div class="ttdeci">void set_personalization(const unsigned char *personalization, size_t personalization_len)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:198</div></div>
+<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html">digestpp::detail::blake2_provider</a></div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:116</div></div>
+<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a11a24fbbd56c34ff1b08a64d6884c83a"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a11a24fbbd56c34ff1b08a64d6884c83a">digestpp::detail::blake2_provider::set_salt</a></div><div class="ttdeci">void set_salt(const unsigned char *salt, size_t salt_len)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:214</div></div>
+<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a14decc09cc54f1eceb7c91e2701d67c6"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a14decc09cc54f1eceb7c91e2701d67c6">digestpp::detail::blake2_provider::squeeze</a></div><div class="ttdeci">void squeeze(unsigned char *hash, size_t hs)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:237</div></div>
+<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a229dafdb988b74fdabcf11b067dab2a3"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a229dafdb988b74fdabcf11b067dab2a3">digestpp::detail::blake2_provider::blake2_provider</a></div><div class="ttdeci">blake2_provider()</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:139</div></div>
+<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a4cf6282a1b29bcc9a3fe3b469fe93cb8"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a4cf6282a1b29bcc9a3fe3b469fe93cb8">digestpp::detail::blake2_provider::set_key</a></div><div class="ttdeci">void set_key(const std::string &amp;key)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:206</div></div>
+<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a77c42f6d0debc83c08bb0edf0b9def86"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a77c42f6d0debc83c08bb0edf0b9def86">digestpp::detail::blake2_provider::init</a></div><div class="ttdeci">void init()</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:159</div></div>
+<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a86cb26d79b16f9143b919c25c4e7ed18"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a86cb26d79b16f9143b919c25c4e7ed18">digestpp::detail::blake2_provider::blake2_provider</a></div><div class="ttdeci">blake2_provider(size_t hashsize=N)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:121</div></div>
+<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a8b0757871bc6b79daddc177aa66ae0e1"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a8b0757871bc6b79daddc177aa66ae0e1">digestpp::detail::blake2_provider::update</a></div><div class="ttdeci">void update(const unsigned char *data, size_t len)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:200</div></div>
+<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a8cf0d8d4656438b5b9fd2f68a922d79f"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a8cf0d8d4656438b5b9fd2f68a922d79f">digestpp::detail::blake2_provider::set_blake2p_params</a></div><div class="ttdeci">void set_blake2p_params(uint8_t fo, uint8_t nd, uint8_t no)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:230</div></div>
+<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_a96b4821f167470095b01bd1cced1d675"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#a96b4821f167470095b01bd1cced1d675">digestpp::detail::blake2_provider::~blake2_provider</a></div><div class="ttdeci">~blake2_provider()</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:154</div></div>
+<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_aaa693df4d1efa0fbf6112e0b1724bc0c"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#aaa693df4d1efa0fbf6112e0b1724bc0c">digestpp::detail::blake2_provider::hash_size</a></div><div class="ttdeci">size_t hash_size() const</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:302</div></div>
+<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_ac0f27bb07331b1dbc8c65ff94165bb52"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#ac0f27bb07331b1dbc8c65ff94165bb52">digestpp::detail::blake2_provider::clear</a></div><div class="ttdeci">void clear()</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:289</div></div>
+<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2__provider_html_ae527693ad0b401eb8ab943d1af7fd964"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2__provider.html#ae527693ad0b401eb8ab943d1af7fd964">digestpp::detail::blake2_provider::set_personalization</a></div><div class="ttdeci">void set_personalization(const unsigned char *personalization, size_t personalization_len)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:222</div></div>
+<div class="ttc" id="aclassdigestpp_1_1detail_1_1blake2p__provider_html"><div class="ttname"><a href="classdigestpp_1_1detail_1_1blake2p__provider.html">digestpp::detail::blake2p_provider</a></div><div class="ttdef"><b>Definition</b> blake2p_provider.hpp:23</div></div>
 <div class="ttc" id="afunctions_8hpp_html"><div class="ttname"><a href="functions_8hpp.html">functions.hpp</a></div></div>
+<div class="ttc" id="anamespacedigestpp_1_1detail_1_1blake2__functions_html_a0e5960c2f7639e583a4b71f3503d8c0e"><div class="ttname"><a href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a0e5960c2f7639e583a4b71f3503d8c0e">digestpp::detail::blake2_functions::initH</a></div><div class="ttdeci">void initH(std::array&lt; uint32_t, 8 &gt; &amp;H, uint8_t fanout)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:75</div></div>
 <div class="ttc" id="anamespacedigestpp_1_1detail_1_1blake2__functions_html_a1fe9066cea68fed5867a078d6f6305ff"><div class="ttname"><a href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a1fe9066cea68fed5867a078d6f6305ff">digestpp::detail::blake2_functions::round</a></div><div class="ttdeci">static void round(int r, T *M, T *v)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:48</div></div>
 <div class="ttc" id="anamespacedigestpp_1_1detail_1_1blake2__functions_html_a5bd2903d7b5915e264494a0b5e2ff224"><div class="ttname"><a href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a5bd2903d7b5915e264494a0b5e2ff224">digestpp::detail::blake2_functions::IV&lt; uint64_t &gt;</a></div><div class="ttdeci">uint64_t IV&lt; uint64_t &gt;(int t)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:70</div></div>
 <div class="ttc" id="anamespacedigestpp_1_1detail_1_1blake2__functions_html_a7378e6525e2cbb7f59bd4f98b7fc1f02"><div class="ttname"><a href="namespacedigestpp_1_1detail_1_1blake2__functions.html#a7378e6525e2cbb7f59bd4f98b7fc1f02">digestpp::detail::blake2_functions::IV&lt; uint32_t &gt;</a></div><div class="ttdeci">uint32_t IV&lt; uint32_t &gt;(int t)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:64</div></div>
 <div class="ttc" id="anamespacedigestpp_1_1detail_1_1blake2__functions_html_ad3a8fdcd03337f228690eb7c41f02581"><div class="ttname"><a href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad3a8fdcd03337f228690eb7c41f02581">digestpp::detail::blake2_functions::IV</a></div><div class="ttdeci">T IV(int t)</div></div>
-<div class="ttc" id="anamespacedigestpp_1_1detail_1_1blake2__functions_html_ad56e731d953585c4316b677806a795c0"><div class="ttname"><a href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad56e731d953585c4316b677806a795c0">digestpp::detail::blake2_functions::initX</a></div><div class="ttdeci">void initX(std::array&lt; uint32_t, 8 &gt; &amp;H, size_t hs, size_t processed, size_t xoffset, uint32_t rhs)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:87</div></div>
+<div class="ttc" id="anamespacedigestpp_1_1detail_1_1blake2__functions_html_ad56e731d953585c4316b677806a795c0"><div class="ttname"><a href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad56e731d953585c4316b677806a795c0">digestpp::detail::blake2_functions::initX</a></div><div class="ttdeci">void initX(std::array&lt; uint32_t, 8 &gt; &amp;H, size_t hs, size_t processed, size_t xoffset, uint32_t rhs)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:89</div></div>
 <div class="ttc" id="anamespacedigestpp_1_1detail_1_1blake2__functions_html_ad6b958162ac9a5f07e4de3244549af86"><div class="ttname"><a href="namespacedigestpp_1_1detail_1_1blake2__functions.html#ad6b958162ac9a5f07e4de3244549af86">digestpp::detail::blake2_functions::G</a></div><div class="ttdeci">static void G(int r, int i, uint64_t &amp;a, uint64_t &amp;b, uint64_t &amp;c, uint64_t &amp;d, uint64_t *M)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:23</div></div>
-<div class="ttc" id="anamespacedigestpp_1_1detail_1_1blake2__functions_html_adf2eda88e9a159b69ed1527291ed216b"><div class="ttname"><a href="namespacedigestpp_1_1detail_1_1blake2__functions.html#adf2eda88e9a159b69ed1527291ed216b">digestpp::detail::blake2_functions::initH</a></div><div class="ttdeci">void initH(std::array&lt; uint32_t, 8 &gt; &amp;H)</div><div class="ttdef"><b>Definition</b> blake2_provider.hpp:75</div></div>
 <div class="ttc" id="anamespacedigestpp_1_1detail_html_a0c07fbe81a54efccc9a70d731948ceb1"><div class="ttname"><a href="namespacedigestpp_1_1detail.html#a0c07fbe81a54efccc9a70d731948ceb1">digestpp::detail::rotate_right</a></div><div class="ttdeci">uint32_t rotate_right(uint32_t x, unsigned n)</div><div class="ttdef"><b>Definition</b> functions.hpp:61</div></div>
 <div class="ttc" id="anamespacedigestpp_1_1detail_html_a2150c1691b90caa41d39477002c363bb"><div class="ttname"><a href="namespacedigestpp_1_1detail.html#a2150c1691b90caa41d39477002c363bb">digestpp::detail::validate_hash_size</a></div><div class="ttdeci">void validate_hash_size(size_t hs, std::initializer_list&lt; size_t &gt; set)</div><div class="ttdef"><b>Definition</b> validate_hash_size.hpp:14</div></div>
 <div class="ttc" id="anamespacedigestpp_1_1detail_html_a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945"><div class="ttname"><a href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">digestpp::detail::ascon_type::hash</a></div><div class="ttdeci">@ hash</div></div>

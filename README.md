@@ -189,36 +189,36 @@ Individual hash algorithms are defined by typedefs, e.g.
 
 ### Hash functions
 
-Dynamic Size Variant|Static Size Variant|Description|Security|Supported output sizes|Optional parameters
+Typedefs|Description|Security|Supported output sizes|Optional parameters
 -------|-------|-----------|-------------------|---|-------------------
-N/A|digestpp::ascon_hash|Ascon (NIST SP 800-232)|✅Secure|256|-
-digestpp::blake|digestpp::static_size::blake|Original BLAKE algorithm|✅Secure|224, 256, 384, 512|salt
-digestpp::blake2b|digestpp::static_size::blake2b|BLAKE2b|✅Secure|8-512|salt, personalization, key
-digestpp::blake2s|digestpp::static_size::blake2s|BLAKE2s|✅Secure|8-256|salt, personalization, key
-digestpp::blake2xb|digestpp::static_size::blake2xb|BLAKE2xb|✅Secure|arbitrary|salt, personalization, key
-digestpp::blake2xs|digestpp::static_size::blake2xs|BLAKE2xs|✅Secure|arbitrary|salt, personalization, key
-digestpp::echo|digestpp::static_size::echo|Echo|✅Secure|8-512|salt
-digestpp::esch|digestpp::static_size::esch|Esch|✅Secure|256, 384|-
-digestpp::groestl|digestpp::static_size::groestl|Grøstl|✅Secure|8-512|-
-digestpp::jh|digestpp::static_size::jh|JH|✅Secure|8-512|-
-digestpp::kmac128|digestpp::static_size::kmac128|KMAC128|✅Secure|arbitrary|key, customization
-digestpp::kmac256|digestpp::static_size::kmac256|KMAC256|✅Secure|arbitrary|key, customization
-digestpp::kupyna|digestpp::static_size::kupyna|Kupyna|✅Secure|256, 512|-
-digestpp::lsh256|digestpp::static_size::lsh256|LSH-256|✅Secure|8-256|-
-digestpp::lsh512|digestpp::static_size::lsh512|LSH-512|✅Secure|8-512|-
-N/A|digestpp::md5|MD5|❌Broken|128|-
-N/A|digestpp::sha1|SHA-1|❌Broken|160|-
-N/A|digestpp::sha224|SHA-224|✅Secure|224|-
-N/A|digestpp::sha256|SHA-256|✅Secure|256|-
-N/A|digestpp::sha384|SHA-384|✅Secure|384|-
-digestpp::sha512|digestpp::static_size::sha512|SHA-512|✅Secure|8-512|-
-digestpp::sha3|digestpp::static_size::sha3|SHA-3|✅Secure|224, 256, 384, 512|-
-digestpp::skein256|digestpp::static_size::skein256|Skein256|✅Secure|arbitrary|personalization, key, nonce
-digestpp::skein512|digestpp::static_size::skein512|Skein512|✅Secure|arbitrary|personalization, key, nonce
-digestpp::skein1024|digestpp::static_size::skein1024|Skein1024|✅Secure|arbitrary|personalization, key, nonce
-N/A|digestpp::sm3|SM3|✅Secure|256|-
-digestpp::streebog|digestpp::static_size::streebog|Streebog|⚠️Backdoored|256, 512|-
-N/A|digestpp::whirlpool|Whirlpool|✅Secure|512|-
+digestpp::ascon_hash|Ascon (NIST SP 800-232)|✅Secure|256|-
+digestpp::blake digestpp::static_size::blake|Original BLAKE algorithm|✅Secure|224, 256, 384, 512|salt
+digestpp::blake2b digestpp::static_size::blake2b|BLAKE2b|✅Secure|8-512|salt, personalization, key
+digestpp::blake2s digestpp::static_size::blake2s|BLAKE2s|✅Secure|8-256|salt, personalization, key
+digestpp::blake2xb digestpp::static_size::blake2xb|BLAKE2xb|✅Secure|arbitrary|salt, personalization, key
+digestpp::blake2xs digestpp::static_size::blake2xs|BLAKE2xs|✅Secure|arbitrary|salt, personalization, key
+digestpp::echo digestpp::static_size::echo|Echo|✅Secure|8-512|salt
+digestpp::esch digestpp::static_size::esch|Esch|✅Secure|256, 384|-
+digestpp::groestl digestpp::static_size::groestl|Grøstl|✅Secure|8-512|-
+digestpp::jh digestpp::static_size::jh|JH|✅Secure|8-512|-
+digestpp::kmac128 digestpp::static_size::kmac128|KMAC128|✅Secure|arbitrary|key, customization
+digestpp::kmac256 digestpp::static_size::kmac256|KMAC256|✅Secure|arbitrary|key, customization
+digestpp::kupyna digestpp::static_size::kupyna|Kupyna|✅Secure|256, 512|-
+digestpp::lsh256 digestpp::static_size::lsh256|LSH-256|✅Secure|8-256|-
+digestpp::lsh512 digestpp::static_size::lsh512|LSH-512|✅Secure|8-512|-
+digestpp::md5|MD5|❌Broken|128|-
+digestpp::sha1|SHA-1|❌Broken|160|-
+digestpp::sha224|SHA-224|✅Secure|224|-
+digestpp::sha256|SHA-256|✅Secure|256|-
+digestpp::sha384|SHA-384|✅Secure|384|-
+digestpp::sha512 digestpp::static_size::sha512|SHA-512|✅Secure|8-512|-
+digestpp::sha3 digestpp::static_size::sha3|SHA-3|✅Secure|224, 256, 384, 512|-
+digestpp::skein256 digestpp::static_size::skein256|Skein256|✅Secure|arbitrary|personalization, key, nonce
+digestpp::skein512 digestpp::static_size::skein512|Skein512|✅Secure|arbitrary|personalization, key, nonce
+digestpp::skein1024 digestpp::static_size::skein1024|Skein1024|✅Secure|arbitrary|personalization, key, nonce
+digestpp::sm3|SM3|✅Secure|256|-
+digestpp::streebog digestpp::static_size::streebog|Streebog|⚠️Backdoored|256, 512|-
+digestpp::whirlpool|Whirlpool|✅Secure|512|-
 
 ### Extendable output functions
 

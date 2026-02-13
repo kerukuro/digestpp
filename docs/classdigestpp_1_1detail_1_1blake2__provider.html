@@ -92,6 +92,7 @@ $(function(){ initResizable(false); });
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classdigestpp_1_1detail_1_1blake2__provider-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">digestpp::detail::blake2_provider&lt; T, type, HS &gt; Class Template Reference</div></div>
 </div><!--header-->
@@ -119,10 +120,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a11a24fbbd56c34ff1b08a64d6884c83a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae527693ad0b401eb8ab943d1af7fd964" id="r_ae527693ad0b401eb8ab943d1af7fd964"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae527693ad0b401eb8ab943d1af7fd964">set_personalization</a> (const unsigned char *personalization, size_t personalization_len)</td></tr>
 <tr class="separator:ae527693ad0b401eb8ab943d1af7fd964"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cf0d8d4656438b5b9fd2f68a922d79f" id="r_a8cf0d8d4656438b5b9fd2f68a922d79f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8cf0d8d4656438b5b9fd2f68a922d79f">set_blake2p_params</a> (uint8_t fo, uint8_t nd, uint8_t no)</td></tr>
+<tr class="separator:a8cf0d8d4656438b5b9fd2f68a922d79f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a14decc09cc54f1eceb7c91e2701d67c6" id="r_a14decc09cc54f1eceb7c91e2701d67c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a14decc09cc54f1eceb7c91e2701d67c6">squeeze</a> (unsigned char *<a class="el" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a>, size_t hs)</td></tr>
 <tr class="separator:a14decc09cc54f1eceb7c91e2701d67c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef8810fb8a8b5f48e000d4bc3e6f4da9" id="r_aef8810fb8a8b5f48e000d4bc3e6f4da9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef8810fb8a8b5f48e000d4bc3e6f4da9">final</a> (unsigned char *<a class="el" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a>)</td></tr>
-<tr class="separator:aef8810fb8a8b5f48e000d4bc3e6f4da9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96bf84890160a37794d1aa3aec5a73ae" id="r_a96bf84890160a37794d1aa3aec5a73ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a96bf84890160a37794d1aa3aec5a73ae">final</a> (unsigned char *<a class="el" href="namespacedigestpp_1_1detail.html#a81b1c45f8a30083a7ee2e0c8106bd24ca0800fc577294c34e0b28ad2839435945">hash</a>, size_t hs_override=0)</td></tr>
+<tr class="separator:a96bf84890160a37794d1aa3aec5a73ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac0f27bb07331b1dbc8c65ff94165bb52" id="r_ac0f27bb07331b1dbc8c65ff94165bb52"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0f27bb07331b1dbc8c65ff94165bb52">clear</a> ()</td></tr>
 <tr class="separator:ac0f27bb07331b1dbc8c65ff94165bb52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa693df4d1efa0fbf6112e0b1724bc0c" id="r_aaa693df4d1efa0fbf6112e0b1724bc0c"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa693df4d1efa0fbf6112e0b1724bc0c">hash_size</a> () const</td></tr>
@@ -132,6 +135,11 @@ Public Member Functions</h2></td></tr>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a2967598e68ace4d357e82a382e6ae023" id="r_a2967598e68ace4d357e82a382e6ae023"><td class="memItemLeft" align="right" valign="top">static const bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2967598e68ace4d357e82a382e6ae023">is_xof</a> = type == <a class="el" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1cad113b01d608d36d99c6b7eae8cdd61de">blake2_type::xof</a></td></tr>
 <tr class="separator:a2967598e68ace4d357e82a382e6ae023"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a0de3e194f98fbd7844feedcfc782f1f7" id="r_a0de3e194f98fbd7844feedcfc782f1f7"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0de3e194f98fbd7844feedcfc782f1f7">blake2p_provider&lt; T, type, HS &gt;</a></td></tr>
+<tr class="separator:a0de3e194f98fbd7844feedcfc782f1f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a86cb26d79b16f9143b919c25c4e7ed18" name="a86cb26d79b16f9143b919c25c4e7ed18"></a>
@@ -247,8 +255,8 @@ template&lt;typename T , <a class="el" href="namespacedigestpp_1_1detail.html#aa
 
 </div>
 </div>
-<a id="aef8810fb8a8b5f48e000d4bc3e6f4da9" name="aef8810fb8a8b5f48e000d4bc3e6f4da9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef8810fb8a8b5f48e000d4bc3e6f4da9">&#9670;&#160;</a></span>final()</h2>
+<a id="a96bf84890160a37794d1aa3aec5a73ae" name="a96bf84890160a37794d1aa3aec5a73ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96bf84890160a37794d1aa3aec5a73ae">&#9670;&#160;</a></span>final()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -261,8 +269,12 @@ template&lt;typename T , <a class="el" href="namespacedigestpp_1_1detail.html#aa
         <tr>
           <td class="memname">void <a class="el" href="classdigestpp_1_1detail_1_1blake2__provider.html">digestpp::detail::blake2_provider</a>&lt; T, type, HS &gt;::final </td>
           <td>(</td>
-          <td class="paramtype">unsigned char *</td>          <td class="paramname"><span class="paramname"><em>hash</em></span></td><td>)</td>
+          <td class="paramtype">unsigned char *</td>          <td class="paramname"><span class="paramname"><em>hash</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>hs_override</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -317,6 +329,42 @@ template&lt;typename T , <a class="el" href="namespacedigestpp_1_1detail.html#aa
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8cf0d8d4656438b5b9fd2f68a922d79f" name="a8cf0d8d4656438b5b9fd2f68a922d79f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cf0d8d4656438b5b9fd2f68a922d79f">&#9670;&#160;</a></span>set_blake2p_params()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , <a class="el" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1c">blake2_type</a> type, size_t HS = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classdigestpp_1_1detail_1_1blake2__provider.html">digestpp::detail::blake2_provider</a>&lt; T, type, HS &gt;::set_blake2p_params </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>fo</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>nd</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>no</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -473,6 +521,31 @@ template&lt;typename T , <a class="el" href="namespacedigestpp_1_1detail.html#aa
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="a0de3e194f98fbd7844feedcfc782f1f7" name="a0de3e194f98fbd7844feedcfc782f1f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0de3e194f98fbd7844feedcfc782f1f7">&#9670;&#160;</a></span>blake2p_provider&lt; T, type, HS &gt;</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T , <a class="el" href="namespacedigestpp_1_1detail.html#aa655ac16d349fa770970b8bbbc1cda1c">blake2_type</a> type, size_t HS = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classdigestpp_1_1detail_1_1blake2p__provider.html">blake2p_provider</a>&lt; T, type, HS &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

@@ -113,10 +113,10 @@ Functions</h2></td></tr>
 <tr class="memitem:a5bd2903d7b5915e264494a0b5e2ff224" id="r_a5bd2903d7b5915e264494a0b5e2ff224"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
 <tr class="memitem:a5bd2903d7b5915e264494a0b5e2ff224"><td class="memTemplItemLeft" align="right" valign="top">uint64_t&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a5bd2903d7b5915e264494a0b5e2ff224">IV&lt; uint64_t &gt;</a> (int t)</td></tr>
 <tr class="separator:a5bd2903d7b5915e264494a0b5e2ff224"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf2eda88e9a159b69ed1527291ed216b" id="r_adf2eda88e9a159b69ed1527291ed216b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adf2eda88e9a159b69ed1527291ed216b">initH</a> (std::array&lt; uint32_t, 8 &gt; &amp;H)</td></tr>
-<tr class="separator:adf2eda88e9a159b69ed1527291ed216b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a58ce9c0111d36e3b3e5468458543650b" id="r_a58ce9c0111d36e3b3e5468458543650b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a58ce9c0111d36e3b3e5468458543650b">initH</a> (std::array&lt; uint64_t, 8 &gt; &amp;H)</td></tr>
-<tr class="separator:a58ce9c0111d36e3b3e5468458543650b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e5960c2f7639e583a4b71f3503d8c0e" id="r_a0e5960c2f7639e583a4b71f3503d8c0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0e5960c2f7639e583a4b71f3503d8c0e">initH</a> (std::array&lt; uint32_t, 8 &gt; &amp;H, uint8_t fanout)</td></tr>
+<tr class="separator:a0e5960c2f7639e583a4b71f3503d8c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4db5fb0cc3b516f53985bdd564fa5065" id="r_a4db5fb0cc3b516f53985bdd564fa5065"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4db5fb0cc3b516f53985bdd564fa5065">initH</a> (std::array&lt; uint64_t, 8 &gt; &amp;H, uint8_t fanout)</td></tr>
+<tr class="separator:a4db5fb0cc3b516f53985bdd564fa5065"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad56e731d953585c4316b677806a795c0" id="r_ad56e731d953585c4316b677806a795c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad56e731d953585c4316b677806a795c0">initX</a> (std::array&lt; uint32_t, 8 &gt; &amp;H, size_t hs, size_t processed, size_t xoffset, uint32_t rhs)</td></tr>
 <tr class="separator:ad56e731d953585c4316b677806a795c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a0339a510ccde7e2b493ed1dd5960fa" id="r_a4a0339a510ccde7e2b493ed1dd5960fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4a0339a510ccde7e2b493ed1dd5960fa">initX</a> (std::array&lt; uint64_t, 8 &gt; &amp;H, size_t hs, size_t processed, size_t xoffset, uint64_t rhs)</td></tr>
@@ -231,8 +231,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="adf2eda88e9a159b69ed1527291ed216b" name="adf2eda88e9a159b69ed1527291ed216b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adf2eda88e9a159b69ed1527291ed216b">&#9670;&#160;</a></span>initH() <span class="overload">[1/2]</span></h2>
+<a id="a0e5960c2f7639e583a4b71f3503d8c0e" name="a0e5960c2f7639e583a4b71f3503d8c0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e5960c2f7639e583a4b71f3503d8c0e">&#9670;&#160;</a></span>initH() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -243,8 +243,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void digestpp::detail::blake2_functions::initH </td>
           <td>(</td>
-          <td class="paramtype">std::array&lt; uint32_t, 8 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>H</em></span></td><td>)</td>
+          <td class="paramtype">std::array&lt; uint32_t, 8 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>H</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>fanout</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -256,8 +260,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a58ce9c0111d36e3b3e5468458543650b" name="a58ce9c0111d36e3b3e5468458543650b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58ce9c0111d36e3b3e5468458543650b">&#9670;&#160;</a></span>initH() <span class="overload">[2/2]</span></h2>
+<a id="a4db5fb0cc3b516f53985bdd564fa5065" name="a4db5fb0cc3b516f53985bdd564fa5065"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4db5fb0cc3b516f53985bdd564fa5065">&#9670;&#160;</a></span>initH() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -268,8 +272,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">void digestpp::detail::blake2_functions::initH </td>
           <td>(</td>
-          <td class="paramtype">std::array&lt; uint64_t, 8 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>H</em></span></td><td>)</td>
+          <td class="paramtype">std::array&lt; uint64_t, 8 &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>H</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">uint8_t</td>          <td class="paramname"><span class="paramname"><em>fanout</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
