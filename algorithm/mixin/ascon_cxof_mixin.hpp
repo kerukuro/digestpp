@@ -13,7 +13,7 @@ namespace mixin
 
 /**
  * \brief Defines additional public functions for Ascon-CXOF
- * \sa hasher, ascon_cxof128
+ * \sa hasher, ascon_cxof
  */
 template<typename T>
 class ascon_cxof_mixin

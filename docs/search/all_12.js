@@ -2,7 +2,7 @@ var searchData=
 [
   ['rationale_20in_20questions_20and_20answers_0',['Design rationale in questions and answers',['../index.html#autotoc_md7',1,'']]],
   ['rc_1',['RC',['../structdigestpp_1_1detail_1_1ascon__constants.html#a43eb68a7ce3670a4ba54ce733da13e1d',1,'digestpp::detail::ascon_constants::RC'],['../structdigestpp_1_1detail_1_1sha3__constants.html#aa22e63c5c298bf6ecad85b8ee235ce1b',1,'digestpp::detail::sha3_constants::RC'],['../structdigestpp_1_1detail_1_1streebog__constants.html#ad640d8f21b9343dee4123566741dd334',1,'digestpp::detail::streebog_constants::RC'],['../structdigestpp_1_1detail_1_1whirlpool__constants.html#a2ac7dac0b7fbfbd554fda7a8e7adfabc',1,'digestpp::detail::whirlpool_constants::RC']]],
-  ['readme_2emd_2',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
+  ['readme4doxygen_2emd_2',['README4Doxygen.md',['../_r_e_a_d_m_e4_doxygen_8md.html',1,'']]],
   ['reference_20documentation_3',['Reference documentation',['../index.html#autotoc_md10',1,'']]],
   ['reformat_5ftest_5fvectors_4',['reformat_test_vectors',['../namespace__t.html#aaec83dd8672a6f2d33b3e9ac8462486f',1,'_t']]],
   ['reset_5',['reset',['../classdigestpp_1_1hasher.html#a326f76f7f383d4ab137f2094407b1013',1,'digestpp::hasher']]],

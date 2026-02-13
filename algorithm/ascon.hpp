@@ -48,7 +48,7 @@ namespace digestpp
  * @code 23414503bf4bde7ad0e85aec94c22ae2d7cd807996b537f9564fc2974053f139
  * @endcode
  *
- * @sa hasher, ascon_xof128
+ * @sa hasher, ascon_xof
  */
 typedef hasher<detail::ascon_provider<detail::ascon_type::hash>> ascon_hash;
 
@@ -68,7 +68,7 @@ typedef hasher<detail::ascon_provider<detail::ascon_type::hash>> ascon_hash;
  *
  * @par Example:
  * @code // Absorb a string and squeeze 32 bytes of output
- * digestpp::ascon_xof128 hasher;
+ * digestpp::ascon_xof hasher;
  * hasher.absorb("The quick brown fox jumps over the lazy dog");
  * std::cout << hasher.hexsqueeze(32) << '\n';
  * @endcode
@@ -77,9 +77,9 @@ typedef hasher<detail::ascon_provider<detail::ascon_type::hash>> ascon_hash;
  * @code f3df449acea2811a43db747c1caa208f3402a17e5ceb43315455d7deff1ffc90
  * @endcode
  *
- * @sa hasher, ascon_hash, ascon_cxof128
+ * @sa hasher, ascon_hash, ascon_cxof
  */
-typedef hasher<detail::ascon_provider<detail::ascon_type::xof>> ascon_xof128;
+typedef hasher<detail::ascon_provider<detail::ascon_type::xof>> ascon_xof;
 
 /**
  * @brief ASCON-CXOF128 customizable extendable output function
@@ -106,7 +106,7 @@ typedef hasher<detail::ascon_provider<detail::ascon_type::xof>> ascon_xof128;
  *
  * @par Example:
  * @code // Absorb a string and squeeze 32 bytes of output
- * digestpp::ascon_cxof128 hasher;
+ * digestpp::ascon_cxof hasher;
  * hasher.set_customization("My Custom ASCON");
  * hasher.absorb("The quick brown fox jumps over the lazy dog");
  * std::cout << hasher.hexsqueeze(32) << '\n';
@@ -116,9 +116,9 @@ typedef hasher<detail::ascon_provider<detail::ascon_type::xof>> ascon_xof128;
  * @code 73910abcd1ffbbd7685947734b964c516bff020c372d6a7b684ce23c69960598
  * @endcode
  *
- * @sa hasher, mixin::ascon_cxof_mixin, ascon_xof128
+ * @sa hasher, mixin::ascon_cxof_mixin, ascon_xof
  */
-typedef hasher<detail::ascon_provider<detail::ascon_type::cxof>, mixin::ascon_cxof_mixin> ascon_cxof128;
+typedef hasher<detail::ascon_provider<detail::ascon_type::cxof>, mixin::ascon_cxof_mixin> ascon_cxof;
 
 /** @} */ // End of ASCON group
 

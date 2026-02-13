@@ -87,8 +87,8 @@ int main()
 	test_vectors(digestpp::whirlpool(), "whirlpool", "testvectors/whirlpool.txt");
 
 	// XOFs
-	test_vectors(digestpp::ascon_xof128(), "ascon_xof", "testvectors/ascon_xof128.txt");
-	test_vectors(digestpp::ascon_cxof128(), "ascon_cxof", "testvectors/ascon_cxof128.txt");
+	test_vectors(digestpp::ascon_xof(), "ascon_xof", "testvectors/ascon_xof128.txt");
+	test_vectors(digestpp::ascon_cxof(), "ascon_cxof", "testvectors/ascon_cxof128.txt");
 	test_vectors(digestpp::blake2xb_xof(), "blake2xb_xof", "testvectors/blake2xb_xof.txt");
 	test_vectors(digestpp::blake2xs_xof(), "blake2xs_xof", "testvectors/blake2xs_xof.txt");
 	test_vectors(digestpp::shake128(), "shake128", "testvectors/shake128.txt");
