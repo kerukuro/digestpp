@@ -190,7 +190,7 @@ Individual hash algorithms are defined by typedefs, e.g.
 ### Hash functions
 
 Typedefs|Description|Security|Supported output sizes|Optional parameters
--------|-------|-----------|-------------------|---|-------------------
+--------|-----------|--------|----------------------|-------------------
 digestpp::ascon_hash|Ascon (NIST SP 800-232)|✅Secure|256|-
 digestpp::blake digestpp::static_size::blake|Original BLAKE algorithm|✅Secure|224, 256, 384, 512|salt
 digestpp::blake2b digestpp::static_size::blake2b|BLAKE2b|✅Secure|8-512|salt, personalization, key
