@@ -419,9 +419,9 @@ using blake2xb = hasher<detail::blake2_provider<uint64_t, detail::blake2_type::x
 template<size_t N>
 using blake2xs = hasher<detail::blake2_provider<uint32_t, detail::blake2_type::x_hash, N>, mixin::blake2_mixin>;
 
-}
-
 /** @} */ // End of BLAKE2 group
+
+}
 
 } // namespace digestpp
 

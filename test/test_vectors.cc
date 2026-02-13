@@ -28,6 +28,8 @@ int main()
 	test_vectors(digestpp::blake2xs(256), "blake2xs/256", "testvectors/blake2xs_256.txt");
 	test_vectors(digestpp::blake2xs(2056), "blake2xs/2056", "testvectors/blake2xs_2056.txt");
 	test_vectors(digestpp::blake2xs(2056), "blake2xs/2056-param", "testvectors/blake2xs_2056param.txt");
+	test_vectors(digestpp::blake2sp(256), "blake2sp/256", "testvectors/blake2sp_256.txt");
+	test_vectors(digestpp::blake2bp(512), "blake2bp/512", "testvectors/blake2bp_512.txt");
 	test_vectors(digestpp::echo(224), "echo/224", "testvectors/echo224.txt");
 	test_vectors(digestpp::echo(256), "echo/256", "testvectors/echo256.txt");
 	test_vectors(digestpp::echo(384), "echo/384", "testvectors/echo384.txt");

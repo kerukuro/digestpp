@@ -72,16 +72,18 @@ namespace blake2_functions
 		return blake2b_constants<void>::IV[t];
 	}
 
-	inline void initH(std::array<uint32_t, 8>& H)
+	inline void initH(std::array<uint32_t, 8>& H, uint8_t fanout)
 	{
 		memcpy(&H[0], blake2s_constants<void>::IV, 32);
-		H[0] ^= 0x01010000ULL;
+		if (!fanout)
+			H[0] ^= 0x01010000ULL;
 	}
 
-	inline void initH(std::array<uint64_t, 8>& H)
+	inline void initH(std::array<uint64_t, 8>& H, uint8_t fanout)
 	{
 		memcpy(&H[0], blake2b_constants<void>::IV, 64);
-		H[0] ^= 0x0000000001010000ULL;
+		if (!fanout)
+			H[0] ^= 0x0000000001010000ULL;
 	}
 
 	inline void initX(std::array<uint32_t, 8>& H, size_t hs, size_t processed, size_t xoffset, uint32_t rhs)
@@ -106,6 +108,9 @@ namespace blake2_functions
 
 }
 
+template<typename T, blake2_type type, size_t HS>
+class blake2p_provider;
+
 template<typename T, blake2_type type, size_t HS = 0>
 class blake2_provider
 {
@@ -125,6 +130,9 @@ public:
 
 		zero_memory(s);
 		zero_memory(p);
+		fanout = 0;
+		nodedepth = 0;
+		nodeoffset = 0;
 	}
 
 	template<size_t hss=HS, typename std::enable_if<hss != 0>::type* = nullptr>
@@ -138,6 +146,9 @@ public:
 
 		zero_memory(s);
 		zero_memory(p);
+		fanout = 0;
+		nodedepth = 0;
+		nodeoffset = 0;
 	}
 
 	~blake2_provider()
@@ -152,7 +163,7 @@ public:
 		xoffset = 0;
 		squeezing = false;
 
-		blake2_functions::initH(H);
+		blake2_functions::initH(H, fanout);
 
 		if (type == blake2_type::hash)
 			H[0] ^= hash_size()/8;
@@ -170,7 +181,20 @@ public:
 		H[5] ^= s[1];
 		H[6] ^= p[0];
 		H[7] ^= p[1];
-		absorb_key();
+
+		if (fanout)
+		{
+			H[0] ^= static_cast<T>(fanout) << 16 | static_cast<T>(2) << 24;
+			H[sizeof(T) == 8 ? 1 : 2] ^= static_cast<T>(nodeoffset);
+			
+			if (sizeof(T) == 8)
+				H[2] ^= static_cast<T>(nodedepth) | (static_cast<T>(N / 8) << 8);
+			else
+				H[3] ^= static_cast<T>(nodedepth) << 16 | static_cast<T>(N / 8) << 24;
+		}
+
+		if (!fanout || !nodedepth)
+			absorb_key();
 	}
 
 	inline void update(const unsigned char* data, size_t len)
@@ -201,6 +225,13 @@ public:
 			throw std::runtime_error("invalid personalization length");
 
 		memcpy(&p[0], personalization, personalization_len);
+	}
+
+	inline void set_blake2p_params(uint8_t fo, uint8_t nd, uint8_t no)
+	{
+		fanout = fo;
+		nodedepth = nd;
+		nodeoffset = no;
 	}
 
 	inline void squeeze(unsigned char* hash, size_t hs)
@@ -240,18 +271,19 @@ public:
 		}
 	}
 
-	inline void final(unsigned char* hash)
+	inline void final(unsigned char* hash, size_t hs_override = 0)
 	{
 		total += pos * 8;
+		size_t hss = hs_override ? hs_override : hs;
 		if (type == blake2_type::hash)
 		{
 			if (N / 4 != pos)
 				memset(&m[pos], 0, N / 4 - pos);
 			transform(m.data(), 1, true);
-			memcpy(hash, H.data(), hash_size() / 8);
+			memcpy(hash, H.data(), hss / 8);
 		}
 		else
-			squeeze(hash, hs / 8);
+			squeeze(hash, hss / 8);
 	}
 
 	inline void clear()
@@ -262,6 +294,9 @@ public:
 		zero_memory(p);
 		zero_memory(k);
 		k.clear();
+		fanout = 0;
+		nodedepth = 0;
+		nodeoffset = 0;
 	}
 
 	inline size_t hash_size() const { return hs; }
@@ -294,7 +329,7 @@ private:
 			if (padding)
 			{
 				f0 = static_cast<T>(-1);
-				f1 = 0;
+				f1 = fanout && (nodeoffset == fanout - 1 || nodedepth) ? static_cast<T>(-1) : 0;
 			}
 
 			T v[16];
@@ -336,6 +371,8 @@ private:
 
 	}
 
+    friend class blake2p_provider<T, type, HS>;
+
 	constexpr static size_t N = sizeof(T) == 8 ? 512 : 256;
 	std::array<T, 8> H;
 	std::array<T, 2> s;
@@ -347,6 +384,9 @@ private:
 	size_t hs;
 	size_t xoffset;
 	bool squeezing;
+	uint8_t fanout;
+	uint8_t nodedepth;
+	uint8_t nodeoffset;
 };
 
 } // namespace detail

@@ -9,6 +9,7 @@ This code is written by kerukuro and released into public domain.
 #include "algorithm/skein.hpp"
 #include "algorithm/blake.hpp"
 #include "algorithm/blake2.hpp"
+#include "algorithm/blake2p.hpp"
 #include "algorithm/groestl.hpp"
 #include "algorithm/jh.hpp"
 #include "algorithm/md5.hpp"
