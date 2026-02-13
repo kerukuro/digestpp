@@ -162,7 +162,10 @@ private:
 
 	inline void transform(const unsigned char* data, size_t num_blks)
 	{
-		for (size_t i = 0; i < P; i++)
+#ifdef _OPENMP
+#pragma omp parallel for
+#endif
+		for (int i = 0; i < static_cast<int>(P); i++)
 		{
 			for (size_t blk = 0; blk < num_blks; blk++)
 			{

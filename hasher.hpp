@@ -151,7 +151,7 @@ class hasher : public Mixin<HashProvider>
 	template<typename T, typename std::enable_if<detail::is_byte<T>::value>::type* = nullptr>
 	inline hasher& absorb(std::basic_istream<T>& istr)
 	{
-		const int tmp_buffer_size = 10000;
+		const int tmp_buffer_size = 65536;
 		unsigned char buffer[tmp_buffer_size];
 		while (istr.read(reinterpret_cast<T*>(buffer), sizeof(buffer)))
 		{
