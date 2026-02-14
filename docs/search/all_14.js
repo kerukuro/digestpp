@@ -6,9 +6,12 @@ var searchData=
   ['test_5fvectors_3',['test_vectors',['../test__vectors_8hpp.html#a90bc5a760bd41cdbd1cfe115a3c87861',1,'test_vectors.hpp']]],
   ['test_5fvectors_2ecc_4',['test_vectors.cc',['../test__vectors_8cc.html',1,'']]],
   ['test_5fvectors_2ehpp_5',['test_vectors.hpp',['../test__vectors_8hpp.html',1,'']]],
-  ['thread_20safety_6',['Thread Safety',['../index.html#autotoc_md9',1,'']]],
-  ['traits_2ehpp_7',['traits.hpp',['../traits_8hpp.html',1,'']]],
-  ['transform_8',['transform',['../classdigestpp_1_1detail_1_1k12m14__provider.html#a77acdb58e4dfdba1fb1c391b1c1a0edb',1,'digestpp::detail::k12m14_provider::transform()'],['../namespacedigestpp_1_1detail_1_1blake__functions.html#ae23c09e5167e7c49374a6b61e6ac0847',1,'digestpp::detail::blake_functions::transform()'],['../namespacedigestpp_1_1detail_1_1groestl__functions.html#aaca0078ac6b4c87e45190a5eb3f5f68e',1,'digestpp::detail::groestl_functions::transform()'],['../namespacedigestpp_1_1detail_1_1kupyna__functions.html#ae8b23742fca63a238303ebab56d60d65',1,'digestpp::detail::kupyna_functions::transform()'],['../namespacedigestpp_1_1detail_1_1sha3__functions.html#a71095ac1d90bd59c10e1fe39df4ec82c',1,'digestpp::detail::sha3_functions::transform(uint64_t *A)'],['../namespacedigestpp_1_1detail_1_1sha3__functions.html#a7d2304c597cee476b4eb709c8b17b81b',1,'digestpp::detail::sha3_functions::transform(const unsigned char *data, uint64_t num_blks, uint64_t *A, size_t rate)']]],
-  ['trim_5fstring_9',['trim_string',['../test__vectors_8hpp.html#a9e009074e2d6cce81d8f5ca3654561b9',1,'test_vectors.hpp']]],
-  ['tsk_2ecc_10',['tsk.cc',['../tsk_8cc.html',1,'']]]
+  ['thread_20safety_6',['Thread Safety',['../index.html#autotoc_md21',1,'']]],
+  ['time_7',['Specifying Output Size (Runtime vs Compile-time)',['../index.html#autotoc_md4',1,'']]],
+  ['to_20a_20raw_20buffer_3a_8',['Output to a raw buffer:',['../index.html#autotoc_md10',1,'']]],
+  ['to_20a_20stream_3a_9',['Output to a stream:',['../index.html#autotoc_md11',1,'']]],
+  ['to_20std_3a_3avector_3a_10',['Output to std::vector:',['../index.html#autotoc_md9',1,'']]],
+  ['traits_2ehpp_11',['traits.hpp',['../traits_8hpp.html',1,'']]],
+  ['transform_12',['transform',['../classdigestpp_1_1detail_1_1k12m14__provider.html#a77acdb58e4dfdba1fb1c391b1c1a0edb',1,'digestpp::detail::k12m14_provider::transform()'],['../namespacedigestpp_1_1detail_1_1blake__functions.html#ae23c09e5167e7c49374a6b61e6ac0847',1,'digestpp::detail::blake_functions::transform()'],['../namespacedigestpp_1_1detail_1_1groestl__functions.html#aaca0078ac6b4c87e45190a5eb3f5f68e',1,'digestpp::detail::groestl_functions::transform()'],['../namespacedigestpp_1_1detail_1_1kupyna__functions.html#ae8b23742fca63a238303ebab56d60d65',1,'digestpp::detail::kupyna_functions::transform()'],['../namespacedigestpp_1_1detail_1_1sha3__functions.html#a71095ac1d90bd59c10e1fe39df4ec82c',1,'digestpp::detail::sha3_functions::transform(uint64_t *A)'],['../namespacedigestpp_1_1detail_1_1sha3__functions.html#a7d2304c597cee476b4eb709c8b17b81b',1,'digestpp::detail::sha3_functions::transform(const unsigned char *data, uint64_t num_blks, uint64_t *A, size_t rate)']]],
+  ['trim_5fstring_13',['trim_string',['../test__vectors_8hpp.html#a9e009074e2d6cce81d8f5ca3654561b9',1,'test_vectors.hpp']]]
 ];

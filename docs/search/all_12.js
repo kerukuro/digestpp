@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['rationale_20in_20questions_20and_20answers_0',['Design rationale in questions and answers',['../index.html#autotoc_md7',1,'']]],
-  ['rc_1',['RC',['../structdigestpp_1_1detail_1_1ascon__constants.html#a43eb68a7ce3670a4ba54ce733da13e1d',1,'digestpp::detail::ascon_constants::RC'],['../structdigestpp_1_1detail_1_1sha3__constants.html#aa22e63c5c298bf6ecad85b8ee235ce1b',1,'digestpp::detail::sha3_constants::RC'],['../structdigestpp_1_1detail_1_1streebog__constants.html#ad640d8f21b9343dee4123566741dd334',1,'digestpp::detail::streebog_constants::RC'],['../structdigestpp_1_1detail_1_1whirlpool__constants.html#a2ac7dac0b7fbfbd554fda7a8e7adfabc',1,'digestpp::detail::whirlpool_constants::RC']]],
-  ['readme4doxygen_2emd_2',['README4Doxygen.md',['../_r_e_a_d_m_e4_doxygen_8md.html',1,'']]],
-  ['reference_20documentation_3',['Reference documentation',['../index.html#autotoc_md10',1,'']]],
-  ['reformat_5ftest_5fvectors_4',['reformat_test_vectors',['../namespace__t.html#aaec83dd8672a6f2d33b3e9ac8462486f',1,'_t']]],
+  ['rationale_20in_20questions_20and_20answers_0',['Design rationale in questions and answers',['../index.html#autotoc_md19',1,'']]],
+  ['raw_20buffer_3a_1',['Output to a raw buffer:',['../index.html#autotoc_md10',1,'']]],
+  ['rc_2',['RC',['../structdigestpp_1_1detail_1_1ascon__constants.html#a43eb68a7ce3670a4ba54ce733da13e1d',1,'digestpp::detail::ascon_constants::RC'],['../structdigestpp_1_1detail_1_1sha3__constants.html#aa22e63c5c298bf6ecad85b8ee235ce1b',1,'digestpp::detail::sha3_constants::RC'],['../structdigestpp_1_1detail_1_1streebog__constants.html#ad640d8f21b9343dee4123566741dd334',1,'digestpp::detail::streebog_constants::RC'],['../structdigestpp_1_1detail_1_1whirlpool__constants.html#a2ac7dac0b7fbfbd554fda7a8e7adfabc',1,'digestpp::detail::whirlpool_constants::RC']]],
+  ['readme4doxygen_2emd_3',['README4Doxygen.md',['../_r_e_a_d_m_e4_doxygen_8md.html',1,'']]],
+  ['reference_20documentation_4',['Reference documentation',['../index.html#autotoc_md22',1,'']]],
   ['reset_5',['reset',['../classdigestpp_1_1hasher.html#a326f76f7f383d4ab137f2094407b1013',1,'digestpp::hasher']]],
   ['right_5fencode_6',['right_encode',['../namespacedigestpp_1_1detail_1_1shake__functions.html#a938f574c4bf412854c2ebd8337653225',1,'digestpp::detail::shake_functions']]],
   ['rotate_5fleft_7',['rotate_left',['../namespacedigestpp_1_1detail.html#a84771e45cb8254ce81de4d3faaad2d69',1,'digestpp::detail::rotate_left(uint32_t x, unsigned n)'],['../namespacedigestpp_1_1detail.html#a2f7559efe60bdc8f567c8f27c5abea3b',1,'digestpp::detail::rotate_left(uint64_t x, unsigned n)']]],
@@ -15,5 +15,6 @@ var searchData=
   ['roundh_12',['roundh',['../namespacedigestpp_1_1detail_1_1md5__functions.html#a0dc01121ece7d081c7cd55c9be865e0c',1,'digestpp::detail::md5_functions']]],
   ['roundi_13',['roundi',['../namespacedigestpp_1_1detail_1_1md5__functions.html#a848a72e43189c9a7e01c1026d0354980',1,'digestpp::detail::md5_functions']]],
   ['roundp_14',['roundP',['../namespacedigestpp_1_1detail_1_1groestl__functions.html#a079ffa98e980f5a44bf511fcb7009c61',1,'digestpp::detail::groestl_functions::roundP()'],['../namespacedigestpp_1_1detail_1_1kupyna__functions.html#af241aca79edccfc696108195391dac41',1,'digestpp::detail::kupyna_functions::roundP()']]],
-  ['roundq_15',['roundQ',['../namespacedigestpp_1_1detail_1_1groestl__functions.html#a46afb5d744518b35332c866fb46a45bb',1,'digestpp::detail::groestl_functions::roundQ()'],['../namespacedigestpp_1_1detail_1_1kupyna__functions.html#ac6415bce4899d5aec3a0b055e87b6907',1,'digestpp::detail::kupyna_functions::roundQ()']]]
+  ['roundq_15',['roundQ',['../namespacedigestpp_1_1detail_1_1groestl__functions.html#a46afb5d744518b35332c866fb46a45bb',1,'digestpp::detail::groestl_functions::roundQ()'],['../namespacedigestpp_1_1detail_1_1kupyna__functions.html#ac6415bce4899d5aec3a0b055e87b6907',1,'digestpp::detail::kupyna_functions::roundQ()']]],
+  ['runtime_20vs_20compile_20time_16',['Specifying Output Size (Runtime vs Compile-time)',['../index.html#autotoc_md4',1,'']]]
 ];

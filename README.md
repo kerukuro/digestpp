@@ -9,86 +9,91 @@ Tested with g++ 6.4.0, clang 4.0.1 and Visual C++ 2017.
 Just copy the `digestpp` folder to your project or include path and `#include <digestpp/digestpp.hpp>`.
 
 ## Examples
-Calculate BLAKE2b digest from a double quoted string and output it in hex format:
+### Quick Start
+Calculate SHA-256 digest of a string literal:
 ````cpp
-std::cout << digestpp::blake2b().absorb("The quick brown fox jumps over the lazy dog").hexdigest();
+#include <digestpp/digestpp.hpp>
+#include <iostream>
+
+int main() {
+    std::cout << digestpp::sha256().absorb("Hello World").hexdigest() << std::endl;
+    return 0;
+}
 ````
-Calculate BLAKE2b-256 digest from an std::string and output it in hex format:
+### Specifying Output Size (Runtime vs Compile-time)
+For algorithms supporting variable output lengths (like BLAKE2, SHA512, SHA-3, etc.), the size can be set either at runtime (constructor argument) or at compile-time (template parameter).
+
+**Runtime size** (more flexible, allows values determined at runtime):
 ````cpp
+size_t length = 256;
+std::cout << digestpp::blake2b(length).absorb("data").hexdigest() << std::endl;
+````
+**Compile-time** size (static checking):
+````cpp
+std::cout << digestpp::static_size::blake2b<256>().absorb("data").hexdigest() << std::endl;
+````
+### Working with Strings
+The .absorb() method accepts both string literals and `std::string` objects. Method chaining is supported:
+````cpp
+// Using std::string
 std::string str = "The quick brown fox jumps over the lazy dog";
-// with digest length specified at runtime
-std::cout << digestpp::blake2b(256).absorb(str).hexdigest();
-// OR with digest length specified at compile-time
-std::cout << digestpp::static_size::blake2b<256>().absorb(str).hexdigest();
+std::cout << digestpp::blake2b().absorb(str).hexdigest() << std::endl;
+
+// Using string literals and chaining
+digestpp::blake2b x;
+x.absorb("The quick brown fox ");
+x.absorb("jumps over the lazy dog");
+std::cout << x.hexdigest() << std::endl;
 ````
-Calculate SHA-512 digest of a vector<unsigned char> and output it in hex format:
+### Hashing Binary Data
+Absorb data from standard containers (like `std::vector`) or raw C-arrays:
 ````cpp
-std::vector<unsigned char> v;
-// ...fill the vector
-std::cout << digestpp::sha512().absorb(v.begin(), v.end()).hexdigest();
+// From a vector<unsigned char>
+std::vector<unsigned char> v = {0x01, 0x02, 0x03};
+std::cout << digestpp::sha512(256).absorb(v.begin(), v.end()).hexdigest() << std::endl;
+
+// From a raw C array
+unsigned char buf[32] = {0};
+std::cout << digestpp::sha512(256).absorb(buf, sizeof(buf)).hexdigest() << std::endl;
 ````
-Calculate SHA-512/256 digest of a C array and output it in hex format:
+### Hashing Files
+Read and hash a file directly using `std::ifstream`:
 ````cpp
-unsigned char c[32];
-// ...fill the array
-// with digest length specified at runtime
-std::cout << digestpp::sha512(256).absorb(c, sizeof(c)).hexdigest();
-// OR with digest length specified at compile-time
-std::cout << digestpp::static_size::sha512<256>().absorb(c, sizeof(c)).hexdigest();
+std::ifstream file("filename", std::ios_base::in | std::ios_base::binary);
+std::cout << digestpp::sha256().absorb(file).hexdigest() << std::endl;
 ````
-Calculate SHA-256 digest of a file and output it in hex format:
+### Output Options
+Retrieve the result as a hex string, raw bytes, or write directly to a stream.
+#### Output to std::vector:
 ````cpp
-std::ifstream file("filename", std::ios_base::in|std::ios_base::binary);
-std::cout << digestpp::sha256().absorb(file).hexdigest();
+std::vector<unsigned char> out;
+digestpp::sha3(256).absorb("data").digest(std::back_inserter(out));
 ````
-Generate SHA3-224 digest using multiple calls to absorb():
-````cpp
-// with digest length specified at runtime
-std::cout << digestpp::sha3(224).absorb("The quick brown fox ").absorb("jumps over the lazy dog").hexdigest();
-// OR with digest length specified at compile-time
-std::cout << digestpp::static_size::sha3<224>().absorb("The quick brown fox ").absorb("jumps over the lazy dog").hexdigest();
-````
-Output binary digest to a vector<unsigned char>:
-````cpp
-std::vector<unsigned char> v;
-// with digest length specified at runtime
-digestpp::sha3(256).absorb("The quick brown fox jumps over the lazy dog").digest(std::back_inserter(v));
-// OR with digest length specified at compile-time
-digestpp::static_size::sha3<256>().absorb("The quick brown fox jumps over the lazy dog").digest(std::back_inserter(v));
-````
-Output binary digest to a raw C array:
+#### Output to a raw buffer:
 ````cpp
 unsigned char buf[32];
-// with digest length specified at runtime
-digestpp::sha3(256).absorb("The quick brown fox jumps over the lazy dog").digest(buf, sizeof(buf));
-// OR with digest length specified at compile-time
-digestpp::static_size::sha3<256>().absorb("The quick brown fox jumps over the lazy dog").digest(buf, sizeof(buf));
+digestpp::sha3(256).absorb("data").digest(buf, sizeof(buf));
 ````
-Output binary digest to a stream:
+#### Output to a stream:
 ````cpp
-std::string str = "The quick brown fox jumps over the lazy dog";
-std::string output;
-std::ostringstream os(output);
-// with digest length specified at runtime
-digestpp::sha3(256).absorb(str).digest(std::ostream_iterator<char>(os, ""));
-// OR with digest length specified at compile-time
-digestpp::static_size::sha3<256>().absorb(str).digest(std::ostream_iterator<char>(os, ""));
+std::stringstream ss;
+digestpp::sha3(256).absorb("data").digest(std::ostream_iterator<char>(ss, ""));
 ````
-Generate long output using SHAKE-256 extendable output function using multiple calls to squeeze():
+### Extendable Output Functions (XOF)
+Use squeeze() to generate outputs of arbitrary length.
+#### SHAKE-256:
 ````cpp
 std::vector<unsigned char> v;
 digestpp::shake256 xof;
-xof.absorb("The quick brown fox jumps over the lazy dog");
-xof.squeeze(1000, std::back_inserter(v));
-xof.squeeze(1000, std::back_inserter(v));
-xof.squeeze(1000, std::back_inserter(v));
-std::cout << "Squeezed " << v.size() << " bytes." << std::endl;
+xof.absorb("data");
+xof.squeeze(10, std::back_inserter(v)); // Get first 10 bytes
+xof.squeeze(10, std::back_inserter(v)); // Get next 10 bytes
 ````
-Generate 64-byte digest using customizable cSHAKE-256 algorithm and print it in hex format:
+#### cSHAKE-256 with customization:
 ````cpp
 digestpp::cshake256 xof;
-xof.set_customization("Customization");
-std::cout << xof.absorb("The quick brown fox jumps over the lazy dog").hexsqueeze(64);
+xof.set_customization("My Custom Protocol");
+std::cout << xof.absorb("data").hexsqueeze(64) << std::endl; // Get 64 bytes as hex
 ````
 
 ## Hasher class
@@ -117,7 +122,7 @@ public:
     template<typename H=HashProvider, typename std::enable_if<!detail::is_xof<H>::value>::type* = nullptr>
     hasher(size_t hashsize);
 
-     // Absorbs bytes from a C-style pointer to a character buffer
+    // Absorbs bytes from a C-style pointer to a character buffer
     template<typename T, typename std::enable_if<detail::is_byte<T>::value>::type* = nullptr>
     inline hasher& absorb(const T* data, size_t len);
 
@@ -138,19 +143,19 @@ public:
     template<typename IT>
     inline hasher& absorb(IT begin, IT end);
 
-    // In case HashProvider is an extendable output function, squeeze len bytes from absorbed data
+    // In case HashProvider is an extendable output function, squeeze <len> bytes from absorbed data
     // into a user-provided preallocated buffer.
     template<typename T, typename H=HashProvider,
         typename std::enable_if<detail::is_byte<T>::value && detail::is_xof<H>::value>::type* = nullptr>
     inline void squeeze(T* buf, size_t len);
 
-    // In case HashProvider is an extendable output function, squeeze len bytes from absorbed data
+    // In case HashProvider is an extendable output function, squeeze <len> bytes from absorbed data
     // and write them to the output iterator.
     template<typename OI, typename H=HashProvider,
         typename std::enable_if<detail::is_xof<H>::value>::type* = nullptr>
     inline void squeeze(size_t len, OI it);
 
-    // In case HashProvider is an extendable output function, squeeze len bytes from absorbed data
+    // In case HashProvider is an extendable output function, squeeze <len> bytes from absorbed data
     // and return them as a hex string.
     template<typename H=HashProvider, typename std::enable_if<detail::is_xof<H>::value>::type* = nullptr>
     inline std::string hexsqueeze(size_t len);

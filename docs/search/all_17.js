@@ -6,5 +6,8 @@ var searchData=
   ['whirlpool_5fconstants_3',['whirlpool_constants',['../structdigestpp_1_1detail_1_1whirlpool__constants.html',1,'digestpp::detail']]],
   ['whirlpool_5fconstants_2ehpp_4',['whirlpool_constants.hpp',['../whirlpool__constants_8hpp.html',1,'']]],
   ['whirlpool_5fprovider_5',['whirlpool_provider',['../classdigestpp_1_1detail_1_1whirlpool__provider.html',1,'digestpp::detail::whirlpool_provider'],['../classdigestpp_1_1detail_1_1whirlpool__provider.html#a291e0582ef6b4b589e953adb3ac741b5',1,'digestpp::detail::whirlpool_provider::whirlpool_provider()']]],
-  ['whirlpool_5fprovider_2ehpp_6',['whirlpool_provider.hpp',['../whirlpool__provider_8hpp.html',1,'']]]
+  ['whirlpool_5fprovider_2ehpp_6',['whirlpool_provider.hpp',['../whirlpool__provider_8hpp.html',1,'']]],
+  ['with_20customization_3a_7',['cSHAKE-256 with customization:',['../index.html#autotoc_md14',1,'']]],
+  ['with_20strings_8',['Working with Strings',['../index.html#autotoc_md5',1,'']]],
+  ['working_20with_20strings_9',['Working with Strings',['../index.html#autotoc_md5',1,'']]]
 ];

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['_5ft_0',['_t',['../namespace__t.html',1,'']]],
-  ['_5ft_2epy_1',['_t.py',['../__t_8py.html',1,'']]],
-  ['_5ftt_2',['_tt',['../namespace__tt.html',1,'']]],
-  ['_5ftt_2epy_3',['_tt.py',['../__tt_8py.html',1,'']]]
+  ['256_20with_20customization_3a_0',['cSHAKE-256 with customization:',['../index.html#autotoc_md14',1,'']]],
+  ['256_3a_1',['SHAKE-256:',['../index.html#autotoc_md13',1,'']]]
 ];

@@ -5,107 +5,91 @@
 #include <iomanip>
 #include <fstream>
 
-// Calculate BLAKE2b digest from a double quoted string and output it in hex format
+// Calculate SHA-256 digest of a string literal 
 void example1()
 {
-	std::cout << digestpp::blake2b().absorb("The quick brown fox jumps over the lazy dog").hexdigest();
+    std::cout << digestpp::sha256().absorb("Hello World").hexdigest() << std::endl;
 }
 
-// Calculate BLAKE2b-256 digest from an std::string and output it in hex format
+// For algorithms supporting variable output lengths (like BLAKE2, SHA512, SHA-3, etc.),
+// the size can be set either at runtime (constructor argument) or at compile-time (template parameter)
 void example2()
 {
-	std::string str = "The quick brown fox jumps over the lazy dog";
-	// with digest length specified at runtime
-	std::cout << digestpp::blake2b(256).absorb(str).hexdigest();
-	// OR with digest length specified at compile-time
-	std::cout << digestpp::static_size::blake2b<256>().absorb(str).hexdigest();
+	size_t length = 256;
+	std::cout << digestpp::blake2b(length).absorb("data").hexdigest() << std::endl;
+	std::cout << digestpp::static_size::blake2b<256>().absorb("data").hexdigest() << std::endl;
 }
 
-// Calculate SHA-512 digest of a vector and output it in hex format
+// The .absorb() method accepts both string literals and std::string objects. Method chaining is supported
 void example3()
 {
-	std::vector<unsigned char> v;
-	// ...fill the vector
-	std::cout << digestpp::sha512().absorb(v.begin(), v.end()).hexdigest();
+	// Using std::string
+	std::string str = "The quick brown fox jumps over the lazy dog";
+	std::cout << digestpp::blake2b().absorb(str).hexdigest() << std::endl;
+
+	// Using string literals and chaining
+	digestpp::blake2b x;
+	x.absorb("The quick brown fox ");
+	x.absorb("jumps over the lazy dog");
+	std::cout << x.hexdigest() << std::endl;
 }
 
-// Calculate SHA-512/256 digest of a C array and output it in hex format
+// Absorb data from standard containers (like std::vector) or raw C-arrays
 void example4()
 {
-	unsigned char c[32];
-	// ...fill the array
-	// with digest length specified at runtime
-	std::cout << digestpp::sha512(256).absorb(c, sizeof(c)).hexdigest();
-	// OR with digest length specified at compile-time
-	std::cout << digestpp::static_size::sha512<256>().absorb(c, sizeof(c)).hexdigest();
+	// From a vector<unsigned char>
+	std::vector<unsigned char> v = {0x01, 0x02, 0x03};
+	std::cout << digestpp::sha512(256).absorb(v.begin(), v.end()).hexdigest() << std::endl;
+
+	// From a raw C array
+	unsigned char buf[32] = {0};
+	std::cout << digestpp::sha512(256).absorb(buf, sizeof(buf)).hexdigest() << std::endl;
 }
 
-// Calculate SHA-256 digest of a file and output it in hex format
+// Read and hash a file directly using std::ifstream
 void example5()
 {
-	std::ifstream file("filename", std::ios_base::in|std::ios_base::binary);
-	std::cout << digestpp::sha256().absorb(file).hexdigest();
+	std::ifstream file("filename", std::ios_base::in | std::ios_base::binary);
+	std::cout << digestpp::sha256().absorb(file).hexdigest() << std::endl;
 }
 
-// Generate SHA3-224 digest using multiple calls to absorb()
+//  Output to std::vector
 void example6()
 {
-	// with digest length specified at runtime
-	std::cout << digestpp::sha3(224).absorb("The quick brown fox ").absorb("jumps over the lazy dog").hexdigest();
-	// OR with digest length specified at compile-time
-	std::cout << digestpp::static_size::sha3<224>().absorb("The quick brown fox ").absorb("jumps over the lazy dog").hexdigest();
+	std::vector<unsigned char> out;
+	digestpp::sha3(256).absorb("data").digest(std::back_inserter(out));
 }
 
-// Output binary digest to a vector
+//  Output to a raw buffer
 void example7()
 {
-	std::vector<unsigned char> v;
-	// with digest length specified at runtime
-	digestpp::sha3(256).absorb("The quick brown fox jumps over the lazy dog").digest(std::back_inserter(v));
-	// OR with digest length specified at compile-time
-	digestpp::static_size::sha3<256>().absorb("The quick brown fox jumps over the lazy dog").digest(std::back_inserter(v));
+	unsigned char buf[32];
+	digestpp::sha3(256).absorb("data").digest(buf, sizeof(buf));
 }
 
-// Output binary digest to a raw C array
+//  Output to a stream
 void example8()
 {
-	unsigned char buf[32];
-	// with digest length specified at runtime
-	digestpp::sha3(256).absorb("The quick brown fox jumps over the lazy dog").digest(buf, sizeof(buf));
-	// OR with digest length specified at compile-time
-	digestpp::static_size::sha3<256>().absorb("The quick brown fox jumps over the lazy dog").digest(buf, sizeof(buf));
+	std::stringstream ss;
+	digestpp::sha3(256).absorb("data").digest(std::ostream_iterator<char>(ss, ""));
 }
 
-// Output binary digest to a stream
+// Use squeeze() to generate outputs of arbitrary length
 void example9()
-{
-	std::string str = "The quick brown fox jumps over the lazy dog";
-	std::string output;
-	std::ostringstream os(output);
-	// with digest length specified at runtime
-	digestpp::sha3(256).absorb(str).digest(std::ostream_iterator<char>(os, ""));
-	// OR with digest length specified at compile-time
-	digestpp::static_size::sha3<256>().absorb(str).digest(std::ostream_iterator<char>(os, ""));
-}
-
-// Generate long output using SHAKE-256 extendable output function using multiple calls to squeeze()
-void example10()
 {
 	std::vector<unsigned char> v;
 	digestpp::shake256 xof;
-	xof.absorb("The quick brown fox jumps over the lazy dog");
-	xof.squeeze(1000, std::back_inserter(v));
-	xof.squeeze(1000, std::back_inserter(v));
-	xof.squeeze(1000, std::back_inserter(v));
-	std::cout << "Squeezed " << v.size() << " bytes." << std::endl;
+	xof.absorb("data");
+	xof.squeeze(10, std::back_inserter(v)); // Get first 10 bytes
+	xof.squeeze(10, std::back_inserter(v)); // Get next 10 bytes
 }
 
-// Generate 64-byte digest using customizable cSHAKE-256 algorithm and print it in hex format
-void example11()
+// cSHAKE-256 with customization
+void example10()
 {
 	digestpp::cshake256 xof;
-	xof.set_customization("Customization");
-	std::cout << xof.absorb("The quick brown fox jumps over the lazy dog").hexsqueeze(64);
+	xof.set_customization("My Custom Protocol");
+	std::cout << xof.absorb("data").hexsqueeze(64) << std::endl; // Get 64 bytes as hex
 }
 
 int main()
@@ -120,5 +104,5 @@ int main()
 	example8();
 	example9();
 	example10();
-	example11();
 }
+
